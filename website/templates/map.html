@@ -1,0 +1,23 @@
+<!-- this file inherits from base.html. 
+this means that for example bootstrap doesn't need to be imported again -->
+{% extends "base.html" %}
+
+<!-- this replaces the block called "title" in base.html -->
+{% block title %} Map {% endblock %}
+
+
+<!-- this replaces the block called "content" in base.html -->
+{% block content %} 
+here the map could be displayed
+ 
+<!-- basic python can by used by using {% ... %} -->
+{% if true %}
+
+<!-- python statements can be used by using {{...}} -->
+<p>{{foo}}</p>
+
+{% endif %}
+
+
+
+{% endblock %}
