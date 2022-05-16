@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-import pandas as pd
+
 auth = Blueprint('auth',__name__)
 
 
