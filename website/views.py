@@ -20,8 +20,5 @@ def map():
 
 
 
-@views.route("/login/")
-def login():
-    temp = render_template("login.html")
-    return temp
+
 
