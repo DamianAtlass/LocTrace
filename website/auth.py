@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,  redirect, url_for
 import pandas as pd
+from flask_login import login_user, login_required, logout_user, current_user
+from .user import User
+from flask import session
 
 auth = Blueprint('auth',__name__)
 
@@ -23,7 +26,6 @@ def login():
         
         if len < 1:
             return "ERROR: user doesn't exist"
-        
         if len > 1:
             return "ERROR: multiple users with same username found"
 
@@ -35,6 +37,9 @@ def login():
         
         
         if(password_login == password_df):
+            user = User(username)
+            login_user(user, remember=True)
+
             return render_template("map.html", username = username)
         else:
              return "password incorrect"
@@ -43,4 +48,10 @@ def login():
     if request.method =="GET":
         temp = render_template("login.html")
         return temp
+
+@auth.route("/logout/")
+#@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("auth.login"))
 
