@@ -1,13 +1,19 @@
 from flask import Blueprint, render_template, request,  redirect, url_for
 import pandas as pd
+from .models import User
+from . import db
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user, login_required, logout_user, current_user
-from .user import User
-from flask import session
+
 
 auth = Blueprint('auth',__name__)
 
-#read data and put it in a dataframe
-df = pd.read_csv("logindata.csv")
+REQUIRE_PW_TO_LOAD_DB = True
+PW_DB = "apfelkuchen"
+
+#automatically load database (not password-protected!)
+DB_AUTOLOAD = True
+
 
 
 @auth.route("/login/", methods=["GET", "POST"])
@@ -16,42 +22,90 @@ def login():
 
         username = request.form.get("username")
         password_login = request.form.get("password")
-        #print("username: "+ username+" pw: "+pw)
+        print("LOGIN: username: "+ username+" pw: "+password_login)
+        user = User.query.filter_by(username=username).first()
 
-        # get user-password pair for corresponding username
-        data_pair = df.loc[df['username'] == username ]
 
-        #check if user exists and if it is unique
-        len = data_pair.shape[0]  # Gives number of rows
-        
-        if len < 1:
-            return "ERROR: user doesn't exist"
-        if len > 1:
-            return "ERROR: multiple users with same username found"
-
-        
-
-        # get right column
-        password_df = data_pair.iloc[0, 1]
-
-        
-        
-        if(password_login == password_df):
-            user = User(username)
-            login_user(user, remember=True)
-
-            return render_template("map.html", username = username)
+        if user:
+            if user.password == password_login:
+                login_user(user, remember=True)
+                return redirect(url_for("views.map", username=password_login))
+            else:
+                return "worng pw"
         else:
-             return "password incorrect"
+            return "no user"
 
 
     if request.method =="GET":
+        #if db is empty
+        if  User.query.first() == None and DB_AUTOLOAD:
+            if REQUIRE_PW_TO_LOAD_DB:
+                load_database()
+
+        
         temp = render_template("login.html")
         return temp
 
 @auth.route("/logout/")
-#@login_required
+@login_required
 def logout():
     logout_user()
     return redirect(url_for("auth.login"))
 
+@auth.route("/loaddb/", methods=["GET", "POST"])
+def loaddb():
+    if request.method =="POST":
+
+        pw_db_form = request.form.get("load_db_password")
+        print("pw_db: "+pw_db_form)
+        if pw_db_form != PW_DB:
+            return "wrong pw, pw can be found in auth.py"
+
+        
+        load_database()
+
+        return redirect(url_for("auth.login"))
+
+    if request.method =="GET":
+
+        if not User.query.first() == None:
+            return "Database already loaded."
+
+        if not REQUIRE_PW_TO_LOAD_DB:
+            load_database()
+            db_loaded = True
+            return redirect(url_for("auth.login"))
+
+        return '''<form method="POST">
+        Enter password to load database
+        <div class="form-group">
+            <input
+            Enter password to load database
+            type="password"
+            class="form-control"
+            id="password"
+            name="load_db_password"
+            />
+        </div>
+        <button type="submit" >Login</button>
+      
+    </form>'''
+
+def load_database():
+    #read data and put it in a dataframe
+    df = pd.read_csv("logindata.csv")
+
+    print("Add users to database...", end="")
+    # add users from datafram in db
+    c = 0
+    
+    for index, row in df.iterrows():
+        new_user = User()
+        new_user.password = row['password']
+        new_user.username = row['username']       
+
+        db.session.add(new_user)
+        db.session.commit()
+        c = c+1
+
+    print("done. "+str(c)+" users were added.")
