@@ -26,14 +26,14 @@
         <div class="collapse navbar-collapse" id="navbar">
           <div class="navbar-nav">
               {%if user and user.is_authenticated%}
-              <a class="nav-item nav-link" id="map" href="/map">Map</a>
-              <a class="nav-item nav-link" id="logout" href="/logout">Log-out</a>
+              <a class="nav-item nav-link" id="map" href="/map/">Map</a>
+              <a class="nav-item nav-link" id="logout" href="/logout/">Log-out</a>
               {% else %}
-              <a class="nav-item nav-link" id="login" href="/login">Login</a>
+              <a class="nav-item nav-link" id="login" href="/login/">Login</a>
               
               {% endif %}
-              <a class="nav-item nav-link" id="base-template" href="/">base-template</a>
-              <a class="nav-item nav-link" id="load-db" href="/loaddb">load-db (delete later)</a>
+              <a class="nav-item nav-link" id="base-template" href="/base/">base-template</a>
+              <a class="nav-item nav-link" id="load-db" href="/loaddb/">load-db (delete later)</a>
 
               {%if user and user.is_authenticated%}
               <p class="center" style="color:rgb(255, 255, 255);" > Hallo {{user.username}}!</p>
@@ -41,6 +41,31 @@
           </div>
         </div>
       </nav>
+      <!-- display flash messages -->
+      {%with messages = get_flashed_messages(with_categories=true)%}
+        {% if messages %}
+          {%for category, message in messages%}
+          {% if category =="error" %}
+
+            <div class="alert alert-danger alter-dismissable fade show" role="alert">
+              {{message}}
+              <button type="button" class ="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+              {{message}}
+              <button type="button" class ="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- blocks will later be replaced by actual content -->
       <div class = "container">
         {% block content%} anything in here will/can be replaced with templates {% endblock %}
       </div>
