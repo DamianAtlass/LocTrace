@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pandas as pd
 from .models import User
 from . import db
-from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
 
@@ -25,14 +25,14 @@ def login():
     if request.method =="POST":
         username_login = request.form.get("username")
         password_login = request.form.get("password")
-        print("LOGIN: username: "+ username_login+" pw: "+password_login)
         user = User.query.filter_by(username=username_login).first()
 
 
         if user:
-            if user.password == password_login:
+            if check_password_hash(user.password, password_login):
                 login_user(user, remember=True)
                 flash("Loggend in successfully!", category="success")
+                print("User "+user.username+" logged in.")
                 return redirect(url_for("views.map", username=username_login))
             else:
                 flash("Password incorrect.", category="error")
@@ -108,9 +108,9 @@ def load_database():
     
     for index, row in df.iterrows():
         new_user = User()
-        new_user.password = row['password']
-        new_user.username = row['username']       
-
+        new_user.username = row['username']
+        new_user.password = generate_password_hash(row['password'], method="sha256")
+        
         db.session.add(new_user)
         db.session.commit()
         c = c+1
