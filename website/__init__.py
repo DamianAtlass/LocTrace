@@ -6,6 +6,8 @@ from flask_login import LoginManager, logout_user
 
 
 
+
+
 db = SQLAlchemy()
 
 DB_NAME = "database.db"
@@ -16,10 +18,16 @@ def create_app():
         app.config["SECRET_KEY "] = "asdjfhakljsdgjf"
 
         app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+        
+        #disables Flask-SQLAlchemy's event system, which is not used anyway
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
         db.init_app(app)
 
         # Set the secret key to some random bytes. Keep this really secret!
         app.secret_key = "sfdjksdafeljkksdf"
+
+        
 
 
 
