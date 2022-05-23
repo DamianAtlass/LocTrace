@@ -11,11 +11,11 @@ from sqlalchemy import func
 
 auth = Blueprint('auth',__name__)
 
-REQUIRE_PW_TO_LOAD_DB = True
+REQUIRE_PW_TO_LOAD_DB = False
 PW_DB = "apfelkuchen"
 
 #automatically load database (not password-protected!)
-DB_AUTOLOAD = True
+DB_AUTOLOAD = False
 #file from which the users' usernames and passwords will be added to the local sqlalchemy database
 LOG_IN_DATA_FILE  = "logindata.csv"
 
@@ -64,12 +64,9 @@ def loaddb():
     #loads db if REQUIRE_PW_TO_LOAD_DB is set to False
     #sends simple form to confirm PW_DB if REQUIRE_PW_TO_LOAD_DB is set to True
     if request.method =="GET":
-            if not User.query.first() == None:
-                return "Database already loaded."
 
             if not REQUIRE_PW_TO_LOAD_DB:
                 load_database()
-                db_loaded = True
                 return redirect(url_for("auth.login"))
 
             return '''<form method="POST">
@@ -101,6 +98,7 @@ def loaddb():
     
 #loads log-in data from LOG_IN_DATA_FILE (csv) in a local sqlanchemy database in order to work with flask-login
 def load_database():
+    print("LOAD DB")
     #read data and put it in a dataframe (if it exists)
 
     if path.exists(LOG_IN_DATA_FILE):
@@ -111,22 +109,32 @@ def load_database():
         # add users from datafram in db
         new = 0
         old = 0
-        
+        p = 0
+
         for index, row in df.iterrows():
-            #only add user if it doesn't already exists
-            if not User.query.filter_by(username=row['username']).first():
+            username_df = row['username']
+
+            if User.query.filter_by(username=username_df).first():
+                old=old+1
+
+                #if user exists, check if it has a new password
+                existing_user = User.query.filter_by(username=username_df).first()
+                if not check_password_hash(existing_user.password, row['password']):
+                    existing_user.password = generate_password_hash(row['password'], method="sha256")
+                    p=p+1
+                    
+            else:
                 new_user = User()
-                new_user.username = row['username']
+                new_user.username = username_df
                 new_user.password = generate_password_hash(row['password'], method="sha256")
                 
                 db.session.add(new_user)
                 db.session.commit()
                 new = new+1
-            else:
-                old=old+1
+                
 
 
-        print("done. "+str(old)+" users already in database, "+str(new)+" new users added.")
+        print("done.\n"+str(old)+" user(s) already in database.\n"+str(new)+" new user(s) added.\n" +str(p) +" password(s) have been updated.")
         
         number_of_users = User.query.count()
         print(str(number_of_users)+" users in database.")
