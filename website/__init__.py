@@ -54,25 +54,15 @@ def create_app():
 
         return app
 
-#this function checks if an 'old' database already exists and if so deletes it
-#this prevents that the same users are pasted in the database multiple time, concluding in an error, since usernames must be unique
-#after that a new (empty) database is created. It will be filled with data in auth.login("GET")
+#this function creates a database
+#if an old one exists it will use that, if not, a new one will be created
 def create_database(app):
     import os
     
     if path.exists('website/' + DB_NAME):
-        print("An old database has been found...", end="")
-        os.remove('website/' + DB_NAME)
-        if path.exists('website/' + DB_NAME):
-            print("removel of old database was unsucessfull.")
-        else:
-            print("removel of old database was sucessfull.")
+        print("An old database has been found.")
     else:
         print("No old database found.")
 
     db.create_all(app=app)
-    if path.exists('website/' + DB_NAME):
-            print('Created a new Database!')
-    else:
-        print("The app failed to build a new database.")
     

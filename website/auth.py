@@ -5,6 +5,8 @@ from .models import User
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
+from os import path
+from sqlalchemy import func
 
 
 auth = Blueprint('auth',__name__)
@@ -44,7 +46,7 @@ def login():
     #sends log-in page to user and checks if database needs to be loaded
     if request.method =="GET":
         #if db is empty and DB_AUTOLOAD is True
-        if DB_AUTOLOAD and User.query.first() == None:
+        if DB_AUTOLOAD:
             load_database()
             
         return render_template("login.html")
@@ -99,25 +101,42 @@ def loaddb():
     
 #loads log-in data from LOG_IN_DATA_FILE (csv) in a local sqlanchemy database in order to work with flask-login
 def load_database():
-    #read data and put it in a dataframe
-    df = pd.read_csv(LOG_IN_DATA_FILE)
+    #read data and put it in a dataframe (if it exists)
 
-    print("Add users to database...", end="")
-    # add users from datafram in db
-    c = 0
-    
-    for index, row in df.iterrows():
-        new_user = User()
-        new_user.username = row['username']
-        new_user.password = generate_password_hash(row['password'], method="sha256")
+    if path.exists(LOG_IN_DATA_FILE):
+
+        df = pd.read_csv(LOG_IN_DATA_FILE)
+
+        print("Add users to database...", end="")
+        # add users from datafram in db
+        new = 0
+        old = 0
         
-        db.session.add(new_user)
-        db.session.commit()
-        c = c+1
+        for index, row in df.iterrows():
+            #only add user if it doesn't already exists
+            if not User.query.filter_by(username=row['username']).first():
+                new_user = User()
+                new_user.username = row['username']
+                new_user.password = generate_password_hash(row['password'], method="sha256")
+                
+                db.session.add(new_user)
+                db.session.commit()
+                new = new+1
+            else:
+                old=old+1
 
-    print("done. "+str(c)+" users were added.")
 
-    if User.query.first() == None:
-                flash("No users found in database.", category="error")
-                print("The app tried to import users from "+ LOG_IN_DATA_FILE +" but failed.")
+        print("done. "+str(old)+" users already in database, "+str(new)+" new users added.")
+        
+        number_of_users = User.query.count()
+        print(str(number_of_users)+" users in database.")
+
+        if User.query.first() == None:
+                    flash("No users found in database.", category="error")
+                    print("No users found in database!")
+    else:
+        print("No file "+ LOG_IN_DATA_FILE +" found!")
+        number_of_users = User.query.count()
+        print(str(number_of_users)+" users in database.")
+
 

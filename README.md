@@ -10,4 +10,4 @@ For loading users from the .csv file into the local sqlalchemy database correctl
 In short: if DB_AUTOLOAD is set to True everything happens automatically, LOG_IN_DATA_FILE should obviously be the path/name to the .csv file.
 
 ###### The database:
-The database is mainly needed so that the server can remember users who just loggend in. It is important to know, that as of now create_database(app) in __init__.py first looks for an old database and deletes it, if it finds one. This is to prevent adding users to the database who are already in it, which would result in an error because usernames need to be unique. Since users are imported into the database from the .csv file (which is not touched in this process), loss of data is not to be expected. However if we would want to permanently store data in the database, this would have to be revised.
+The database is mainly needed so that the server can remember users who just loggend in. create_database(app) in __init__.py first looks for an old database and uses that, if it finds one. When DB_AUTOLOAD is True and it regulary checks LOG_IN_DATA_FILE for new users, it won't add users who already exist.
