@@ -1,4 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
+from website.map import buildmap
+from datetime import datetime
+import folium
+import sys
 
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views',__name__,)
@@ -13,9 +17,28 @@ def base():
 
 variable = "variables can be passed this way"
 
-@views.route("/map/")
+@views.route("/map/", methods=['GET','POST'])
 def map():
-    temp = render_template("map.html", foo = variable)
+    
+    if request.method == 'POST':
+
+
+        #print(str(start), file=sys.stdout)
+        buildmap()
+        temp = render_template("map.html")
+        return temp
+    else:
+        temp = render_template("map.html")
+        return temp
+    temp = render_template("map.html")
+    return temp
+    
+
+
+
+@views.route("/displaymap/")
+def map1():
+    temp = render_template("map1.html")
     return temp
 
 
