@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pandas as pd
 from .models import User
 from . import db
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from os import path
 from sqlalchemy import func
@@ -16,7 +15,7 @@ PW_DB = "apfelkuchen"
 
 #automatically load database (not password-protected!)
 DB_AUTOLOAD = False
-#file from which the users' usernames and passwords will be added to the local sqlalchemy database
+#file from which the users' usernames will be added to the local sqlalchemy database
 LOG_IN_DATA_FILE  = "logindata.csv"
 
 
@@ -26,20 +25,18 @@ def login():
     #manages log in, redirectes and informs user if log-in failed
     if request.method =="POST":
         username_login = request.form.get("username")
-        password_login = request.form.get("password")
         user = User.query.filter_by(username=username_login).first()
 
 
         if user:
-            if check_password_hash(user.password, password_login):
-                login_user(user, remember=True)
-                flash("Loggend in successfully!", category="success")
-                print("User "+user.username+" logged in.")
-                return redirect(url_for("views.map", username=username_login))
-            else:
-                flash("Password incorrect.", category="error")
+            login_user(user, remember=True)
+            flash("Loggend in successfully!", category="success")
+            print("User "+user.username+" logged in.")
+            return redirect(url_for("views.map", username=username_login))
         else:
             flash("No user named '"+username_login+"' has been found.", category="error")
+            if not User.query.first():
+                flash("No users in database found.", category="error")
         
         return redirect(url_for("auth.login"))
 
@@ -109,32 +106,24 @@ def load_database():
         # add users from datafram in db
         new = 0
         old = 0
-        p = 0
 
         for index, row in df.iterrows():
             username_df = row['username']
 
             if User.query.filter_by(username=username_df).first():
                 old=old+1
-
-                #if user exists, check if it has a new password
-                existing_user = User.query.filter_by(username=username_df).first()
-                if not check_password_hash(existing_user.password, row['password']):
-                    existing_user.password = generate_password_hash(row['password'], method="sha256")
-                    p=p+1
                     
             else:
                 new_user = User()
                 new_user.username = username_df
-                new_user.password = generate_password_hash(row['password'], method="sha256")
-                
+                                
                 db.session.add(new_user)
                 db.session.commit()
                 new = new+1
                 
 
 
-        print("done.\n"+str(old)+" user(s) already in database.\n"+str(new)+" new user(s) added.\n" +str(p) +" password(s) have been updated.")
+        print("done.\n"+str(old)+" user(s) already in database.\n"+str(new)+" new user(s) added.\n")
         
         number_of_users = User.query.count()
         print(str(number_of_users)+" users in database.")
