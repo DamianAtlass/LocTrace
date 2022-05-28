@@ -3,7 +3,29 @@ from website.map import buildmap
 from datetime import datetime
 import folium
 import sys
+import datetime
+import pandas as pd
 
+
+
+def filter_by_date_range(start_date,start_time, end_date, end_time):
+    start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    start_time = datetime.datetime.strptime(start_time, "%H:%M")
+    end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+    end_time = datetime.datetime.strptime(end_time, "%H:%M")
+    
+    start_datetime = datetime.datetime.combine(start_date, start_time.time())
+    end_datetime = datetime.datetime.combine(end_date, end_time.time())
+    
+    data = pd.read_csv("website/data/example_gps.csv")
+    df_filtered = pd.DataFrame(columns =['Unnamed: 0', 'ts', 'longitude', 'latitude', 'altitude', 'accuracy', 'motion_score', 'y', 'x'])
+    
+    data['ts']= data['ts'].apply(lambda x: datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S+02:00"))
+    data_filtered =data[start_datetime <= data['ts']]
+    data_filtered2 =data_filtered[ data['ts'] <= end_datetime]
+    
+
+    return data_filtered2
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views',__name__,)
 
