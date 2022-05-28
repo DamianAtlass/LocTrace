@@ -9,7 +9,7 @@ views = Blueprint('views',__name__,)
 @views.route("/")
 def home():
     if (current_user.is_authenticated):
-        return redirect(url_for("views.map", user = current_user))
+        return redirect(url_for("views.map"))
     else:
         return redirect(url_for("auth.login"))
 
@@ -18,13 +18,13 @@ variable = "variables can be passed this way"
 @views.route("/map/")
 @login_required
 def map():
-    temp = render_template("map.html", foo = variable, user = current_user)
+    temp = render_template("map.html")
     return temp
 
 
 @views.route("/base/")
 def base():
-    return render_template("base.html", user = current_user)
+    return render_template("base.html")
 
 
 

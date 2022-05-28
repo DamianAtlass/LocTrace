@@ -27,7 +27,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
           <div class="navbar-nav">
-              {%if user and user.is_authenticated%}
+              {%if current_user.is_authenticated%}
               <a class="nav-item nav-link" id="map" href="/map/">Map</a>
               <a class="nav-item nav-link" id="logout" href="/logout/">Log-out</a>
               {% else %}
@@ -35,10 +35,9 @@
               
               {% endif %}
               <a class="nav-item nav-link" id="base-template" href="/base/">base-template</a>
-              <a class="nav-item nav-link" id="load-db" href="/loaddb/">load-db (delete later)</a>
 
-              {%if user and user.is_authenticated%}
-              <p class="center" style="color:rgb(255, 255, 255);" > Hallo {{user.username}}!</p>
+              {%if current_user.is_authenticated%}
+              <p class="center" style="color:rgb(255, 255, 255);" > Hallo {{current_user.username}}!</p>
               {% endif %}
           </div>
         </div>

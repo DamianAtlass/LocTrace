@@ -11,10 +11,10 @@ this means that for example bootstrap doesn't need to be imported again -->
 here the map could be displayed
  
 
-{% if user%}
+{% if current_user.is_authenticated%}
 
 
-<p>{{user.username}} is now logged in</p>
+<p>{{current_user.username}} is now logged in</p>
 
 {% endif %}
 
