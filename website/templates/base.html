@@ -36,6 +36,8 @@
               {% endif %}
               <a class="nav-item nav-link" id="base-template" href="/base/">base-template</a>
               <a class="nav-item nav-link" id="load-db" href="/loaddb/">load-db (delete later)</a>
+                <!-- nur Beispiel für Backend-Fkt, muss an andere Stelle, sieht natürlich schäbig aus so -->
+              <a class="nav-item nav-link" id="weekday" href="/wednesday/">Wednesday</a>
 
               {%if user and user.is_authenticated%}
               <p class="center" style="color:rgb(255, 255, 255);" > Hallo {{user.username}}!</p>

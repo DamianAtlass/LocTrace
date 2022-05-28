@@ -30,7 +30,7 @@ def login():
 
         if user:
             login_user(user, remember=True)
-            flash("Loggend in successfully!", category="success")
+            flash("Logged in successfully!", category="success")
             print("User "+user.username+" logged in.")
             return redirect(url_for("views.map", username=username_login))
         else:
