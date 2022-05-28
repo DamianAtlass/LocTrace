@@ -58,6 +58,19 @@ def map():
 
 
 
+@views.route('/filter', methods=['POST'])
+def filter():
+    start_date = request.form['start_date']
+    start_time = request.form['start_time']
+    end_date = request.form['end_date']
+    end_time = request.form['end_time']
+    data = filter_by_date_range(start_date,start_time, end_date, end_time)
+    buildmap(data)
+    return render_template('map.html', data=data)
+
+
+
+
 @views.route("/displaymap/")
 def map1():
     temp = render_template("map1.html")
