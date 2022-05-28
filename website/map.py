@@ -15,7 +15,7 @@ data = pd.read_csv("website/data/example_gps.csv")
 
 
 # function for building the map with given data
-def buildmap():
+def buildmap(data):
 
 
 
