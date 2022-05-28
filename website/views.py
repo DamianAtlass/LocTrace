@@ -13,17 +13,14 @@ def base():
 
 variable = "variables can be passed this way"
 
-@views.route("/map/")
+@views.route("/map")
 def map():
     temp = render_template("map.html", foo = variable)
     return temp
 
+foo = "hey"
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d246d8844544a7dc4aa6717f110e170ee47fb33e
-@views.route("/login/")
+@views.route("/login")
 def login():
     temp = render_template("login.html")
     return temp
