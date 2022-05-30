@@ -30,10 +30,13 @@ def map():
         #getting values from html form 
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
-        build_date_map(current_user, start_date, end_date)
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+        build_date_map(current_user, start_date, end_date, start_time, end_time)
         temp = render_template("map_date.html")
         #print(str(start), file=sys.stdout)
         return temp
+
     
     buildmap(current_user)
     temp = render_template("map.html")
