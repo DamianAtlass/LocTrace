@@ -12,10 +12,35 @@ iframe {
     width: 100vw;
 }
 </style>-->
-<style>body{
-    margin: 0;
-}
-    </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+<style>
+  .dropdown {
+    position: static !important;
+  }
+
+  .dropdown-menu {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+  }
+
+  ul {
+    margin-left: 10px;
+  }
+
+  {
+
+  }
+
+
+</style>
 
 {% extends "base.html" %}
 
@@ -26,46 +51,112 @@ iframe {
 <!-- this replaces the block called "content" in base.html -->
 {% block content %}
 <!---action="{{ url_for('views.map') }}-->
-<form method="POST" action="{{ url_for('views.map') }}" >
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
-	  <div class="container-fluid">	    
-		<div class="collapse navbar-collapse " id="navbarSupportedContent">
-		  <ul class="navbar-nav me-auto order-0 form-group">
-			<li class="nav-item">
-			  <span class="nav-link active">Start date: </span>
-			</li>
-			<li class="nav-item">
-			  <input class="form-control me-2" type="date" name="start_date" value="2022-00-00" min="2020-01-01" max="2022-12-31">
-			</li>
-            <li>
-                <input class="form-control me-2" type="time" name="start_time">
-            </li>
-			<li class="nav-item">
-			  <span class="nav-link active">End date: </span>
-			</li>
-			<li class="nav-item">
-			  <input class="form-control me-2" type="date" name="end_date" value="2022-00-00" min="2020-01-01" max="2022-12-31">
-			</li>
-            <li>
-                <input class="form-control me-2" type="time" name="end_time">
-            </li>
-            <li>
-                <button class="btn btn-outline-success" type="submit">Filtern</button>
-            </li>
-		  </ul>
-	  </div>
-	</nav>
-</form>
+<div class="fluid-container">
+  <center>
+    <br>
+    <nav class="navbar navbar-expand-lg navbar-dark
+                  justify-content-between text-white" style="background-color: #573b8a;">
+      <a class="navbar-brand" href="#">
+        Filter
+      </a>
+      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
+        aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
+        style="outline-color:#fff">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    
- <!--{{map |safe}}-->
- <iframe class="displaymap", src="/displaymap" height="100%" width="100%" frameborder="0" seamless="seamless"></iframe>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown01">
+
+        <ul class="navbar-nav ">
+
+          <!--dropdown item of menu-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Zeitfenster
+            </a>
+
+            <!--dropdown sub items of menu-->
+            <div class="dropdown-menu form-group" aria-labelledby="navbarDropdown">
+
+              <div class="dropdown item form-check mb-3">
+                <div class="form-check ">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Wochentage
+                  </label>
+                </div>
+                <div class="form-check ">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Datum
+                  </label>
+                </div>
+              </div>
+             
+              <div class="row dropdown item input-group" style="margin-left: 10px;" >
+                <div class="col-5">Start: </div>
+                <div class="col-4">Ende: </div>
+                <div class="w-100" style="padding: 5px;"></div>
+                <input class="col-2 form-control" type="date" href="#" name="start_date" placeholder="Beginn des Filters">
+                <input class="col-2 form-control" type="time" name="start_time">
+                <div class="col-1"></div>
+                <input class="col-2 form-control" type="date" href="#" name="end_date" placeholder="Ende des Filters">
+                <input class="col-2 form-control" type="time" name="end_time">
+              </div>
+
+              <div class="row dropdown item input-group" style="margin:10px;">
+                <div class="col">Monday</div>
+                <div class="col">Tuesday</div>
+                <div class="col">Wednesday</div>
+                <div Class="col">Thursday</div>
+                <div class="col">Friday</div>
+                <div class="col">Saturday</div>
+                <div class="col">Sunday</div>
+              </div>
+ 
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                More Content here
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown 02
+            </a>
+
+            <!--dropdown sub items of menu-->
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-width: 1366px;">
+              <a class="dropdown-item" href="#">
+                Action 01
+              </a>
+              <a class="dropdown-item" href="#">
+                Action 02
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                More Content here
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </center>
+</div>
+
+
+<!--{{map |safe}}-->
+<iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0" seamless="seamless"></iframe>
 
 {% if true %}
 <p>{{foo}}</p>
 <!--<div>{{ map }}</div>-->
 
 {% endif %}
+
 
 
 {% endblock %}
