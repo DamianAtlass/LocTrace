@@ -1,25 +1,21 @@
 <!-- this file inherits from base.html. 
-this means that for example bootstrap doesn't need to be imported again -->
+   this means that for example bootstrap doesn't need to be imported again -->
 <!--<style>
-    body {
-    margin: 0;            /* Reset default margin */
-}
-iframe {
-    display: block;       /* iframes are inline by default */
-    background: #000;
-    border: none;         /* Reset default border */
-    height: 100vh;        /* Viewport-relative units */
-    width: 100vw;
-}
-</style>-->
+   body {
+   margin: 0;            /* Reset default margin */
+   }
+   iframe {
+   display: block;       /* iframes are inline by default */
+   background: #000;
+   border: none;         /* Reset default border */
+   height: 100vh;        /* Viewport-relative units */
+   width: 100vw;
+   }
+   </style>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style>
   .dropdown {
     position: static !important;
@@ -35,128 +31,135 @@ iframe {
     margin-left: 10px;
   }
 
-  {
-
+  .float-parent-element {
+    width: 95%;
   }
 
-
+  .float-child-element {
+    float: left;
+    width: 80%;
+  }
 </style>
-
 {% extends "base.html" %}
-
 <!-- this replaces the block called "title" in base.html -->
 {% block title %} Map {% endblock %}
-
-
 <!-- this replaces the block called "content" in base.html -->
 {% block content %}
 <!---action="{{ url_for('views.map') }}-->
-<div class="fluid-container">
-  <center>
-    <br>
-    <nav class="navbar navbar-expand-lg navbar-dark
-                  justify-content-between text-white" style="background-color: #573b8a;">
-      <a class="navbar-brand" href="#">
-        Filter
-      </a>
-      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
-        aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
-        style="outline-color:#fff">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<div class="float-parent-element">
+  <div class="float-child-element">
+    <div class="fluid-container">
 
-      <div class="collapse navbar-collapse" id="navbarNavDropdown01">
-
-        <ul class="navbar-nav ">
-
-          <!--dropdown item of menu-->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Zeitfenster
-            </a>
-
-            <!--dropdown sub items of menu-->
-            <div class="dropdown-menu form-group" aria-labelledby="navbarDropdown">
-
-              <div class="dropdown item form-check mb-3">
-                <div class="form-check ">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Wochentage
-                  </label>
+      <nav class="navbar navbar-expand-lg navbar-dark
+            justify-content-between text-white" style="background-color: #573b8a;">
+        <a class="navbar-brand" href="#">
+          Filter
+        </a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
+          aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
+          style="outline-color:#fff">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown01">
+          <ul class="navbar-nav ">
+            <!--dropdown item of menu-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Zeitfenster
+              </a>
+              <!--dropdown sub items of menu-->
+              <div class="dropdown-menu form-group" aria-labelledby="navbarDropdown">
+                <div class="dropdown item form-check mb-3">
+                  <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Wochentage
+                    </label>
+                  </div>
+                  <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Datum
+                    </label>
+                  </div>
                 </div>
-                <div class="form-check ">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Datum
-                  </label>
+                <div class="row dropdown item input-group" style="margin-left: 10px;">
+                  <div class="col-5">Start: </div>
+                  <div class="col-4">Ende: </div>
+                  <div class="w-100" style="padding: 5px;"></div>
+                  <input class="col-2 form-control" type="date" href="#" name="start_date"
+                    placeholder="Beginn des Filters">
+                  <input class="col-2 form-control" type="time" name="start_time">
+                  <div class="col-1"></div>
+                  <input class="col-2 form-control" type="date" href="#" name="end_date" placeholder="Ende des Filters">
+                  <input class="col-2 form-control" type="time" name="end_time">
                 </div>
+                <div class="row dropdown item input-group" style="margin:10px;">
+                  <div class="col">Monday</div>
+                  <div class="col">Tuesday</div>
+                  <div class="col">Wednesday</div>
+                  <div Class="col">Thursday</div>
+                  <div class="col">Friday</div>
+                  <div class="col">Saturday</div>
+                  <div class="col">Sunday</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  More Content here
+                </a>
               </div>
-             
-              <div class="row dropdown item input-group" style="margin-left: 10px;" >
-                <div class="col-5">Start: </div>
-                <div class="col-4">Ende: </div>
-                <div class="w-100" style="padding: 5px;"></div>
-                <input class="col-2 form-control" type="date" href="#" name="start_date" placeholder="Beginn des Filters">
-                <input class="col-2 form-control" type="time" name="start_time">
-                <div class="col-1"></div>
-                <input class="col-2 form-control" type="date" href="#" name="end_date" placeholder="Ende des Filters">
-                <input class="col-2 form-control" type="time" name="end_time">
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Dropdown 02
+              </a>
+              <!--dropdown sub items of menu-->
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-width: 1366px;">
+                <a class="dropdown-item" href="#">
+                  Action 01
+                </a>
+                <a class="dropdown-item" href="#">
+                  Action 02
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  More Content here
+                </a>
               </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!--{{map |safe}}-->
+    <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
+      seamless="seamless"></iframe>
+  </div>
+  <div width="20%">
 
-              <div class="row dropdown item input-group" style="margin:10px;">
-                <div class="col">Monday</div>
-                <div class="col">Tuesday</div>
-                <div class="col">Wednesday</div>
-                <div Class="col">Thursday</div>
-                <div class="col">Friday</div>
-                <div class="col">Saturday</div>
-                <div class="col">Sunday</div>
-              </div>
- 
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                More Content here
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Dropdown 02
-            </a>
+    <h2 style="text-align:center;"><strong>Metadata</strong></h2>
+    <table>
 
-            <!--dropdown sub items of menu-->
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-width: 1366px;">
-              <a class="dropdown-item" href="#">
-                Action 01
-              </a>
-              <a class="dropdown-item" href="#">
-                Action 02
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                More Content here
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </center>
+      {% for i in Metadata %}
+      </tr>
+      <td>
+        {{i[0]}}
+      </td>
+      <td>
+        {{i[1]}}
+      </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 </div>
 
 
-<!--{{map |safe}}-->
-<iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0" seamless="seamless"></iframe>
 
 {% if true %}
 <p>{{foo}}</p>
 <!--<div>{{ map }}</div>-->
-
 {% endif %}
-
-
-
 {% endblock %}
