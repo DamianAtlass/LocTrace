@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required, current_user
+import pandas as pd
 from website.map import buildmap
+from website.map import metadata
 from website.map import build_weekday_map
 from website.map import build_date_map
 from datetime import datetime
@@ -34,13 +36,18 @@ def map():
         end_time = request.form.get('end_time')
         build_date_map(current_user, start_date,
                        end_date, start_time, end_time)
-        temp = render_template("map_date.html")
+        #add metadata
+        df_metadata = metadata()
+        temp = render_template("map_date.html", Metadata = zip(df_metadata.columns,df_metadata.loc[0]))
         #print(str(start), file=sys.stdout)
         return temp
 
     buildmap(current_user)
-    temp = render_template("map.html")
-    return temp
+    
+    #add metadata
+    df_metadata = metadata()
+    
+    return render_template("map.html", Metadata = zip(df_metadata.columns,df_metadata.loc[0])  )
 
 
 @views.route("/displaymap/")
