@@ -14,7 +14,7 @@ REQUIRE_PW_TO_LOAD_DB = False
 PW_DB = "apfelkuchen"
 
 #automatically load database (not password-protected!)
-DB_AUTOLOAD = False
+DB_AUTOLOAD = True
 #file from which the users' usernames will be added to the local sqlalchemy database
 LOG_IN_DATA_FILE  = "logindata.csv"
 
