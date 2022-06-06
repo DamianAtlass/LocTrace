@@ -51,9 +51,6 @@ def map1():
     temp = render_template("map1.html")
     return temp
 
-@views.route("/base/")
-def base():
-    return render_template("base.html", user = current_user)
 
 # example for routing for filteroption "wednesday" <- 
 @views.route("/wednesday/")
