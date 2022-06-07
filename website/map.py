@@ -49,7 +49,7 @@ def buildmap(user):
 
         loc = [loc1,loc2]
     
-        color_ = colormap(data['motion_score'][i])
+        color_ = colormap(data['motion_score'].iloc[i])
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
@@ -110,7 +110,7 @@ def build_weekday_map(user, weekday):
 
         loc = [loc1,loc2]
     
-        color_ = colormap(newData['motion_score'][i])
+        color_ = colormap(newData['motion_score'].iloc[i])
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
@@ -119,53 +119,44 @@ def build_weekday_map(user, weekday):
     print("mapPath:" +mapPath)
     m3.save(mapPath)
 
-# funktioniert bisher nur für den 27-10-2021, weil keine anderen daten in csv-datei
-# expl week, needs to be adjusted {"2021-10-25" : 0 , "2021-10-26" : 1, "2021-10-27" : 2, "2021-10-28" : 3, "2021-10-29" : 4, "2021-10-30" : 5,"2021-10-31" : 6}
+# builds new map for requested timespan
 def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time): 
     
-    # creating comaprable ints form string dates
-    date_values = {"2021-10-25" : 1 , "2021-10-26" : 2, "2021-10-27" : 3, "2021-10-28" : 4, "2021-10-29" : 5, "2021-10-30" : 6,"2021-10-31" : 7}
-
-    
-    # convert to int and if no time request, then set req time span to whole day
-    if (req_start_time == "" or req_start_time == ""):
-        req_start_time_int = 0
-        start_date_value = 0
-    else: 
-        req_start_time_int = int(req_start_time[0:2])*100 + int(req_start_time[3:5])
-        start_date_value = date_values[str(req_start_date)]
-    
-    if (req_end_time == ""):
-        req_end_time_int = 2359 
-        end_date_value = 0
-    else: 
-        req_end_time_int = int(req_end_time[0:2])*100 + int(req_end_time[3:5])
-        end_date_value = date_values[str(req_end_date)]   
-    
-
      # get Data for user
     csv_path = "website/data/" + user.username + ".csv" 
     data = pd.read_csv(csv_path)
+
+    #if no time is given, set to while day
+    if req_start_time == "" and  req_end_time == "" :
+        reqStartDateTime = datetime.strptime(req_start_date + "00:00", '%Y-%m-%d%H:%M')
+        reqEndDateTime = datetime.strptime(req_end_date +  "23:59", '%Y-%m-%d%H:%M')
+    elif req_start_time == "" and req_end_time != "":
+        reqStartDateTime = datetime.strptime(req_start_date + "00:00", '%Y-%m-%d%H:%M')
+        reqEndDateTime = datetime.strptime(req_end_date +  req_end_time, '%Y-%m-%d%H:%M')
+    elif req_start_time != "" and req_end_time == "":
+        reqStartDateTime = datetime.strptime(req_start_date +  req_start_time, '%Y-%m-%d%H:%M')
+        reqEndDateTime = datetime.strptime(req_end_date + "23:59", '%Y-%m-%d%H:%M')
+    else:
+        reqStartDateTime = datetime.strptime(req_start_date +  req_start_time, '%Y-%m-%d%H:%M')
+        reqEndDateTime = datetime.strptime(req_end_date +  req_end_time, '%Y-%m-%d%H:%M')
+
     newData = pd.DataFrame()
+
+    print(data['ts'].iloc[0])
+    print(data['ts'].iloc[len(data)-1])
+
+    
+
 
     for i in range(0, len(data)-1):
         dataDate = data['ts'].iloc[i]
-        #vllt problem, wegen :00
+    
         # date from timestamp in data
-        data_date = datetime.strptime(dataDate, '%Y-%m-%d %H:%M:%S+%f:00').date()
-        data_time = str(datetime.strptime(dataDate, '%Y-%m-%d %H:%M:%S+%f:00').time())[0:5]
-        data_time_int = int(data_time[0:2])*100 + int(data_time[3:5])
-       
-        # if required date, add to newDataframe
-      
-        print(req_start_time == "")
-        print('r_end_time:' + str(req_end_time))
-
-        if start_date_value <= date_values[str(data_date)] and date_values[str(data_date)] <= end_date_value and req_start_time_int <= data_time_int and data_time_int <= req_end_time_int:
-      
+        data_date = datetime.strptime(dataDate, '%Y-%m-%d %H:%M:%S+%f:00')
+        if data_date >= reqStartDateTime and data_date <= reqEndDateTime:
             newData = pd.concat([newData, data.iloc[[i]]])
 
-    print(newData)
+  
 
     # if dataframe is empty (no locations at selected date intervall) then build empty map doesn't work, idk why
     
@@ -203,7 +194,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
             loc = [loc1,loc2]
     
-            color_ = colormap(newData['motion_score'][i])
+            color_ = colormap(newData['motion_score'].iloc[i])
 
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
