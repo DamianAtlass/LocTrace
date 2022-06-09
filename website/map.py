@@ -5,13 +5,80 @@ import pandas as pd
 import branca
 import branca.colormap as cm
 from datetime import datetime
-
+#import for home loc
+import folium
+import pandas as pd
+import branca
+import branca.colormap as cm
+from datetime import datetime
+from datetime import timedelta
+import geopy.distance
+import numpy as np
+from geopy.geocoders import Nominatim
  
 
 
 #loading all the loc data
 #using panda dataframe
 
+# converts a str to a date
+def toDate(str):
+    return datetime.strptime(str[0:-6], "%Y-%m-%d %H:%M:%S")
+
+
+#returns location of work
+def getHomeLoc(stops):
+    
+    durationPerUniqueId = np.zeros(len(stops)-1, dtype=np.int64)
+    
+    for i in range(0, len(stops)-1):
+        durationPerUniqueId[stops.iloc[i]["unique_id"]] += stops.iloc[i]["duration"]
+            
+    max_index = np.argmax(durationPerUniqueId)
+    #print("max: "+str(max_index))
+    home = None
+    
+    for i in range(0, len(stops)-1):
+        #print("id: "+str(stops.iloc[i]["unique_id"]))
+        if stops.iloc[i]["unique_id"] == max_index:
+            home = stops.iloc[i]
+            break
+    return home
+
+#returns location of work
+def getWorkLoc(stops, home):
+    
+    durationPerUniqueId = np.zeros(len(stops)-1, dtype=np.int64)
+    
+    for i in range(0, len(stops)-1):
+        
+        if stops.iloc[i]["unique_id"] != home["unique_id"] and toDate(stops.iloc[i]["start"]).weekday() < 5:
+            #print("weekday: "+str(toDate(stops.iloc[i]["start"]).weekday()))
+            durationPerUniqueId[stops.iloc[i]["unique_id"]] += stops.iloc[i]["duration"]
+            
+    max_index = np.argmax(durationPerUniqueId)
+    
+    workplace = None
+    
+    for i in range(0, len(stops)-1):
+        #print("id: "+str(stops.iloc[i]["unique_id"]))
+        if stops.iloc[i]["unique_id"] == max_index:
+            workplace = stops.iloc[i]
+            break
+    return workplace
+
+#builds a little popup
+def buildPopup(lat, long):
+    geolocator = Nominatim(user_agent="LocTrace")
+    adress, coordinates = geolocator.reverse(str(lat)+" "+str(long))
+    if adress == None:
+        return None
+    
+    html = str(adress)
+    iframe = folium.IFrame(html,width=200,  height=100)
+
+    popup = folium.Popup(iframe, max_width=200)
+    return popup
 
 
 
@@ -27,9 +94,11 @@ def buildmap(user):
     print("username: " +  user.username)
     '''
    
-    csv_path = "website/data/" + user.username + ".csv"
+    csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
+    stops_path = "data/" + user.username + "/stops.csv"
     
     data = pd.read_csv(csv_path)
+    stops = pd.read_csv(stops_path)
 
     location = data['latitude'].mean(), data['longitude'].mean()
 
@@ -53,6 +122,16 @@ def buildmap(user):
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
+    home = getHomeLoc(stops)
+    workplace = getWorkLoc(stops, home)
+
+    # marker home
+    popup_h = buildPopup(home["latitude"], home["longitude"])
+    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
+
+    # marker work
+    popup_w = buildPopup(workplace["latitude"], workplace["longitude"])
+    folium.Marker((workplace["latitude"], workplace["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
 
 
     m3.save('website/templates/map1.html')
@@ -74,10 +153,12 @@ def build_weekday_map(user, weekday):
     print(userStr)
      '''
   
-    csv_path = "website/data/" + user.username + ".csv"
+    csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
+    stops_path = "data/" + user.username + "/stops.csv"
     
-    # get Data for user 
     data = pd.read_csv(csv_path)
+    stops = pd.read_csv(stops_path)
+
     newData = pd.DataFrame()
 
     for i in range(0, len(data)-1):
@@ -114,6 +195,16 @@ def build_weekday_map(user, weekday):
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
+    home = getHomeLoc(stops)
+    workplace = getWorkLoc(stops, home)
+
+    # marker home
+    popup_h = buildPopup(home["latitude"], home["longitude"])
+    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
+
+    # marker work
+    popup_w = buildPopup(workplace["latitude"], workplace["longitude"])
+    folium.Marker((workplace["latitude"], workplace["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
 
     mapPath = "website/templates/map" + weekday + ".html" 
     print("mapPath:" +mapPath)
@@ -144,8 +235,13 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     
 
      # get Data for user
-    csv_path = "website/data/" + user.username + ".csv" 
+    
+    csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
+    stops_path = "data/" + user.username + "/stops.csv"
+    
     data = pd.read_csv(csv_path)
+    stops = pd.read_csv(stops_path)
+
     newData = pd.DataFrame()
 
     for i in range(0, len(data)-1):
@@ -203,12 +299,23 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
             loc = [loc1,loc2]
     
-            color_ = colormap(newData['motion_score'][i])
+            color_ = colormap(newData.iloc[i]['motion_score'])
 
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
+        
+    home = getHomeLoc(stops)
+    workplace = getWorkLoc(stops, home)
+
+    # marker home
+    popup_h = buildPopup(home["latitude"], home["longitude"])
+    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m4)
+
+    # marker work
+    popup_w = buildPopup(workplace["latitude"], workplace["longitude"])
+    folium.Marker((workplace["latitude"], workplace["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m4)
   
-        m4.save("website/templates/map_date.html" )
+    m4.save("website/templates/map_date.html" )
    
 
 
