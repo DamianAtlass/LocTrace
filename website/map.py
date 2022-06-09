@@ -173,7 +173,7 @@ def buildPopup(entry, showLastVisit):
         return None
     html = ""
     if showLastVisit:
-        html += "Besucht am: " + str(getDate(entry))+"<br><br>"
+        html += ("Besucht am: " + str(getDate(entry))+"<br><br>")
     
     html += "Adresse:<br>"+str(adress)
     iframe = folium.IFrame(html,width=200,  height=200)
