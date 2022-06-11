@@ -138,17 +138,16 @@
 
 
 
-
-<button onclick="myFunction()">Click me</button>
-<button onclick="change()">Click me</button>
-<button onclick="openMeta()">Click me</button>
-
 <script>
   function openMeta() {
-    document.getElementById("karte").style.marginRight = "400px";
+    if (document.getElementById("karte").style.marginRight == "400px") {
+      document.getElementById("karte").style.marginRight = "0px";
+    } else {
+      document.getElementById("karte").style.marginRight = "400px";
+    }
   }
   function closeMeta() {
-    document.getElementById("karte").style.marginRight = "0Px";
+    document.getElementById("karte").style.marginRight = "0px";
   }
 
 </script>
