@@ -205,7 +205,7 @@ def buildmap(user):
 
     m3 = folium.Map(
         location,
-        zoom_start=15)
+        zoom_start=10)
 
     colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                              index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
@@ -286,7 +286,7 @@ def build_weekday_map(user, weekday):
 
     m3 = folium.Map(
         location,
-        zoom_start=15)
+        zoom_start=10)
 
     colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                              index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
@@ -385,7 +385,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
         location = data['latitude'].mean(), data['longitude'].mean()
         m4 = folium.Map(
              location,
-            zoom_start=15)
+            zoom_start=10)
 
         colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                              index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
@@ -401,7 +401,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
         m4 = folium.Map(
                  location,
-                 zoom_start=15)
+                 zoom_start=10)
 
         colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                              index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
