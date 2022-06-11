@@ -50,6 +50,10 @@
     padding: 70px;
 
   }
+  
+  .row{
+    padding-left: 30px;
+  }
 </style>
 {% extends "base.html" %}
 <!-- this replaces the block called "title" in base.html -->
@@ -80,69 +84,27 @@
                 Zeitfenster
               </a>
               <!--dropdown sub items of menu-->
-              <div class="dropdown-menu form-group" aria-labelledby="navbarDropdown">
-                <div class="dropdown item form-check mb-3">
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Wochentage
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      Datum
-                    </label>
-                  </div>
-                </div>
-                <div class="row dropdown item input-group" style="margin-left: 10px;">
-                  <div class="col-5">Start: </div>
-                  <div class="col-4">Ende: </div>
+              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
+                <div class="row dropdown item input-group" style=" width: 80%;">
+                  <div class="col-6 " style="padding-left: 0px;">Start: </div>
+                  <div class="col-4 " style="padding-left: 24px">Ende: </div>
                   <div class="w-100" style="padding: 5px;"></div>
-                  <input class="col-2 form-control" type="date" href="#" name="start_date"
-                    placeholder="Beginn des Filters">
+                  <input class="col-2 form-control" type="date" href="#" name="start_date">
                   <input class="col-2 form-control" type="time" name="start_time">
                   <div class="col-1"></div>
-                  <input class="col-2 form-control" type="date" href="#" name="end_date" placeholder="Ende des Filters">
+                  <input class="col-2 form-control" type="date" href="#" name="end_date">
                   <input class="col-2 form-control" type="time" name="end_time">
                 </div>
-                <div class="row dropdown item input-group" style="margin:10px;">
-                  <div class="col">Monday</div>
-                  <div class="col">Tuesday</div>
-                  <div class="col">Wednesday</div>
-                  <div Class="col">Thursday</div>
-                  <div class="col">Friday</div>
-                  <div class="col">Saturday</div>
-                  <div class="col">Sunday</div>
-                </div>
+                
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
-                  More Content here
-                </a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Dropdown 02
-              </a>
-              <!--dropdown sub items of menu-->
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-width: 1366px;">
-                <a class="dropdown-item" href="#">
-                  Action 01
-                </a>
-                <a class="dropdown-item" href="#">
-                  Action 02
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  More Content here
+                  <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
                 </a>
               </div>
             </li>
           </ul>
-          <a class="ml-auto ">
-            <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
+          <a class="ml-auto "">
+            <button class="btn btn-light" name="offcanvas_button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
           </a>
         </div>
       </nav>
@@ -152,7 +114,7 @@
       seamless="seamless"></iframe>
   </div>
 
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasRightLabel">Metadata</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -181,9 +143,9 @@
 </div>
 
 
-
 {% if true %}
 <p>{{foo}}</p>
 <!--<div>{{ map }}</div>-->
 {% endif %}
+
 {% endblock %}

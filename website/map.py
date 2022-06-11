@@ -7,6 +7,8 @@ import branca
 import branca.colormap as cm
 from datetime import datetime
 
+from requests import request
+
 
 # loading all the loc data
 # using panda dataframe
@@ -198,7 +200,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
             loc = [loc1, loc2]
 
-            color_ = colormap(newData['motion_score'][i])
+            color_ = colormap(newData['motion_score'].iloc[i])
 
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
