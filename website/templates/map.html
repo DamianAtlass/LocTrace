@@ -32,6 +32,8 @@
     margin-left: 10px;
   }
 
+ 
+
   .row {
     padding-left: 30px;
   }
@@ -48,6 +50,17 @@
   #karte {
     transition: margin-right .5s;
   }
+
+  p {
+    color: rgba(255, 255, 255, 0.799);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    
+  }
+
+  p{
+    margin-bottom: 0px !important;
+  }
 </style>
 {% extends "base.html" %}
 <!-- this replaces the block called "title" in base.html -->
@@ -57,7 +70,8 @@
 <!---action="{{ url_for('views.map') }}-->
 
 <div id="karte">
-  <div>
+  <div class="fluid-container">
+   
     <nav class="navbar navbar-expand-lg navbar-dark
       justify-content-between text-white" id="main" style="background-color: #573b8a;">
       <a class="navbar-brand" href="#">
@@ -94,22 +108,41 @@
               </a>
             </div>
           </li>
-        </ul>
-        <a class="ml-auto "">
-         <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
-          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-          style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
-        </a>
-      </div>
-    </nav>
+          <li>
+            <a>
+              
+              <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
+            </a>
+          </li>
 
+        </ul>
+      
+        {%if current_user.is_authenticated%}
+
+
+        <!--Form item of menu for search purpose-->
+        <a class="ms-auto">
+          <p>Hello, {{current_user.username}}!</p>
+          <a class="nav-item nav-link " id="logout" href="/logout/"
+            style="color: #a079e8; font-weight: bold;">Logout</a>
+        </a>
+                   
+       
+        {% endif %}
+
+      </div>
+    
   </div>
+</nav>
   <!--{{map |safe}}-->
   <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
     seamless="seamless"></iframe>
 
 
 </div>
+
 
 
 <div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -146,10 +179,10 @@
       document.getElementById("karte").style.marginRight = "400px";
     }
   }
+
   function closeMeta() {
     document.getElementById("karte").style.marginRight = "0px";
   }
-
 </script>
 
 {% if true %}
