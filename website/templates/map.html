@@ -12,151 +12,181 @@
    width: 100vw;
    }
    </style>-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<style>
-  .dropdown {
-    position: static !important;
-  }
-
-  .dropdown-menu {
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-    margin-top: 0px !important;
-    width: 100% !important;
-  }
-
-  ul {
-    margin-left: 10px;
-  }
-
-  .inhalt{
-    width: 95%;
-  }
-
-  .row {
-    padding-left: 30px;
-  }
-
-  .main {
-    margin-left: 22;
-  }
-
-  .metadata {
-    width: 30%;
-  }
-
-  #karte {
-    width: 70%;
-  }
-
-  p {
-    color: rgba(255, 255, 255, 0.799);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
-    margin-bottom: 0px !important;
-  }
-</style>
-{% extends "base.html" %}
-<!-- this replaces the block called "title" in base.html -->
-{% block title %} Map {% endblock %}
-<!-- this replaces the block called "content" in base.html -->
-{% block content %}
-<!---action="{{ url_for('views.map') }}-->
-<div class = "inhalt">
-<div id="karte">
-  <div class="fluid-container">
-
-    <nav class="navbar navbar-expand-lg navbar-dark
-      justify-content-between text-white" id="main" style="background-color: #573b8a;">
-      <a class="navbar-brand" href="#">
-        Filter
-      </a>
-      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
-        aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
-        style="outline-color:#fff">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown01">
-        <ul class="navbar-nav ">
-          <!--dropdown item of menu-->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Zeitfenster
-            </a>
-            <!--dropdown sub items of menu-->
-            <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
-              <div class="row dropdown item input-group" style=" width: 80%;">
-                <div class="col-6 " style="padding-left: 0px;">Start: </div>
-                <div class="col-4 " style="padding-left: 24px">Ende: </div>
-                <div class="w-100" style="padding: 5px;"></div>
-                <input class="col-2 form-control" type="date" href="#" name="start_date">
-                <input class="col-2 form-control" type="time" name="start_time">
-                <div class="col-1"></div>
-                <input class="col-2 form-control" type="date" href="#" name="end_date">
-                <input class="col-2 form-control" type="time" name="end_time">
-              </div>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
-              </a>
-            </div>
-          </li>
-        </ul>
-
-        {%if current_user.is_authenticated%}
-
-
-        <!--Form item of menu for search purpose-->
-        <a class="ms-auto">
-          <p>Hello, {{current_user.username}}!</p>
-          <a class="nav-item nav-link " id="logout" href="/logout/"
-            style="color: #a079e8; font-weight: bold;">Logout</a>
-        </a>
-
-
-        {% endif %}
-
-      </div>
-
-  </div>
-  </nav>
-  <!--{{map |safe}}-->
-  <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
-    seamless="seamless"></iframe>
-
-
-</div>
-
-
-
-<div class="metadata">
-  <h5>Metadata</h5>
-  <table>
-    {% for i in Metadata %}
-    </tr>
-    <td>
-      {{i[0]}}
-    </td>
-    <td>
-      {{i[1]}}
-    </td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-</div>
-
-
-<script>
-
-</script>
-
-{% if true %}
-<p>{{foo}}</p>
-<!--<div>{{ map }}</div>-->
-{% endif %}
-{% endblock %}
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   
+   <style>
+     .dropdown {
+       position: static !important;
+     }
+   
+     .dropdown-menu {
+       box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+       margin-top: 0px !important;
+       width: 100% !important;
+     }
+   
+     ul {
+       margin-left: 10px;
+     }
+   
+    
+   
+     .row {
+       padding-left: 30px;
+     }
+   
+     .main {
+       margin-left: 22;
+     }
+   
+     #id {
+       transition: 0.5s;
+       margin: 1px;
+     }
+   
+     #karte {
+       transition: margin-right .5s;
+     }
+   
+     p {
+       color: rgba(255, 255, 255, 0.799);
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: large;
+       
+     }
+   
+     p{
+       margin-bottom: 0px !important;
+     }
+   </style>
+   {% extends "base.html" %}
+   <!-- this replaces the block called "title" in base.html -->
+   {% block title %} Map {% endblock %}
+   <!-- this replaces the block called "content" in base.html -->
+   {% block content %}
+   <!---action="{{ url_for('views.map') }}-->
+   
+   <div id="karte">
+     <div class="fluid-container">
+      
+       <nav class="navbar navbar-expand-lg navbar-dark
+         justify-content-between text-white" id="main" style="background-color: #573b8a;">
+         <a class="navbar-brand" href="#">
+           Filter
+         </a>
+         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
+           aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
+           style="outline-color:#fff">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavDropdown01">
+           <ul class="navbar-nav ">
+             <!--dropdown item of menu-->
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                 Zeitfenster
+               </a>
+               <!--dropdown sub items of menu-->
+               <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
+                 <div class="row dropdown item input-group" style=" width: 80%;">
+                   <div class="col-6 " style="padding-left: 0px;">Start: </div>
+                   <div class="col-4 " style="padding-left: 24px">Ende: </div>
+                   <div class="w-100" style="padding: 5px;"></div>
+                   <input class="col-2 form-control" type="date" href="#" name="start_date">
+                   <input class="col-2 form-control" type="time" name="start_time">
+                   <div class="col-1"></div>
+                   <input class="col-2 form-control" type="date" href="#" name="end_date">
+                   <input class="col-2 form-control" type="time" name="end_time">
+                 </div>
+                 <div class="dropdown-divider"></div>
+                 <a class="dropdown-item" href="#">
+                   <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
+                 </a>
+               </div>
+             </li>
+             <li>
+               <a>
+                 
+                 <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
+                   data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                   style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
+               </a>
+             </li>
+   
+           </ul>
+         
+           {%if current_user.is_authenticated%}
+   
+   
+           <!--Form item of menu for search purpose-->
+           <a class="ms-auto">
+             <p>Hello, {{current_user.username}}!</p>
+             <a class="nav-item nav-link " id="logout" href="/logout/"
+               style="color: #a079e8; font-weight: bold;">Logout</a>
+           </a>
+                      
+          
+           {% endif %}
+   
+         </div>
+       
+     </div>
+   </nav>
+     <!--{{map |safe}}-->
+     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
+       seamless="seamless"></iframe>
+   
+   
+   </div>
+   
+   
+   
+   <div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+     id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+     <div class="offcanvas-header">
+       <h5 id="offcanvasRightLabel">Metadata</h5>
+       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+         onclick="closeMeta()"></button>
+     </div>
+     <div class="offcanvas-body">
+       <table>
+         {% for i in Metadata %}
+         </tr>
+         <td>
+           {{i[0]}}
+         </td>
+         <td>
+           {{i[1]}}
+         </td>
+         </tr>
+         {% endfor %}
+       </table>
+     </div>
+   </div>
+   
+   
+   
+   
+   <script>
+     function openMeta() {
+       if (document.getElementById("karte").style.marginRight == "400px") {
+         document.getElementById("karte").style.marginRight = "0px";
+       } else {
+         document.getElementById("karte").style.marginRight = "400px";
+       }
+     }
+   
+     function closeMeta() {
+       document.getElementById("karte").style.marginRight = "0px";
+     }
+   </script>
+   
+   {% if true %}
+   <p>{{foo}}</p>
+   <!--<div>{{ map }}</div>-->
+   {% endif %}
+   {% endblock %}
