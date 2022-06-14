@@ -166,13 +166,13 @@ def getWorkLoc(stops, home):
 
 #builds a little popup
 def buildPopup(entry, showLastVisit):
-    geolocator = Nominatim(user_agent="LocTrace")
-    adress, coordinates = geolocator.reverse(str(entry["latitude"])+" "+str(entry["longitude"]))
+    
+    adress = entry.adress
     if adress == None:
         return None
     html = ""
     if showLastVisit:
-        html += "Besucht am: " + str(getDate(entry))+"<br><br>"
+        html += "Besucht am: " + str(entry.timestamp)+"<br><br>"
     
     html += "Adresse:<br>"+str(adress)
     iframe = folium.IFrame(html,width=200,  height=200)
@@ -202,7 +202,7 @@ def buildmap(user):
 
     m3 = folium.Map(
         location,
-        zoom_start=15)
+        zoom_start=10)
 
     colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                              index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
@@ -222,20 +222,19 @@ def buildmap(user):
 
 
     #calculate home and work location
-    home = getHomeLoc(stops)
-    workplace = getWorkLoc(stops, home)
 
     # marker home
-    popup_h = buildPopup(home, False)
-    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
+    for home in user.home:
+        popup_h = buildPopup(home, False)
+        folium.Marker((home.latitude, home.longitude), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
 
 
-    for entry in workplace:#print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
-        if len(workplace)>1:
+    for entry in user.work:#print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
+        if len(user.work)>1:
             popup_w = buildPopup(entry, True)
         else:
             popup_w = buildPopup(entry, False)
-        folium.Marker((entry["latitude"], entry["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
+        folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
 
 
 

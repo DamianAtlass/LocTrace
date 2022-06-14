@@ -1,11 +1,14 @@
 from re import L
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pandas as pd
-from .models import User
+from .models import User, Stop_h, Stop_w
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 from os import path
 from sqlalchemy import func
+from .map import getHomeLoc, getWorkLoc
+import time
+from geopy.geocoders import Nominatim
 
 
 auth = Blueprint('auth',__name__)
@@ -14,7 +17,7 @@ REQUIRE_PW_TO_LOAD_DB = False
 PW_DB = "apfelkuchen"
 
 #automatically load database (not password-protected!)
-DB_AUTOLOAD = False
+DB_AUTOLOAD = True
 #file from which the users' usernames will be added to the local sqlalchemy database
 LOG_IN_DATA_FILE  = "logindata.csv"
 
@@ -53,6 +56,11 @@ def login():
 def logout():
     logout_user()
     flash("Loggend out successfully!", category="success")
+    return redirect(url_for("auth.login"))
+
+@auth.route("/work/")
+def work():
+    calculateHomeAndWork()
     return redirect(url_for("auth.login"))
 
 #this route is important when the database is not automatically loaded
@@ -135,5 +143,49 @@ def load_database():
         print("No file "+ LOG_IN_DATA_FILE +" found!")
         number_of_users = User.query.count()
         print(str(number_of_users)+" users in database.")
+
+def calculateHomeAndWork():
+    geolocator = Nominatim(user_agent="LocTrace")
+    
+    
+    
+    print("--------------------")
+    if len(User.query.first().home) == 0:
+        start = time.time()
+        for user in User.query:
+            print("user: "+str(user.username))
+            stops_path = "data/" + user.username + "/stops.csv"
+            
+            
+            stops = pd.read_csv(stops_path)
+
+            #calc and add home loc
+            h_dic = getHomeLoc(stops)
+            adress, coordinates = geolocator.reverse(str(h_dic["latitude"])+" "+str(h_dic["longitude"]))
+
+            home = Stop_h(latitude = h_dic["latitude"], longitude = h_dic["longitude"],timestamp = h_dic["start"], adress = adress, user_id = user.id)
+            
+            db.session.add(home)
+            db.session.commit()
+            print("added home: "+str(len(user.home)))
+            #calc and add work loc
+            w_list = getWorkLoc(stops, h_dic)
+            print("work: "+str(len(w_list)))
+            
+            for entry in w_list:
+                
+                adress, coordinates = geolocator.reverse(str(entry["latitude"])+" "+str(entry["longitude"]))
+                work = Stop_w(latitude = entry["latitude"], longitude = entry["longitude"],timestamp = entry["start"], adress = adress, user_id= user.id)
+
+                db.session.add(work)
+                db.session.commit()
+                print("   added workplace")
+
+        end = time.time()
+        print(end - start)
+
+    else:
+        print("voll")
+
 
 
