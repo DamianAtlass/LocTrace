@@ -265,88 +265,10 @@ def buildmap(user):
     return m3
 
 
-# funtion for building map that shows data at a requested day of the week
-
-def build_weekday_map(user, weekday):
-    # mapping int to weekday
-    weekDays = {0: "Monday", 1: "Tuesday", 2: "Wednesday",
-                3:  "Thursday", 4: "Friday", 5: "Saturday", 6: "Sunday"}
-
-    '''
-    # get Stringformatted Username
-    userStr = str(user)[1:-1].replace(" ","")
-    #for debugging delete later <---
-    print(type(userStr)) 
-    print(userStr)
-     '''
-
-    csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
-    stops_path = "data/" + user.username + "/stops.csv"
-
-    data = pd.read_csv(csv_path)
-    stops = pd.read_csv(stops_path)
-
-    newData = pd.DataFrame()
-
-    for i in range(0, len(data)-1):
-        dataWeekday = data['ts'].iloc[i]
-        # vllt problem, wegen :00
-        # weekday of data row as Integer
-        data_weekday = datetime.strptime(
-            dataWeekday, '%Y-%m-%d %H:%M:%S+%f:00').weekday()
-
-        # if required weekday, add to newDataframe
-        if weekDays[data_weekday] == weekday:
-            newData = pd.concat([newData, data.iloc[[i]]])
-
-    # create new folium map with filterd Data
-    location = newData['latitude'].mean(), newData['longitude'].mean()
-    print(location)
-
-    m3 = folium.Map(
-        location,
-        zoom_start=10)
-
-    colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
-                                 index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
-                                 caption='motion score')
-    m3.add_child(colormap)
-
-    for i in range(0, len(newData)-1):
-        loc1 = newData['latitude'].iloc[i], newData['longitude'].iloc[i]
-        loc2 = newData['latitude'].iloc[i+1], newData['longitude'].iloc[i+1]
-
-        loc = [loc1, loc2]
-
-        color_ = colormap(newData['motion_score'][i])
-
-        folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
-
-    # calculate home and work location
-    home = getHomeLoc(stops)
-    workplace = getWorkLoc(stops, home)
-
-    # marker home
-    popup_h = buildPopup(home, False)
-    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(
-        icon='home', color='blue'), popup=popup_h).add_to(m3)
-
-    # print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
-    for entry in workplace:
-        if len(workplace) > 1:
-            popup_w = buildPopup(entry, True)
-        else:
-            popup_w = buildPopup(entry, False)
-        folium.Marker((entry["latitude"], entry["longitude"]), icon=folium.Icon(
-            icon='wrench', color='red'), popup=popup_w).add_to(m3)
-
-    mapPath = "website/templates/map" + weekday + ".html"
-    print("mapPath:" + mapPath)
-    m3.save(mapPath)
-
-# funktioniert bisher nur für den 27-10-2021, weil keine anderen daten in csv-datei
 
 
+
+# builds new map with filteres data range 
 def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time):
 
     # get Data for user
@@ -404,7 +326,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
                                      caption='motion score')
         m4.add_child(colormap)
-        m4.save("website/templates/map_date.html")
+        m4.save("website/templates/map1.html")
 
     else:
 
@@ -450,7 +372,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
         folium.Marker((entry["latitude"], entry["longitude"]), icon=folium.Icon(
             icon='wrench', color='red'), popup=popup_w).add_to(m4)
 
-    m4.save("website/templates/map_date.html")
+    m4.save("website/templates/map1.html")
 
 
 def metadata():
