@@ -77,22 +77,25 @@
               Zeitfenster
             </a>
             <!--dropdown sub items of menu-->
-            <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
-              <div class="row dropdown item input-group" style=" width: 80%;">
-                <div class="col-6 " style="padding-left: 0px;">Start: </div>
-                <div class="col-4 " style="padding-left: 24px">Ende: </div>
-                <div class="w-100" style="padding: 5px;"></div>
-                <input class="col-2 form-control" type="date" href="#" name="start_date">
-                <input class="col-2 form-control" type="time" name="start_time">
-                <div class="col-1"></div>
-                <input class="col-2 form-control" type="date" href="#" name="end_date">
-                <input class="col-2 form-control" type="time" name="end_time">
+            <form method="POST" action="/map/">
+              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
+                <div class="row dropdown item input-group" style=" width: 80%;">
+                  <div class="col-6 " style="padding-left: 0px;">Start: </div>
+                  <div class="col-4 " style="padding-left: 24px">Ende: </div>
+                  <div class="w-100" style="padding: 5px;"></div>
+
+                  <input class="form-control me-2" type="date" href="#" name="start_date">
+                  <input class="form-control me-2" type="time" name="start_time">
+                  <div class="col-1"></div>
+                  <input class="form-control me-2" type="date" href="#" name="end_date">
+                  <input class="form-control me-2" type="time" name="end_time">
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <button type="submit" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
+                </a>
               </div>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
-              </a>
-            </div>
+            </form>
           </li>
         </ul>
         <a class="ml-auto "">
