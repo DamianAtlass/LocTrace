@@ -32,7 +32,9 @@
     margin-left: 10px;
   }
 
- 
+  .inhalt{
+    width: 95%;
+  }
 
   .row {
     padding-left: 30px;
@@ -42,23 +44,18 @@
     margin-left: 22;
   }
 
-  #id {
-    transition: 0.5s;
-    margin: 1px;
+  .metadata {
+    width: 30%;
   }
 
   #karte {
-    transition: margin-right .5s;
+    width: 70%;
   }
 
   p {
     color: rgba(255, 255, 255, 0.799);
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
-    
-  }
-
-  p{
     margin-bottom: 0px !important;
   }
 </style>
@@ -68,10 +65,10 @@
 <!-- this replaces the block called "content" in base.html -->
 {% block content %}
 <!---action="{{ url_for('views.map') }}-->
-
+<div class = "inhalt">
 <div id="karte">
   <div class="fluid-container">
-   
+
     <nav class="navbar navbar-expand-lg navbar-dark
       justify-content-between text-white" id="main" style="background-color: #573b8a;">
       <a class="navbar-brand" href="#">
@@ -108,17 +105,8 @@
               </a>
             </div>
           </li>
-          <li>
-            <a>
-              
-              <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
-                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
-            </a>
-          </li>
-
         </ul>
-      
+
         {%if current_user.is_authenticated%}
 
 
@@ -128,14 +116,14 @@
           <a class="nav-item nav-link " id="logout" href="/logout/"
             style="color: #a079e8; font-weight: bold;">Logout</a>
         </a>
-                   
-       
+
+
         {% endif %}
 
       </div>
-    
+
   </div>
-</nav>
+  </nav>
   <!--{{map |safe}}-->
   <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
     seamless="seamless"></iframe>
@@ -145,44 +133,26 @@
 
 
 
-<div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-  id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">Metadata</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
-      onclick="closeMeta()"></button>
-  </div>
-  <div class="offcanvas-body">
-    <table>
-      {% for i in Metadata %}
-      </tr>
-      <td>
-        {{i[0]}}
-      </td>
-      <td>
-        {{i[1]}}
-      </td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
+<div class="metadata">
+  <h5>Metadata</h5>
+  <table>
+    {% for i in Metadata %}
+    </tr>
+    <td>
+      {{i[0]}}
+    </td>
+    <td>
+      {{i[1]}}
+    </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 </div>
 
 
-
-
 <script>
-  function openMeta() {
-    if (document.getElementById("karte").style.marginRight == "400px") {
-      document.getElementById("karte").style.marginRight = "0px";
-    } else {
-      document.getElementById("karte").style.marginRight = "400px";
-    }
-  }
 
-  function closeMeta() {
-    document.getElementById("karte").style.marginRight = "0px";
-  }
 </script>
 
 {% if true %}
