@@ -36,18 +36,19 @@ def map():
         end_time = request.form.get('end_time')
         build_date_map(current_user, start_date,
                        end_date, start_time, end_time)
-        #add metadata
+        # add metadata
         df_metadata = metadata()
-        temp = render_template("map_date.html", Metadata = zip(df_metadata.columns,df_metadata.loc[0]))
+        temp = render_template("map_date.html", Metadata=zip(
+            df_metadata.columns, df_metadata.loc[0]), df_metadata1 =df_metadata)
         #print(str(start), file=sys.stdout)
         return temp
 
     buildmap(current_user)
-    
-    #add metadata
+
+    # add metadata
     df_metadata = metadata()
-    
-    return render_template("map.html", Metadata = zip(df_metadata.columns,df_metadata.loc[0])  )
+
+    return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata1=df_metadata)
 
 
 @views.route("/displaymap/")
