@@ -39,7 +39,7 @@ def map():
         # add metadata
         df_metadata = metadata()
         temp = render_template("map_date.html", Metadata=zip(
-            df_metadata.columns, df_metadata.loc[0]), df_metadata1 =df_metadata)
+            df_metadata.columns, df_metadata.loc[0]), df_metadata =df_metadata)
         #print(str(start), file=sys.stdout)
         return temp
 
@@ -48,7 +48,7 @@ def map():
     # add metadata
     df_metadata = metadata()
 
-    return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata1=df_metadata)
+    return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata)
 
 
 @views.route("/displaymap/")
