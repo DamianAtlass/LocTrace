@@ -63,7 +63,7 @@ def create_database(app):
     if path.exists('website/' + DB_NAME):
         print("An old database has been found.")
     else:
-        print("No old database found.")
+        print("No old database found. Create a new one.")
 
     db.create_all(app=app)
     
