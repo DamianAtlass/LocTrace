@@ -181,9 +181,24 @@ def buildPopup(entry, showLastVisit):
     return popup
 
 
+def addSigificantLocations(user, map):
+    for home in user.home:
+        popup_h = buildPopup(home, False)
+        folium.Marker((home.latitude, home.longitude), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(map)
+        #there should only be 1 home element, but make sure only 1 is displayed anyway
+        break
+
+    for entry in user.work:
+        if len(user.work)>1:
+            popup_w = buildPopup(entry, True)
+        else:
+            popup_w = buildPopup(entry, False)
+        folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(map)
+
+
 # function for building the map with given data
 def buildmap(user):
-
+    
     '''
     userStr = str(user)[1:-1].replace(" ","")
     #print(str(user))
@@ -221,21 +236,8 @@ def buildmap(user):
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
 
-    #calculate home and work location
-
-    # marker home
-    for home in user.home:
-        popup_h = buildPopup(home, False)
-        folium.Marker((home.latitude, home.longitude), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
-
-
-    for entry in user.work:#print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
-        if len(user.work)>1:
-            popup_w = buildPopup(entry, True)
-        else:
-            popup_w = buildPopup(entry, False)
-        folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
-
+    #add sigificant locations (home and work)
+    addSigificantLocations(user, m3)
 
 
     m3.save('website/templates/map1.html')
@@ -299,22 +301,8 @@ def build_weekday_map(user, weekday):
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
-    #calculate home and work location
-    home = getHomeLoc(stops)
-    workplace = getWorkLoc(stops, home)
-
-    # marker home
-    popup_h = buildPopup(home, False)
-    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m3)
-
-
-    for entry in workplace:#print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
-        if len(workplace)>1:
-            popup_w = buildPopup(entry, True)
-        else:
-            popup_w = buildPopup(entry, False)
-        folium.Marker((entry["latitude"], entry["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m3)
-
+    #add sigificant locations (home and work)
+    addSigificantLocations(user, m3)
 
     mapPath = "website/templates/map" + weekday + ".html" 
     print("mapPath:" +mapPath)
@@ -414,22 +402,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
         
-        #calculate home and work location
-    home = getHomeLoc(stops)
-    workplace = getWorkLoc(stops, home)
-
-    # marker home
-    popup_h = buildPopup(home, False)
-    folium.Marker((home["latitude"], home["longitude"]), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(m4)
-
-
-    for entry in workplace:#print("lat: "+str(entry["latitude"])+" | long: "+str(entry["longitude"])+" id:"+str(entry["unique_id"]))
-        if len(workplace)>1:
-            popup_w = buildPopup(entry, True)
-        else:
-            popup_w = buildPopup(entry, False)
-        folium.Marker((entry["latitude"], entry["longitude"]), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(m4)
-
+    addSigificantLocations(user, m4)
   
     m4.save("website/templates/map_date.html" )
    

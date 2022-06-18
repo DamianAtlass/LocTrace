@@ -181,6 +181,7 @@ def calculateSigLocs():
             print("File '"+stops_path+"' for user '" +user.username+"' doesn't exist. Can't calculate significant locations.")
             continue
 
+        # skip if sigLocs already have been loaded
         if user.sigLoc_loaded:
             continue
 
