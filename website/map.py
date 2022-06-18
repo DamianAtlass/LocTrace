@@ -326,6 +326,8 @@ def build_weekday_map(user, weekday):
 # funktioniert bisher nur für den 27-10-2021, weil keine anderen daten in csv-datei
 
 
+
+# builds new map with filteres data range 
 def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time):
 
     # get Data for user
@@ -381,7 +383,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
                                      caption='motion score')
         m4.add_child(colormap)
-        m4.save("website/templates/map_date.html")
+        m4.save("website/templates/map1.html")
 
     else:
 
@@ -411,7 +413,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     #add sigificant locations (home and work)
     addSigificantLocations(user, m4)
 
-    m4.save("website/templates/map_date.html")
+    m4.save("website/templates/map1.html")
 
 
 def metadata():
