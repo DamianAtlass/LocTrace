@@ -12,181 +12,262 @@
    width: 100vw;
    }
    </style>-->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-   
-   <style>
-     .dropdown {
-       position: static !important;
-     }
-   
-     .dropdown-menu {
-       box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-       margin-top: 0px !important;
-       width: 100% !important;
-     }
-   
-     ul {
-       margin-left: 10px;
-     }
-   
-    
-   
-     .row {
-       padding-left: 30px;
-     }
-   
-     .main {
-       margin-left: 22;
-     }
-   
-     #id {
-       transition: 0.5s;
-       margin: 1px;
-     }
-   
-     #karte {
-       transition: margin-right .5s;
-     }
-   
-     p {
-       color: rgba(255, 255, 255, 0.799);
-       font-family: Arial, Helvetica, sans-serif;
-       font-size: large;
-       
-     }
-   
-     p{
-       margin-bottom: 0px !important;
-     }
-   </style>
-   {% extends "base.html" %}
-   <!-- this replaces the block called "title" in base.html -->
-   {% block title %} Map {% endblock %}
-   <!-- this replaces the block called "content" in base.html -->
-   {% block content %}
-   <!---action="{{ url_for('views.map') }}-->
-   
-   <div id="karte">
-     <div class="fluid-container">
-      
-       <nav class="navbar navbar-expand-lg navbar-dark
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+  .offcanvas.offcanvas-end {
+    width: 25%;
+  }
+
+  .dropdown {
+    position: static !important;
+  }
+
+  .dropdown-menu {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+  }
+
+  ul {
+    margin-left: 10px;
+  }
+
+
+
+  .row {
+    padding-left: 30px;
+  }
+
+  .main {
+    margin-left: 22;
+  }
+
+  #id {
+    transition: 0.5s;
+    margin: 1px;
+  }
+
+  #karte {
+    transition: margin-right .5s;
+  }
+
+  p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+
+  }
+
+  p {
+    margin-bottom: 0px !important;
+  }
+</style>
+{% extends "base.html" %}
+<!-- this replaces the block called "title" in base.html -->
+{% block title %} Map {% endblock %}
+<!-- this replaces the block called "content" in base.html -->
+{% block content %}
+<!---action="{{ url_for('views.map') }}-->
+
+<div id="karte">
+  <div class="fluid-container">
+
+    <nav class="navbar navbar-expand-lg navbar-dark
          justify-content-between text-white" id="main" style="background-color: #573b8a;">
-         <a class="navbar-brand" href="#">
-           Filter
-         </a>
-         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
-           aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
-           style="outline-color:#fff">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarNavDropdown01">
-           <ul class="navbar-nav ">
-             <!--dropdown item of menu-->
-             <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                 aria-haspopup="true" aria-expanded="false">
-                 Zeitfenster
-               </a>
-               <!--dropdown sub items of menu-->
-               <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
-                 <div class="row dropdown item input-group" style=" width: 80%;">
-                   <div class="col-6 " style="padding-left: 0px;">Start: </div>
-                   <div class="col-4 " style="padding-left: 24px">Ende: </div>
-                   <div class="w-100" style="padding: 5px;"></div>
-                   <input class="col-2 form-control" type="date" href="#" name="start_date">
-                   <input class="col-2 form-control" type="time" name="start_time">
-                   <div class="col-1"></div>
-                   <input class="col-2 form-control" type="date" href="#" name="end_date">
-                   <input class="col-2 form-control" type="time" name="end_time">
-                 </div>
-                 <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="#">
-                   <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
-                 </a>
-               </div>
-             </li>
-             <li>
-               <a>
-                 
-                 <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
-                   data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                   style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
-               </a>
-             </li>
-   
-           </ul>
-         
-           {%if current_user.is_authenticated%}
-   
-   
-           <!--Form item of menu for search purpose-->
-           <a class="ms-auto">
-             <p>Hello, {{current_user.username}}!</p>
-             <a class="nav-item nav-link " id="logout" href="/logout/"
-               style="color: #a079e8; font-weight: bold;">Logout</a>
-           </a>
-                      
-          
-           {% endif %}
-   
-         </div>
-       
-     </div>
-   </nav>
-     <!--{{map |safe}}-->
-     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
-       seamless="seamless"></iframe>
-   
-   
-   </div>
-   
-   
-   
-   <div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-     id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-     <div class="offcanvas-header">
-       <h5 id="offcanvasRightLabel">Metadata</h5>
-       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
-         onclick="closeMeta()"></button>
-     </div>
-     <div class="offcanvas-body">
-       <table>
-         {% for i in Metadata %}
-         </tr>
-         <td>
-           {{i[0]}}
-         </td>
-         <td>
-           {{i[1]}}
-         </td>
-         </tr>
-         {% endfor %}
-       </table>
-     </div>
-   </div>
-   
-   
-   
-   
-   <script>
-     function openMeta() {
-       if (document.getElementById("karte").style.marginRight == "400px") {
-         document.getElementById("karte").style.marginRight = "0px";
-       } else {
-         document.getElementById("karte").style.marginRight = "400px";
-       }
-     }
-   
-     function closeMeta() {
-       document.getElementById("karte").style.marginRight = "0px";
-     }
-   </script>
-   
-   {% if true %}
-   <p>{{foo}}</p>
-   <!--<div>{{ map }}</div>-->
-   {% endif %}
-   {% endblock %}
+      <a class="navbar-brand" href="#">
+        Filter
+      </a>
+      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown01"
+        aria-controls="navbarNavDropdown01" aria-expanded="false" aria-label="Toggle navigation"
+        style="outline-color:#fff">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown01">
+        <ul class="navbar-nav ">
+          <!--dropdown item of menu-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Zeitfenster
+            </a>
+            <!--dropdown sub items of menu-->
+            <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
+              <div class="row dropdown item input-group" style=" width: 80%;">
+                <div class="col-6 " style="padding-left: 0px;">Start: </div>
+                <div class="col-4 " style="padding-left: 24px">Ende: </div>
+                <div class="w-100" style="padding: 5px;"></div>
+                <input class="col-2 form-control" type="date" href="#" name="start_date">
+                <input class="col-2 form-control" type="time" name="start_time">
+                <div class="col-1"></div>
+                <input class="col-2 form-control" type="date" href="#" name="end_date">
+                <input class="col-2 form-control" type="time" name="end_time">
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <button type="button" class="btn btn-success" style="background-color: #573b8a;">Bestätigen</button>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a>
+
+              <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show Metadata</button>
+            </a>
+          </li>
+
+        </ul>
+
+        {%if current_user.is_authenticated%}
+
+
+        <!--Form item of menu for search purpose-->
+        <a class="ms-auto">
+          <p>Hello, {{current_user.username}}!</p>
+          <a class="nav-item nav-link " id="logout" href="/logout/"
+            style="color: #a079e8; font-weight: bold;">Logout</a>
+        </a>
+
+
+        {% endif %}
+
+      </div>
+
+  </div>
+  </nav>
+  <!--{{map |safe}}-->
+  <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
+    seamless="seamless"></iframe>
+
+
+</div>
+
+
+
+<div class="offcanvas offcanvas-end" name="offcanvas_card" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+  id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Metadata</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+      onclick="closeMeta()"></button>
+  </div>
+  <p style="text-align: left;">In the following you can see additional information which can be inferred based on your
+    location information:</p>
+  <br>
+  <table style="height: 455px; width: 513px; border-style: solid; margin-left: auto; margin-right: auto;" border="1"
+    cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr style="height: 40px;">
+        <td style="width: 503px; height: 40px;" colspan="2">
+          <p style="text-align: left;"><strong>Locations:</strong></p>
+        </td>
+      </tr>
+      <tr style="height: 16px;">
+        <td style="width: 238.469px; height: 16px;">
+          <p>Overall, you have visited {{df_metadata['stops'][0]}} locations.</p>
+        </td>
+        <td style="width: 258.531px; height: 16px;">
+          <p>Among them {{df_metadata['unique locations'][0]}} unique locations can be detected.
+          </p>
+        </td>
+      </tr>
+      <tr style="height: 14px;">
+        <td style="width: 503px; height: 14px;" colspan="2">
+          <p><strong>Distance:</strong></p>
+        </td>
+      </tr>
+      <tr style="height: 75px;">
+        <td style="width: 238.469px; height: 75px;">
+          <p>Overall, you have traveled {{df_metadata['total trip path distance (km)'][0]}} km for which you needed
+            {{df_metadata['total trip duration (min)'][0]}} minutes.</p>
+        </td>
+        <td style="width: 258.531px; height: 75px;">
+          <p>On average you needed {{df_metadata['mean trip duration (min)'][0]}} minutes for each trip.</p>
+        </td>
+      </tr>
+      <tr style="height: 46px;">
+        <td style="width: 503px; height: 46px;" colspan="2">
+          <p><strong>Home Location:</strong></p>
+        </td>
+      </tr>
+      <tr style="height: 100px;">
+        <td style="width: 238.469px; height: 100px;">
+          <p>Overall, you have spent {{df_metadata['time at home (min)'][0]}} minutes at home and
+            {{df_metadata['time out of home (min)'][0]}} minutes outside of your home.
+          </p>
+        </td>
+        <td style="width: 258.531px; height: 100px;">
+          <p>The largest distance from your home was {{df_metadata['max distance to home (stops, km)'][0]}} km.</p>
+        </td>
+      </tr>
+      <tr style="height: 46px;">
+        <td style="width: 503px; height: 46px;" colspan="2">
+          <p><strong>Movement Times:</strong></p>
+        </td>
+      </tr>
+      <tr style="height: 118px;">
+        <td style="width: 238.469px; height: 118px;">
+          <p>On average, you started your first movement on a day at
+            {{df_metadata['time first move'][0]}}a clock and
+            changed your location the first time.</p>
+        </td>
+        <td style="width: 258.531px; height: 118px;">
+          <p>On average, your last movement on a day was at
+            {{df_metadata['time last move'][0]}} a clock, when you changed your
+            location the last time.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <p style="text-align: left;">This information can easily be inferred from your location traces, which are usually
+    tracked by numerous applications on your smartphone. The collection of location information over a longer period of
+    time allows to aggregate very precise information about your daily routines. Among them are, when you are usually
+    going to work and coming home, when and where you meet your friends and family, when and where you like to go for
+    vacation, which doctors you are visiting, if you are an active sports person or not and sometimes even your secret
+    passions.</p>
+  <p style="text-align: center;">&nbsp;</p>
+  <p style="text-align: center;">&nbsp;</p>
+  <!--
+  <div class="offcanvas-body">
+    <table>
+      {% for i in Metadata %}
+      </tr>
+      <td>
+        {{i[0]}}
+      </td>
+      <td>
+        {{i[1]}}
+      </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>-->
+</div>
+<div>
+  {{df_metadata['time'][3]}}
+</div>
+
+<script>
+  function openMeta() {
+    if (document.getElementById("karte").style.marginRight == "25%") {
+      document.getElementById("karte").style.marginRight = "0px";
+    } else {
+      document.getElementById("karte").style.marginRight = "25%";
+    }
+  }
+
+  function closeMeta() {
+    document.getElementById("karte").style.marginRight = "0px";
+  }
+</script>
+
+{% if true %}
+<p>{{foo}}</p>
+<!--<div>{{ map }}</div>-->
+{% endif %}
+{% endblock %}
