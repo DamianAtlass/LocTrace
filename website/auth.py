@@ -33,7 +33,6 @@ def login():
 
         if user:
             login_user(user, remember=True)
-            flash("Loggend in successfully!", category="success")
             print("User "+user.username+" logged in.")
             return redirect(url_for("views.map", username=username_login))
         else:
@@ -53,7 +52,6 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("Loggend out successfully!", category="success")
     return redirect(url_for("auth.login"))
 
 #Force-reloads database. Only needed if data is added after running the server
