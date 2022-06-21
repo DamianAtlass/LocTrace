@@ -1,11 +1,11 @@
 #import cgi;
 from email.policy import default
+from flask import render_template
 import folium
 import pandas as pd
 import branca
 import branca.colormap as cm
 from datetime import datetime
-# import for home loc
 import folium
 import pandas as pd
 import branca
@@ -16,9 +16,6 @@ import geopy.distance
 import numpy as np
 from geopy.geocoders import Nominatim
 
-
-# loading all the loc data
-# using panda dataframe
 
 def filter_by_date_range(start_date, start_time, end_date, end_time):
     start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
@@ -187,35 +184,38 @@ def getWorkLoc(stops, home):
     return workplace
 
 
-#builds a little popup
+# builds a little popup
 def buildPopup(entry, showLastVisit):
-    
+
     adress = entry.adress
     if adress == None:
         return None
     html = ""
     if showLastVisit:
         html += "Besucht am: <br>" + str(toDate(entry.timestamp))+"<br><br>"
-    
+
     html += "Adresse:<br>"+str(adress)
-    iframe = folium.IFrame(html,width=200,  height=200)
+    iframe = folium.IFrame(html, width=200,  height=200)
 
     popup = folium.Popup(iframe, max_width=200)
     return popup
 
+
 def addSigificantLocations(user, map):
     for home in user.home:
         popup_h = buildPopup(home, False)
-        folium.Marker((home.latitude, home.longitude), icon=folium.Icon(icon='home',color='blue'), popup = popup_h).add_to(map)
-        #there should only be 1 home element, but make sure only 1 is displayed anyway
+        folium.Marker((home.latitude, home.longitude), icon=folium.Icon(
+            icon='home', color='blue'), popup=popup_h).add_to(map)
+        # there should only be 1 home element, but make sure only 1 is displayed anyway
         break
 
     for entry in user.work:
-        if len(user.work)>1:
+        if len(user.work) > 1:
             popup_w = buildPopup(entry, True)
         else:
             popup_w = buildPopup(entry, False)
-        folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(icon='wrench',color='red'), popup = popup_w).add_to(map)
+        folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(
+            icon='wrench', color='red'), popup=popup_w).add_to(map)
 
 
 # function for building the map with given data
@@ -253,7 +253,7 @@ def buildmap(user):
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
-    #add sigificant locations (home and work)
+    # add sigificant locations (home and work)
     addSigificantLocations(user, m3)
 
     m3.save('website/templates/map1.html')
@@ -316,7 +316,7 @@ def build_weekday_map(user, weekday):
 
         folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
-    #add sigificant locations (home and work)
+    # add sigificant locations (home and work)
     addSigificantLocations(user, m3)
 
     mapPath = "website/templates/map" + weekday + ".html"
@@ -326,8 +326,7 @@ def build_weekday_map(user, weekday):
 # funktioniert bisher nur für den 27-10-2021, weil keine anderen daten in csv-datei
 
 
-
-# builds new map with filteres data range 
+# builds new map with filteres data range
 def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time):
 
     # get Data for user
@@ -410,13 +409,13 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
-    #add sigificant locations (home and work)
-    addSigificantLocations(user, m4)
+         # add sigificant locations (home and work)
+        addSigificantLocations(user, m4)
 
-    m4.save("website/templates/map1.html")
+        m4.save("website/templates/map1.html")
 
 
-def metadata():
-    csv_path = "website/data/" + "mobility_report" + ".csv"
+def metadata(current_user):
+    csv_path = "data/" + current_user.username + "/mobility_report" + ".csv"
     df = pd.read_csv(csv_path)
     return df
