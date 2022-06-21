@@ -207,7 +207,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
         m4.save("website/templates/map_date.html")
 
 
-def metadata():
-    csv_path = "website/data/" + "mobility_report" + ".csv"
+def metadata(current_user):
+    csv_path = "data/" + current_user.username + "/mobility_report" + ".csv"
     df = pd.read_csv(csv_path)
     return df
