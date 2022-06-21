@@ -39,62 +39,13 @@
   <!-- no clue what this does, but it prevents "GET /favicon.ico HTTP/1.1" 404 errors -->
   <link rel="icon" href="data:;base64,=">
   <style>
-    p {
-      color: rgba(255, 255, 255, 0.799);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: large;
-      margin: auto;
-    }
+   
   </style>
 
 </head>
 
 <body>
-  <div class="fluid-container">
-    <center>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav ">
-            {%if current_user.is_authenticated%}
-            <li class="nav-item">
-              <a class="nav-link" id="map" href="/map/">Map</a>
-            </li>
-
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" id="login" href="/login/">Login</a>
-            </li>
-
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-item nav-link" id="base-template" href="/base/">base-template</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="load-db" href="/loaddb/">load-db (delete later)</a>
-            </li>
-            <!-- nur Beispiel für Wochentag-Backend-Fkt, muss an andere Stelle, sieht natürlich schäbig aus so -->
-            <li class="nav-item">
-              <a class="nav-link" id="weekday" href="/wednesday/">Wednesday</a>
-            </li>
-          </ul>
-
-          {%if current_user.is_authenticated%}
-          <!--Form item of menu for search purpose-->
-          <a class="form-inline ml-auto ">
-            <p>Hello, {{current_user.username}}!</p>
-            <a class="nav-item nav-link" id="logout" href="/logout/"
-              style="color: #a079e8; font-weight: bold;">Logout</a>
-          </a>
-          {% endif %}
-        </div>
-      </nav>
-    </center>
-  </div>
-
-
+ 
 
   <!-- display flash messages -->
   {%with messages = get_flashed_messages(with_categories=true)%}
