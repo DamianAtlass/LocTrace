@@ -69,12 +69,18 @@ def survey():
 @login_required
 def receivedata():
     data = request.data
-    print("got request. type: "+str(type(data)))
     
     if not path.exists('surveyData/'):
         mkdir("surveyData/")
 
     with open("surveyData/"+current_user.username+".csv", "wb") as binary_file:
+        
+        # data starts with : 'data="Screen index","Type of[...]'
+        #get rid of 'data='
+        data = data[5:]
         binary_file.write(data)
+
+    if not path.exists("surveyData/"+current_user.username+".csv"):
+        print("Error while saving survey data for user "+current_user.username+".")
 
     return ""
