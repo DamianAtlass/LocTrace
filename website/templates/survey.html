@@ -8,13 +8,11 @@
         <link rel="stylesheet" href="css/style.css">
 
         <script>
-
             //this variable needs to be adjusted depending on where the server is hosted
             // example1:
             let HOST = "http://127.0.0.1:5000"
             // example2:
             //let HOST = "http://loctrace.pythonanywhere.com"
-
         </script>
 <style>
     html {
@@ -4372,7 +4370,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         screens.push(screen2);
 
         //START
-        
+        /*
         var screen3 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1>Hungriness Factor</h1>"),
             //new UIElementHTML(undefined, "<h2>Some fancy questions.</h2>"),
@@ -4386,7 +4384,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             //new QuestionnaireItemSVGQuality7pt("max-width", "Continuous scale for subjective quality assessment (cf. <a href='https://www.itu.int/rec/T-REC-P.851-200311-I/en'>ITU-T P.851</a>)<br>Labels can be configured.", false),
         );
         screens.push(screen3);
-        /* 
+         
         //screens.push(new ScreenWaitDataUpload(undefined, "/TheFragebogen", 4, "Uploading data. Please wait ...", "data", "Upload failed. Data will ve downloaded to local computer now.", true, false));
 
         //screens.push(new ScreenWaitDataDownload(undefined, "Hallihallo", "Basically.csv", true  ))
@@ -4523,10 +4521,9 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //This includes also the changelog of all QuestionnaireItems.
 
         //posts data to server
-        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part1/"));
-
+        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2"));
         //displays a message and link to the map
-        screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
+        screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the second part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
         
         
 

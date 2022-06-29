@@ -4373,7 +4373,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
     
         );
         screens.push(screen1);
-
+                
         //This screen shows some questions.
         var screen2 = new ScreenUIElements(
             new UIElementHTML(undefined, "In the following we will introduce your tracked location types again which we will ask you for in the next section:"),
@@ -4389,22 +4389,22 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new UIElementHTML(undefined, "Please answer as truthfully as you can! "),            
             );
         screens.push(screen3);
-
+        
         var screen4 = new ScreenUIElements(
 
             new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, HOST+"/get_image?image=eins.png"),*/
+            
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='"+HOST+"/get_image?image=eins-zwei.png'>", "<img src='"+HOST+"/get_image?image=eins-zwei.png'>", "<img src='"+HOST+"/get_image?image=eins-drei.png'>"]),
             
            );
-
+         	
         //screens.push(screen4);
 
         //This screen "shows" questions that are answered automatically (and are not visible to the user).
         var screen5 = new ScreenUIElements(
 
             new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, HOST+"/get_image?image=zwei.png"),*/
+            
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types:<hr>", true, ["<img src='"+HOST+"/get_image?image=zwei-eins.png'>", "<img src='"+HOST+"/get_image?image=zwei-zwei.png'>", "<img src='"+HOST+"/get_image?image=zwei-drei.png'>"]),
              );
           //  screens.push(screen5);
@@ -4414,7 +4414,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         var screen6 = new ScreenUIElements(
 
             new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, HOST+"/get_image?image=drei.png"),*/
+            
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='"+HOST+"/get_image?image=drei-eins.png'>", "<img src='"+HOST+"/get_image?image=drei-zwei.png'>", "<img src='"+HOST+"/get_image?image=drei-drei.png'>"]),
             );
             
@@ -4444,19 +4444,19 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             }
         } 
       
-        
+      /*  
 
         var screen7 = new ScreenUIElements(
             new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=vier.png"),*/
+            //new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=vier.png")
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='"+HOST+"/get_image?image=vier-eins.png'>", "<img src='"+HOST+"/get_image?image=vier-zwei.png'>", "<img src='"+HOST+"/get_image?image=vier-drei.png'>"]),
               );
         //screens.push(screen7);
-
+        
         var screen8 = new ScreenUIElements(
 
             new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=fuenf.png"),*/
+            //new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=fuenf.png"),
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='"+HOST+"/get_image?image=fuenf-eins.png'>", "<img src='"+HOST+"/get_image?image=fuenf-zwei.png'>", "<img src='"+HOST+"/get_image?image=fuenf-drei.png'>"]),
             );
         //screens.push(screen8);
@@ -4467,7 +4467,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         var screen9 = new ScreenUIElements(
 
             new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=sechs.png"),*/
+            //new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, HOST+"/get_image?image=sechs.png"),
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='"+HOST+"/get_image?image=sechs-eins.png'>", "<img src='"+HOST+"/get_image?image=sechs-zwei.png'>", "<img src='"+HOST+"/get_image?image=sechs-drei.png'>"]),
            );
         //screens.push(screen9);
@@ -4489,7 +4489,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
             new UIElementHTML(undefined, "Both companies are requesting your location data on a monthly basis. The following questions will assess for how much money you would sell the respective location types. "),
             new UIElementHTML(undefined, "Google wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Google? "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, HOST+"/get_image?image=sieben.png"),*/
+            
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google: <hr>", true, ["<img src='"+HOST+"/get_image?image=sieben-eins.png'>", "<img src='"+HOST+"/get_image?image=sieben-zwei.png'>", "<img src='"+HOST+"/get_image?image=sieben-drei.png'>"]),
         
             );
@@ -4588,16 +4588,16 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             );
             screens.push(screen19)
 
+        */
         //This screen shows a preview of the collected data.
         screens.push(new ScreenDataPreview("screenPreview", false));
 
-        
-
         //posts data to server
         screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2"));
-
         //displays a message and link to the map
         screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the second part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
+        
+
         
         //Most important: create the ScreenController
         var screenController = new ScreenController(screens);
@@ -4613,7 +4613,6 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
                 return;
             }
             screenController.init(document.body);
-            console.log("hey")
             screenController.start();
         }
 
