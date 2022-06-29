@@ -4513,15 +4513,17 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //This screen triggers the download all collected data (CSV).
         //This includes also the changelog of all QuestionnaireItems.
          
-        //this variable needs to be adjusted variing on where the server is hosted
+        //this variable needs to be adjusted depending on where the server is hosted
         // example1: let HOST = "http://127.0.0.1:5000"
         // example2: let HOST = "LocTrace.pythonanywhere.com"
         let HOST = "http://127.0.0.1:5000"
 
+        //posts data to server
         screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata"));
+
+        //displays a message and link to the map
+        screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
         
-        // TODO: redirecten ohne etwas runterzuladen
-        screens.push(new ScreenWaitDataDownload(undefined,"The End<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->", "TheFragebogen-basic.csv", true, true));
         
 
         //Most important: create the ScreenController
@@ -4539,7 +4541,6 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             }
             screenController.init(document.body);
             screenController.start();
-            return redirect(url_for("views.map", username=username_login))
         }
         
         </script>
