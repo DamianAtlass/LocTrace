@@ -1,0 +1,127 @@
+html {
+    /*width: 100%;
+    min-height: 100%;*/
+    /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.label{
+  font-size:0.5em; 
+}
+
+body {
+    width: 60em;
+    margin: 3em;
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: #573b8a;
+  }
+
+  tbody{
+    color: #a079e8;
+    width:100%;
+    display: inline-table;
+    font-size: 1rem;
+  }
+
+
+  @media only screen and (max-width: 1152px) {
+    body {
+      width:100%;
+      margin:0;
+    }
+  }
+
+hr {
+    border: 0.1px solid rgba(87, 59, 138, 0.2);
+  }
+
+
+  h1, .h1, h2, .h2, h3, .h3{
+    margin-top: 0;
+    margin-bottom:2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+  
+  h1, .h1 {
+    font-size: calc(1.325rem + 0.9vw);
+  }
+
+  b1{
+    color: #573b8a;
+    font-weight: bold
+  }
+  
+  /*Styling der Input Elemente*/
+  :focus:not([type="radio"]){
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: 0 0 0 0.25rem rgb(0, 0, 0);
+    outline: none !important;
+    border: none;
+  }
+  
+  
+  
+  /*Styling des Button*/
+  button, [type="button"]{
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-color: #573b8a;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #573b8a;
+    color: #573b8a;
+    background-color: transparent;
+    border-radius: 0.5em;
+  }
+  
+  button:hover, [type="button"]:hover{
+    color: white;
+    background-color: #573b8a;
+  }
+  
+  button:focus, [type="button"]:focus{
+    box-shadow: 0 0 0 0.25rem rgba(26, 26, 26, 0.5);
+  }
+  
+  
+  
+
+  
+  
+  
+  /*Kästen um die Fragebogenelemente*/
+  .questionnaireItem {
+    
+    margin-top: 4em;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.1rem 1rem #573b8a;
+    border-radius: 0.5em;
+    padding: 2em;
+  }
+
+  
+  /*Fragebogenelement ist erforderlich*/
+  .Required,
+  .questionnaireItemRequired {
+    outline: none;
+    border-color: #cc5858;
+    box-shadow: 0 0 0 0.25rem #f3bdbc;
+  }
+
+
+

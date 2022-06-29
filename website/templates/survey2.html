@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Survey Part 1</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="js/thefragebogen.js"></script>
+
+
+        <script>
+        //body{
+        //    background-color: hotpink;
+        //    color: white;
+        //}
+        //This array stores all screens that will be shown.
+        var screens = [];
+
+
+        //var hallo = <p>hallo</p>
+        //screens.push(hallo)
+
+        //The welcome screen of this questionnaire with some text and a standard question.
+        var screen1 = new ScreenUIElements(
+            new UIElementHTML(undefined, "<h1 style:background-color: hotpink>Please read the following text carefully: </h1>"),
+            new UIElementHTML(undefined, "<h2>Location data in general: is one of the most tracked data types, which is collected by most smartphone applications, even though the intended use does not require it. </h2>"),
+            new UIElementHTML(undefined, "Location data is sensitive for three reasons: "),
+            new UIElementHTML(undefined, "<br><b1>Location can be a personal identifier:</b1> through your shared locations it is very easy to identify you as a person. "),
+            new UIElementHTML(undefined, "<br><b1>Location carries very sensitive information:</b1> sensitive personal data is shared when locations are tracked. Location information can reveille a person’s ethnicity, political or philosphical beliefs, and also health and sexual orientation. This can be detected by frequent visits to a church or a specific doctor. This information can be highly important for future career opportunities when your health status can be predicted from sport activities and movement patterns. "),
+            new UIElementHTML(undefined, "<br><b1>Location creates patterns:</b1> when location data is aggregated over many users various patterns can be extracted. For example a fitness tracker could reveal the location of military bases on remote locations, as some of their users turned out to be soldiers. "),
+    
+        );
+        screens.push(screen1);
+
+        //This screen shows some questions.
+        var screen2 = new ScreenUIElements(
+            new UIElementHTML(undefined, "In the following we will introduce your tracked location types again which we will ask you for in the next section:"),
+            new UIElementHTML(undefined, "<br><b1>Home location:</b1> your predicted home location, which you"),
+            new UIElementHTML(undefined, "<b1>Workplace:</b1> the predicted work location"),
+            new UIElementHTML(undefined, "<b1>All location data:</b1> all the location traces you leave are shared on a continuous basis"),
+            new UIElementHTML(undefined, "<b1>Aggregated information:</b1> all the information which can be inferred from your movement patterns (some examples have been displayed next to the map such as unique places, time you spent at certain places, how many hours a day you are moving, which days you are active and so on)"),
+            );
+        screens.push(screen2);
+
+        var screen3 = new ScreenUIElements(
+            new UIElementHTML(undefined, "In the following you will be asked for what price you are willing to protect your location information and for how much money you would sell your information to two different data requestors (Apple and Google). The data sharing scenarios refer always to sharing your location data for one month, or the costs to protect your data for one month. "),
+            new UIElementHTML(undefined, "Please answer as truthfully as you can! "),            
+            );
+        screens.push(screen3);
+
+        var screen4 = new ScreenUIElements(
+
+            new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, "./img/eins.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='./img/eins-eins.png'>", "<img src='./img/eins-zwei.png'>", "<img src='./img/eins-drei.png'>"]),
+            
+           );
+
+        //screens.push(screen4);
+
+        //This screen "shows" questions that are answered automatically (and are not visible to the user).
+        var screen5 = new ScreenUIElements(
+
+            new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, "./img/zwei.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types:<hr>", true, ["<img src='./img/zwei-eins.png'>", "<img src='./img/zwei-zwei.png'>", "<img src='./img/zwei-drei.png'>"]),
+             );
+          //  screens.push(screen5);
+    
+        
+
+        var screen6 = new ScreenUIElements(
+
+            new UIElementHTML(undefined, "Google has developed a new product: Google Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Google Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: ", false, "./img/drei.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='./img/drei-eins.png'>", "<img src='./img/drei-zwei.png'>", "<img src='./img/drei-drei.png'>"]),
+            );
+            
+        //screens.push(screen6);
+        
+        
+
+
+        var a=[0, 1, 2]
+        
+        var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    for (let i = 0; i < a.length; i++) {
+            if(a[i]==0){
+                screens.push(screen6)
+            }
+            if(a[i]==1){
+                screens.push(screen4)
+            }
+            if(a[i]==2){
+                screens.push(screen5)
+            }
+        } 
+      
+        
+
+        var screen7 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, "./img/vier.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='./img/vier-eins.png'>", "<img src='./img/vier-zwei.png'>", "<img src='./img/vier-drei.png'>"]),
+              );
+        //screens.push(screen7);
+
+        var screen8 = new ScreenUIElements(
+
+            new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, "./img/fuenf.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='./img/fuenf-eins.png'>", "<img src='./img/fuenf-zwei.png'>", "<img src='./img/fuenf-drei.png'>"]),
+            );
+        //screens.push(screen8);
+
+        //This screen another webpage using an iframe.
+        //screens.push(new ScreenIFrame("iframe", "http://www.TheFragebogen.de", 1));
+
+        var screen9 = new ScreenUIElements(
+
+            new UIElementHTML(undefined, "Apple has developed a new product: Apple Protect! This app protects your location data and enable sharing your location traces with any requesting app or service. The monthly cost for Apple Protect varies, depending on which location types you want to keep protected.  "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Apple Protect to protect your location types: ", false, "./img/sechs.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option most closely reflects how much you are willing to pay on a monthly basis for Google Protect to protect your location types: <hr>", true, ["<img src='./img/sechs-eins.png'>", "<img src='./img/sechs-zwei.png'>", "<img src='./img/sechs-drei.png'>"]),
+           );
+        //screens.push(screen9);
+
+        for (let i = 0; i < a.length; i++) {
+            if(a[i]==0){
+                screens.push(screen7)
+            }
+            if(a[i]==1){
+                screens.push(screen8)
+            }
+            if(a[i]==2){
+                screens.push(screen9)
+            }
+        } 
+
+
+        var screen10 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
+            new UIElementHTML(undefined, "Both companies are requesting your location data on a monthly basis. The following questions will assess for how much money you would sell the respective location types. "),
+            new UIElementHTML(undefined, "Google wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Google? "),
+            /*new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, "./img/sieben.png"),*/
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google: <hr>", true, ["<img src='./img/sieben-eins.png'>", "<img src='./img/sieben-zwei.png'>", "<img src='./img/sieben-drei.png'>"]),
+        
+            );
+        //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
+        //screens.push(screen10);
+
+
+        var screen11 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
+            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, "./img/acht.png"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would choose:", true, ["Option 1", "Option 2", "Option 3"]),
+            );
+        
+        var screen12 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
+            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, "./img/neun.png"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would choose:", true, ["Option 1", "Option 2", "Option 3"]),
+            );
+        for (let i = 0; i < a.length; i++) {
+            if(a[i]==0){
+                screens.push(screen10)
+            }
+            if(a[i]==1){
+                screens.push(screen11)
+            }
+            if(a[i]==2){
+                screens.push(screen12)
+            }
+        } 
+        
+        var screen13 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Apple wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Apple? "),
+            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Apple:  ", false, "./img/Tzehn.png"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would choose:", true, ["Option 1", "Option 2", "Option 3"]),
+            );
+        var screen14 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Apple wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Apple? "),
+            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Apple:  ", false, "./img/elf.png"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would choose:", true, ["Option 1", "Option 2", "Option 3"]),
+            );
+        
+        var screen15 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Apple wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Apple? "),
+            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Apple:  ", false, "./img/zwoelf.png"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would choose:", true, ["Option 1", "Option 2", "Option 3"]),
+            );
+
+        for (let i = 0; i < a.length; i++) {
+            if(a[i]==0){
+                screens.push(screen13)
+            }
+            if(a[i]==1){
+                screens.push(screen14)
+            }
+            if(a[i]==2){
+                screens.push(screen15)
+            }
+        } 
+
+        var screen16 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Please indicate if you would sell your data in principle or not: "),
+            new UIElementHTML(undefined, ""), 
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would never accept money in exchange for my data from…<hr>", true, ["Google", "Apple", "Any other application or service"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would sell my data if the price is right to…<hr>", true, ["Google", "Apple", "Any other application or service"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would never accept money in exchange for the following locations/data…<hr>", true, ["Home Location", "Work Location", "All location data", "All location data<br> and<br> aggregated information", "None of the above"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would sell the following location types to any data requestor if the price is right…<hr>", true, ["Home Location", "Work Location", "All location data", "All location data<br> and <br>aggregated information", "None of the above"]),
+            );
+        screens.push(screen16)
+        var screen17 = new ScreenUIElements(
+            new UIElementHTML(undefined, "Please indicate if you would pay for the protection of your data in principle or not: "),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would never pay for the protection of my data for…<hr>", true, ["Google", "Apple", "Any other application or service"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would never pay for the protection of the following location types/data… <hr>", true, ["Home Location", "Work Location", "All location data", "All location data<br> and<br> aggregated information", "None of the above"]),
+            );
+            screens.push(screen17)
+        var screen18 = new ScreenUIElements(
+            new UIElementHTML(undefined, "In the following several questions regarding your general privacy perception will be asked. Please answer as truthfully as possible. "),
+            new UIElementHTML(undefined, "In the following some questions are asked about your general usage of different applications. Please answer as truthfully as possible. "),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Consumer online privacy is really a matter of consumers’ right to exercise control and autonomy over decisions about how their information is collected, used, and shared.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Consumer control of personal information lies at the heart of consumer privacy.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I believe that online privacy is invaded when control is lost or unwillingly reduced as a result of a marketing transaction.<hr>", true, ["Strongly Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Companies seeking information online should disclose the way the data are collected, processed, and used.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "A good consumer online privacy policy should have a clear and conspicuous disclosure.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is very important to me that I am aware and knowledgeable about how my personal information will be used.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It usually bothers me when online companies ask me for personal information.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "When online companies ask me for personal information, I sometimes think twice before providing it.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It bothers me to give personal information to so many online companies.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I’m concerned that online companies are collecting too much personal information about me.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "When you’re responding to the questions in the questionnaire it is important that you’re paying attention. Please agree by selecting the second option from the left on the scale.", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]), 
+            );
+            screens.push(screen18)
+        var screen19 = new ScreenUIElements(
+            new QuestionnaireItemDefinedOne("questionnaireItem", "How many times a day on average do you use Apple services, i.e. Safari, Mail, Calendar, Reminder, Apple Music, Map, etc.? ", true, ["Less than 1 hour per day", "1-2 hours per day", "2-3 hours per day", "More than 4 hours per day"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "How many times a day on average do you use Google services, i.e. Chrome, Google Maps, Google Calendar, Google Drive, Gmail etc.?", true, ["Less than 1 hour per day", "1-2 hours per day", "2-3 hours per day", "More than 4 hours per day"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Which of the following services do you use to share your location data?<hr> ", true, ["Facebook", "Whatsapp", "TikTok", "Twitter", "Instagram", "Telegram", "Maps", "Find my Phone", "Other", "I don`t share my location data"]),
+            new QuestionnaireItemDefinedSelector(undefined, "Which of the following services do you use to share your location data?<hr>", true, ["Facebook", "Whatsapp", "TikTok", "Twitter", "Instagram", "Telegram", "Maps", "Find my Phone", "Other", "I don`t share my location data"])
+            );
+            screens.push(screen19)
+
+        //This screen shows a preview of the collected data.
+        screens.push(new ScreenDataPreview("screenPreview", false));
+
+        //This screen triggers the download all collected data (CSV).
+        //This includes also the changelog of all QuestionnaireItems.
+        //screens.push(new ScreenWaitDataDownload(undefined, "The End<br>All data should now be downloaded <a href='http://127.0.0.1:5000/map/'>(incl. changes of questionnaireItems and their final answers).", "TheFragebogen-basic.csv", true));
+
+        screens.push(new ScreenWaitDataUpload(undefined, "http://localhost:8080"));
+        //Most important: create the ScreenController
+        var screenController = new ScreenController(screens);
+
+        </script>
+
+        <script>
+        //Having the start()-function in an extra script-tag makes sure that it will be executed even if there are errors in the script-tag configuring TheFragebogen.
+        function start() {
+            document.body.innerHTML += "TheFragebogen loaded.";
+            if (typeof(screenController) === "undefined") {
+                document.body.innerHTML += "<br><i>Something went wrong:</i> Please check that thefragebogen.js was loaded and that the configuration is ok.";
+                return;
+            }
+            screenController.init(document.body);
+            screenController.start();
+        }
+
+        </script>
+    </head>
+
+    <body onload="start()">
+        <p>
+            TheFragebogen will be shown here.<br> If something fails while starting, an error message will be shown here.
+        </p>
+    </body>
+
+</html>

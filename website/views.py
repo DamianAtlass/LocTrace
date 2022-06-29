@@ -7,6 +7,8 @@ from website.map import build_date_map
 from datetime import datetime
 import folium
 import sys
+import csv
+from os import path, mkdir
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views', __name__,)
 
@@ -54,3 +56,34 @@ def map():
 def map1():
     temp = render_template("map1.html")
     return temp
+
+@views.route("/survey/")
+def survey():
+    return render_template("survey.html")
+
+
+@views.route("/receivedata/", methods=['POST'])
+def receivedata():
+    print("got request:\n")
+    #TODO: convert into something readble
+    data = request.data
+    print(data)
+    print("-----------------------------------------")
+
+    if not path.exists('surveyData/'):
+        mkdir("surveyData/")
+
+    # open the file in the write mode
+    f = open('surveyData/'+current_user.username +'.csv', 'w')
+
+    # create the csv writer
+    writer = csv.writer(f)
+
+    # write a row to the csv file
+    writer.writerow(data)
+
+    # close the file
+    f.close()
+
+
+    return "hello world!"
