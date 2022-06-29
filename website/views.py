@@ -9,6 +9,7 @@ import folium
 import sys
 import csv
 from os import path, mkdir
+from flask import send_file
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views', __name__,)
 
@@ -59,28 +60,57 @@ def map1():
     return temp
 
 
-@views.route("/survey/")
+@views.route("/survey_part1/")
 @login_required
-def survey():
-    print("User "+current_user.username+".")
+def survey_part1():
     return render_template("survey.html")
 
-@views.route("/receivedata/", methods=['POST'])
+@views.route("/survey_part2/")
 @login_required
-def receivedata():
+def survey_part2():
+    print("part 2")
+    return render_template("survey2.html")
+
+
+@views.route("/receivedata_part1/", methods=['POST'])
+@login_required
+def receivedata_part1():
+
+    saveSurveyData(request.data, "part1/")
+    return ""
+
+@views.route("/receivedata_part2/", methods=['POST'])
+@login_required
+def receivedata_part2():
+
+    saveSurveyData(request.data, "part2/")
+    return ""
+
+def saveSurveyData(data, directory):
+    
     data = request.data
     
     if not path.exists('surveyData/'):
         mkdir("surveyData/")
+    if not path.exists('surveyData/'+directory):
+        mkdir("surveyData/"+directory)
 
-    with open("surveyData/"+current_user.username+".csv", "wb") as binary_file:
+
+    with open("surveyData/"+directory+current_user.username+".csv", "wb") as binary_file:
         
         # data starts with : 'data="Screen index","Type of[...]'
         #get rid of 'data='
         data = data[5:]
         binary_file.write(data)
 
-    if not path.exists("surveyData/"+current_user.username+".csv"):
-        print("Error while saving survey data for user "+current_user.username+".")
+    if not path.exists("surveyData/"+directory+current_user.username+".csv"):
+        print("Error while saving survey data for user "+current_user.username+" in "+directory+".")
 
-    return ""
+
+
+
+@views.route('/get_image')
+def get_image():
+    img = request.args.get("image")
+    directory ="./templates/img/"
+    return send_file(directory+img, mimetype='image/gif')

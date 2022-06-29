@@ -34,7 +34,7 @@ def login():
         if user:
             login_user(user, remember=True)
             print("User "+user.username+" logged in.")
-            return redirect(url_for("views.survey"))
+            return redirect(url_for("views.survey_part1"))
         else:
             flash("No user named '"+username_login+"' has been found.", category="error")
             if not User.query.first():
