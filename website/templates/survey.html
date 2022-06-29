@@ -7,6 +7,15 @@
         <!--<link rel="stylesheet" href="./css/bootstrap.min.css">-->
         <link rel="stylesheet" href="css/style.css">
 
+        <script>
+
+            //this variable needs to be adjusted depending on where the server is hosted
+            // example1:
+            let HOST = "http://127.0.0.1:5000"
+            // example2:
+            //let HOST = "http://loctrace.pythonanywhere.com"
+
+        </script>
 <style>
     html {
     /*width: 100%;
@@ -4512,14 +4521,9 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
 
         //This screen triggers the download all collected data (CSV).
         //This includes also the changelog of all QuestionnaireItems.
-         
-        //this variable needs to be adjusted depending on where the server is hosted
-        // example1: let HOST = "http://127.0.0.1:5000"
-        // example2: let HOST = "LocTrace.pythonanywhere.com"
-        let HOST = "http://127.0.0.1:5000"
 
         //posts data to server
-        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part1"));
+        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part1/"));
 
         //displays a message and link to the map
         screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
