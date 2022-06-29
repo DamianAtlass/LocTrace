@@ -51,6 +51,7 @@ def login():
 @auth.route("/logout/")
 @login_required
 def logout():
+    print("User "+current_user.username+" logged out.")
     logout_user()
     return redirect(url_for("auth.login"))
 

@@ -23,8 +23,8 @@ def home():
 
 variable = "variables can be passed this way"
 
-
 @views.route("/map/", methods=['GET', 'POST'])
+@login_required
 def map():
 
     if request.method == 'POST':
@@ -53,37 +53,28 @@ def map():
 
 
 @views.route("/displaymap/")
+@login_required
 def map1():
     temp = render_template("map1.html")
     return temp
 
+
 @views.route("/survey/")
+@login_required
 def survey():
+    print("User "+current_user.username+".")
     return render_template("survey.html")
 
-
 @views.route("/receivedata/", methods=['POST'])
+@login_required
 def receivedata():
-    print("got request:\n")
-    #TODO: convert into something readble
     data = request.data
-    print(data)
-    print("-----------------------------------------")
-
+    print("got request. type: "+str(type(data)))
+    
     if not path.exists('surveyData/'):
         mkdir("surveyData/")
 
-    # open the file in the write mode
-    f = open('surveyData/'+current_user.username +'.csv', 'w')
+    with open("surveyData/"+current_user.username+".csv", "wb") as binary_file:
+        binary_file.write(data)
 
-    # create the csv writer
-    writer = csv.writer(f)
-
-    # write a row to the csv file
-    writer.writerow(data)
-
-    # close the file
-    f.close()
-
-
-    return "hello world!"
+    return ""
