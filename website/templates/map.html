@@ -18,13 +18,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style>
-  
-
   .row {
     width: 100% !important;
     margin: 0px !important;
     height: fit-content;
-   
+
 
   }
 
@@ -48,12 +46,16 @@
   .metacard>table>tbody {
     font-size: larger !important;
     border-spacing: 10px !important;
-    
+
   }
 
   .metacard>table>tbody>tr>td {
     margin-right: 10px !important;
-    
+    padding: 5px;
+    vertical-align: top;
+    text-align: left;
+    font-size: 12pt;
+
   }
 
   .col-md-9.col-12 {
@@ -77,19 +79,24 @@
 
   p {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: medium;
+    font-size: 11pt;
     margin-bottom: 0px !important;
+    font-weight: bold;
   }
 
   @media screen and (max-width: 720px) {
-    div#map{order: 2}
-    div#meta{order: 1}
+    div#map {
+      order: 2
+    }
 
-    #map{
+    div#meta {
+      order: 1
+    }
+
+    #map {
       height: 1000px !important;
     }
   }
-
 </style>
 {% extends "base.html" %}
 <!-- this replaces the block called "title" in base.html -->
@@ -175,11 +182,10 @@
   <div class="col-md-3 col-12" id="meta">
     <div class="metacard">
       <div class="metaheader">
-        <h4 id="offcanvasRightLabel">Aggregated Information</h4>
+        <h4 id="offcanvasRightLabel" style="color: #a079e8">Aggregated Information</h4>
         <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
             onclick="closeMeta()"></button> -->
       </div>
-      <p style="text-align: center;">&nbsp;</p>
 
       <p>In the following you can see additional information which can be inferred based on your
         location information:</p>
@@ -194,40 +200,44 @@
           </tr>
           <tr>
             <td>
-              Overall, you have visited {{df_metadata['stops'][0]}} locations.
+              Overall, you have visited<strong> {{df_metadata['stops'][0]}}</strong> locations.
             </td>
             <td>
-              Among them {{df_metadata['unique locations'][0]}} unique locations can be detected.
+              Among them <strong>{{df_metadata['unique locations'][0]}}</strong> unique locations can be detected.
 
             </td>
           </tr>
           <tr>
             <td colspan="2">
-              <p>Distance:</p>
+              Distance:
             </td>
           </tr>
           <tr>
             <td>
-              Overall, you have traveled {{df_metadata['total trip path distance (km)'][0]}} km for which you needed
+              Overall, you have traveled <strong>{{df_metadata['total trip path distance (km)'][0]}} km</strong> for
+              which you needed
               {{(df_metadata['total trip duration (min)'][0]/60)|round}} hours.
             </td>
             <td>
-              On average you needed {{(df_metadata['mean trip duration (min)'][0]|round)}} hours for each trip.
+              On average you needed <strong>{{(df_metadata['mean trip duration (min)'][0]|round)}} hours</strong> for
+              each trip.
             </td>
           </tr>
           <tr>
             <td colspan="2">
-              <p>Home Location:</p>
+              Home Location:
             </td>
           </tr>
           <tr>
             <td>
-              Overall, you have spent {{(df_metadata['time at home (min)'][0])|round}} hours at home and
-              {{(df_metadata['time out of home (min)'][0])|round}} hours outside of your home.
+              Overall, you have spent <strong>{{(df_metadata['time at home (min)'][0])|round}} hours</strong> at home
+              and
+              <strong>{{(df_metadata['time out of home (min)'][0])|round}} hours </strong> outside of your home.
 
             </td>
             <td>
-              The largest distance from your home was {{df_metadata['max distance to home (stops, km)'][0]}} km.
+              The largest distance from your home was <strong>{{df_metadata['max distance to home (stops, km)'][0]}}
+                km</strong>.
             </td>
           </tr>
           <tr>
@@ -238,12 +248,12 @@
           <tr>
             <td>
               On average, you started your first movement on a day at
-              {{df_metadata['time first move'][0]}}a clock and
+              <strong>{{df_metadata['time first move'][0]}}</strong> a clock and
               changed your location the first time.
             </td>
             <td>
               On average, your last movement on a day was at
-              {{df_metadata['time last move'][0]}} a clock, when you changed your
+              <strong>{{df_metadata['time last move'][0]}}</strong> a clock, when you changed your
               location the last time.
             </td>
           </tr>
@@ -252,7 +262,7 @@
       <br>
       <p style="text-align: center;">&nbsp;</p>
 
-      <p>This information can easily be inferred from your location traces, which are usually
+      <p style="font-size: 10.5pt;">This information can easily be inferred from your location traces, which are usually
         tracked by numerous applications on your smartphone. The collection of location information over a longer period
         of
         time allows to aggregate very precise information about your daily routines. Among them are, when you are
