@@ -18,16 +18,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style>
-  .container {
-    margin: 0px !important;
-    padding: 0px !important;
-    font-size: larger !important;
-  }
+  
 
   .row {
     width: 100% !important;
     margin: 0px !important;
     height: fit-content;
+   
 
   }
 
@@ -37,25 +34,26 @@
 
   .metacard {
     padding: 20px !important;
-
-  }
-
-  .metacard>table>tbody {
     font-size: larger !important;
 
   }
-
-  .metacard>table>tbody>tr>td {
-    margin-right: 10px !important;
-    font-size: medium
-  }
-
 
   .metacard>table>tbody>tr:nth-child(2n+1) {
     color: #a079e8 !important;
     font-weight: bold !important;
     border-bottom-width: 2px !important;
     border-color: #573b8a !important;
+  }
+
+  .metacard>table>tbody {
+    font-size: larger !important;
+    border-spacing: 10px !important;
+    
+  }
+
+  .metacard>table>tbody>tr>td {
+    margin-right: 10px !important;
+    
   }
 
   .col-md-9.col-12 {
@@ -82,6 +80,16 @@
     font-size: medium;
     margin-bottom: 0px !important;
   }
+
+  @media screen and (max-width: 720px) {
+    div#map{order: 2}
+    div#meta{order: 1}
+
+    #map{
+      height: 1000px !important;
+    }
+  }
+
 </style>
 {% extends "base.html" %}
 <!-- this replaces the block called "title" in base.html -->
@@ -89,6 +97,7 @@
 <!-- this replaces the block called "content" in base.html -->
 {% block content %}
 <!---action="{{ url_for('views.map') }}-->
+
 
 <div class="row">
   <div class="col">
@@ -158,12 +167,12 @@
 </div>
 
 <div class="row" height="1000px">
-  <div class="col-md-9 col-12" padding="0px">
+  <div class="col-md-9 col-12" id="map" padding="0px">
     <!--{{map |safe}}-->
     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
   </div>
-  <div class="col-md-3 col-12">
+  <div class="col-md-3 col-12" id="meta">
     <div class="metacard">
       <div class="metaheader">
         <h4 id="offcanvasRightLabel">Aggregated Information</h4>
@@ -176,7 +185,7 @@
         location information:</p>
       <p style="text-align: center;">&nbsp;</p>
 
-      <table cellspacing="0" cellpadding="0">
+      <table cellspacing="10px" style="border-spacing: 10px;">
         <tbody>
           <tr>
             <td colspan="2">
