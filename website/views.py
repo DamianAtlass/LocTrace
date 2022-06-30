@@ -10,7 +10,6 @@ import sys
 import csv
 from os import path, mkdir
 from flask import send_file
-from . import db
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views', __name__,)
 

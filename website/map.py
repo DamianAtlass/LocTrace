@@ -272,27 +272,51 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
 
     data = pd.read_csv(csv_path)
+    print(req_start_date)
+    print(req_end_date)
+    print(req_start_time)
+    print(req_end_time)
 
-    # if no time is given, set to while day
-    if req_start_time == "" and req_end_time == "":
-        reqStartDateTime = datetime.strptime(
+    # if no date is given, set to first and/or last possible day
+    if req_start_date == "" and req_end_date == "":
+        reqStartDateTime = datetime.strptime(data['ts'].iloc[0], '%Y-%m-%d %H:%M:%S+%f:00')
+        reqEndDateTime = datetime.strptime(data['ts'].iloc[len(data)-1], '%Y-%m-%d %H:%M:%S+%f:00')
+    elif req_start_date == "":
+        reqStartDateTime = datetime.strptime(data['ts'].iloc[0], '%Y-%m-%d %H:%M:%S+%f:00')
+        if req_end_time == "":
+            reqEndDateTime = datetime.strptime(req_end_date + "23:59", '%Y-%m-%d%H:%M')
+        else:
+            reqEndDateTime = datetime.strptime(req_end_date + req_end_time, '%Y-%m-%d%H:%M')    
+    elif req_end_date == "":
+        reqEndDateTime = datetime.strptime(data['ts'].iloc[len(data)-1], '%Y-%m-%d %H:%M:%S+%f:00')
+        if req_start_time == "":
+            reqStartDateTime = datetime.strptime(
             req_start_date + "00:00", '%Y-%m-%d%H:%M')
-        reqEndDateTime = datetime.strptime(
+        else:
+            reqStartDateTime = datetime.strptime(
+            req_start_date + req_start_time, '%Y-%m-%d%H:%M')   
+
+    else: 
+        #if date but no time set to whole day
+        if req_start_time == "" and req_end_time == "":
+            reqStartDateTime = datetime.strptime(
+            req_start_date + "00:00", '%Y-%m-%d%H:%M')
+            reqEndDateTime = datetime.strptime(
             req_end_date + "23:59", '%Y-%m-%d%H:%M')
-    elif req_start_time == "" and req_end_time != "":
-        reqStartDateTime = datetime.strptime(
+        elif req_start_time == "" and req_end_time != "":
+            reqStartDateTime = datetime.strptime(
             req_start_date + "00:00", '%Y-%m-%d%H:%M')
-        reqEndDateTime = datetime.strptime(
+            reqEndDateTime = datetime.strptime(
             req_end_date + req_end_time, '%Y-%m-%d%H:%M')
-    elif req_start_time != "" and req_end_time == "":
-        reqStartDateTime = datetime.strptime(
+        elif req_start_time != "" and req_end_time == "":
+            reqStartDateTime = datetime.strptime(
             req_start_date + req_start_time, '%Y-%m-%d%H:%M')
-        reqEndDateTime = datetime.strptime(
+            reqEndDateTime = datetime.strptime(
             req_end_date + "23:59", '%Y-%m-%d%H:%M')
-    else:
-        reqStartDateTime = datetime.strptime(
+        else:
+            reqStartDateTime = datetime.strptime(
             req_start_date + req_start_time, '%Y-%m-%d%H:%M')
-        reqEndDateTime = datetime.strptime(
+            reqEndDateTime = datetime.strptime(
             req_end_date + req_end_time, '%Y-%m-%d%H:%M')
 
     newData = pd.DataFrame()
