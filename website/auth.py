@@ -140,6 +140,8 @@ def load_users():
                 new_user = User()
                 new_user.username = username_df
                 new_user.sigLoc_loaded = False
+                new_user.survey_part1_answered = False
+                new_user.survey_part2_answered = False
                                 
                 db.session.add(new_user)
                 db.session.commit()

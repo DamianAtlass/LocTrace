@@ -10,6 +10,7 @@ import sys
 import csv
 from os import path, mkdir
 from flask import send_file
+from . import db
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views', __name__,)
 
@@ -45,12 +46,12 @@ def map():
         #print(str(start), file=sys.stdout)
         return temp
 
-    buildmap(current_user)
+    if request.method == 'GET':
+        buildmap(current_user)
+        # add metadata
+        df_metadata = metadata(current_user)
 
-    # add metadata
-    df_metadata = metadata(current_user)
-
-    return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata)
+        return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata)
 
 
 @views.route("/displaymap/")
@@ -63,12 +64,19 @@ def map1():
 @views.route("/survey_part1/")
 @login_required
 def survey_part1():
+    print("survey part 1: "+str(current_user.survey_part1_answered))
+    if  current_user.survey_part1_answered:
+        return redirect(url_for("views.map"))
+
     return render_template("survey.html")
 
 @views.route("/survey_part2/")
 @login_required
 def survey_part2():
-    print("part 2")
+    print("survey part 2: "+str(current_user.survey_part2_answered))
+    if current_user.survey_part2_answered:
+        return redirect(url_for("views.map"))
+
     return render_template("survey2.html")
 
 
@@ -77,6 +85,10 @@ def survey_part2():
 def receivedata_part1():
 
     saveSurveyData(request.data, "part1/")
+
+    current_user.survey_part1_answered = True
+    db.session.commit()
+    print("survey part 2: "+str(current_user.survey_part2_answered))
     return ""
 
 @views.route("/receivedata_part2/", methods=['POST'])
@@ -84,6 +96,10 @@ def receivedata_part1():
 def receivedata_part2():
 
     saveSurveyData(request.data, "part2/")
+    current_user.survey_part2_answered = True
+    db.session.commit()
+    print("survey part 2: "+str(current_user.survey_part2_answered))
+    
     return ""
 
 def saveSurveyData(data, directory):
@@ -105,7 +121,7 @@ def saveSurveyData(data, directory):
 
     if not path.exists("surveyData/"+directory+current_user.username+".csv"):
         print("Error while saving survey data for user "+current_user.username+" in "+directory+".")
-
+    
 
 
 

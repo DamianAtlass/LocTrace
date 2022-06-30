@@ -9,6 +9,9 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True)
 
+    survey_part1_answered = db.Column(db.Boolean)
+    survey_part2_answered = db.Column(db.Boolean)
+
     sigLoc_loaded = db.Column(db.Boolean)
     home = db.relationship('Stop_h')
     work = db.relationship('Stop_w')
