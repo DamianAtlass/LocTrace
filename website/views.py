@@ -67,6 +67,7 @@ def survey_part1():
         return render_template("survey.html")
     if request.method == 'POST':
         print("GOT IT")
+        return ""
 
 @views.route("/survey_part2/")
 @login_required
