@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     survey_part2_answered = db.Column(db.Boolean)
 
     sigLoc_loaded = db.Column(db.Boolean)
+
     home = db.relationship('Stop_h')
     work = db.relationship('Stop_w')
 

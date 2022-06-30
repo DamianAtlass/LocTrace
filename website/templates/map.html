@@ -84,6 +84,13 @@
     font-weight: bold;
   }
 
+  #myModal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
   @media screen and (max-width: 720px) {
     div#map {
       order: 2
@@ -96,6 +103,13 @@
     #map {
       height: 1000px !important;
     }
+
+    #myModal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
   }
 </style>
 {% extends "base.html" %}
@@ -148,12 +162,11 @@
             </form>
           </li>
           <li>
-            <!--   <a>
+              <a>
   
-                <button class=" btn btn-light" onclick="openMeta()" name="offcanvas_button" type="button"
-                  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                  style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Show More Results</button>
-              </a> -->
+                <button class=" btn btn-light" onclick="" name="survey_button" type="button" id="survey_button"
+                  style="background-color: #a079e8; color: #fff; border-color: #a079e8; display:none;">Go to Survey!</button>
+              </a> 
           </li>
 
         </ul>
@@ -172,9 +185,32 @@
         {% endif %}
 
       </div>
+
+      <!-- Modal -->
+<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Survey</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Please take part in our Survey now. 
+
+        If you want to continue exploring your location data, you can also do so by pressing the survey button above!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Go to Survey now!</button>
+      </div>
+    </div>
+  </div>
+</div>
     </nav>
   </div>
 </div>
+
+
 
 <div class="row" height="1000px">
   <div class="col-md-9 col-12" id="map" padding="0px">
@@ -280,10 +316,30 @@
   </div>
 </div>
 
+<script>
 
+var is_modal_show = sessionStorage.getItem('alreadyShow');
 
+if(is_modal_show == 'already shown'){  
+  const survey_button = document.getElementById('survey_button');
+  survey_button.style.display = 'block';
+}else{
+  
+  setTimeout(() => {
 
-
+    if(is_modal_show != 'already shown'){
+      $('#myModal').modal('show')
+      sessionStorage.setItem('alreadyShow','already shown');
+      console.log("modal was shown");
+      const survey_button = document.getElementById('survey_button')
+      survey_button.style.display = 'block';
+      console.log("button appears");
+    }
+  //console.log("works");
+  }, 30000);
+//console.log(is_modal_show);
+}
+</script>
 
 
 
