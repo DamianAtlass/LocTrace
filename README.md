@@ -11,3 +11,6 @@ For loading users from the .csv file into the local sqlalchemy database correctl
 
 #### The database:
 The database is mainly needed so that the server can remember users who just loggend in. create_database(app) in __init__.py first looks for an old database and uses that, if it finds one. When the server is hosted for the first time (and no database exists), an instance of the class 'State' will be created, which roughly represents the state of the database. The State instance, which there can only be one of, prevents the server from looking for data to be put into the database more than once. However, the route /loaddb/ can be used to bypass that without restarting the server. Immediately after creation, users and significant locations are saved into the database. Loading significant locations from the database saves a significant amount of time, when loading the website. They are represented by the classes 'Stop_h' and 'Stop_w', as every significant location is technically represented by a simplified version of an entry in the stops.cvs.
+
+#### adding new participants
+The location data for each participant is stored in the data folder. Every participant has their own sub-folder, which has to bee named after the username. To add new participant, simply create a new sub-folder that is named after the participant's usename.
