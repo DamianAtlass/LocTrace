@@ -24,11 +24,6 @@
             //let HOST = "http://loctrace.pythonanywhere.com"
 </script>
 <style>
-
-  .row>.col>nav>.collapse>ul{
-    padding-top: 12px !important;
-  }
-
   .row {
     width: 100% !important;
     margin: 0px !important;
@@ -121,18 +116,6 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
-
-.row>.col>nav>.collapse>ul{
-    margin: 0px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .row>.col>nav>.collapse>a{
-   padding: 0px !important;
- }
-
-
-
   }
 </style>
 {% extends "base.html" %}
@@ -165,7 +148,7 @@
             </a>
             <!--dropdown sub items of menu-->
             <form method="POST" action="/map/">
-              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown" style="margin-top: 10px; padding: 5px;">
+              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
                 <div class="row dropdown item input-group" style=" width: 80%;">
                   <div class="col-6 " style="padding-left: 0px;">Start: </div>
                   <div class="col-4 " style="padding-left: 24px">Ende: </div>
@@ -223,7 +206,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Go to Survey now!</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='HOST'+'/survey_part2/'">Go to Survey now!</button>
       </div>
     </div>
   </div>
