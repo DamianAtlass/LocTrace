@@ -4386,7 +4386,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             //new QuestionnaireItemSVGQuality7pt("max-width", "Continuous scale for subjective quality assessment (cf. <a href='https://www.itu.int/rec/T-REC-P.851-200311-I/en'>ITU-T P.851</a>)<br>Labels can be configured.", false),
         );
         screens.push(screen3);
-        /* 
+        
         //screens.push(new ScreenWaitDataUpload(undefined, "/TheFragebogen", 4, "Uploading data. Please wait ...", "data", "Upload failed. Data will ve downloaded to local computer now.", true, false));
 
         //screens.push(new ScreenWaitDataDownload(undefined, "Hallihallo", "Basically.csv", true  ))
@@ -4501,7 +4501,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         );
         //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
         screens.push(screen10);
-        */
+        
 
         var screen11 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1>Demographics:</h1>"),
@@ -4514,9 +4514,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         )
         //This screen shows a preview of the collected data.
         
-         //END
-
-
+        
         screens.push(new ScreenDataPreview("screenPreview", false));
 
         //This screen triggers the download all collected data (CSV).
