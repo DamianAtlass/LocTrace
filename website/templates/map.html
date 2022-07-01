@@ -24,6 +24,9 @@
             //let HOST = "http://loctrace.pythonanywhere.com"
 </script>
 <style>
+  .modal{
+    color:#573b8a !important;
+  }
 
   .row>.col>nav>.collapse>ul{
     margin-top: 12px !important;
@@ -121,7 +124,7 @@
   transform: translate(-50%,-50%);
 }
 
-.row>.col>nav>.collapse>ul{
+  .row>.col>nav>.collapse>ul{
     margin: 0px !important;
   }
 
@@ -183,7 +186,7 @@
           </li>
           <li>
               <a>
-                <button class=" btn btn-light" onclick="window.location.href= HOST + '/survey_part2/'" name="survey_button" type="button" id="survey_button"
+                <button class=" btn btn-light" onclick="window.location.href=HOST + '/survey_part2/'" name="survey_button" type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="survey_button"
                   style="background-color: #a079e8; color: #fff; border-color: #a079e8; display:none;">Go to Survey!</button>
               </a> 
           </li>
@@ -206,11 +209,11 @@
       </div>
 
       <!-- Modal -->
-<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Survey</h5>
+        <h5 class="modal-title" id="myModalLabel">Survey</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
