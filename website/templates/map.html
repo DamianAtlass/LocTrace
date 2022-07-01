@@ -18,6 +18,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style>
+
+  .row>.col>nav>.collapse>ul{
+    padding-top: 12px !important;
+  }
+
   .row {
     width: 100% !important;
     margin: 0px !important;
@@ -110,6 +115,18 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+.row>.col>nav>.collapse>ul{
+    margin: 0px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .row>.col>nav>.collapse>a{
+   padding: 0px !important;
+ }
+
+
+
   }
 </style>
 {% extends "base.html" %}
@@ -142,7 +159,7 @@
             </a>
             <!--dropdown sub items of menu-->
             <form method="POST" action="/map/">
-              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu form-group" method="POST" aria-labelledby="navbarDropdown" style="margin-top: 10px; padding: 5px;">
                 <div class="row dropdown item input-group" style=" width: 80%;">
                   <div class="col-6 " style="padding-left: 0px;">Start: </div>
                   <div class="col-4 " style="padding-left: 24px">Ende: </div>
@@ -163,7 +180,6 @@
           </li>
           <li>
               <a>
-  
                 <button class=" btn btn-light" onclick="" name="survey_button" type="button" id="survey_button"
                   style="background-color: #a079e8; color: #fff; border-color: #a079e8; display:none;">Go to Survey!</button>
               </a> 
