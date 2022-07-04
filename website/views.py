@@ -60,7 +60,7 @@ def map1():
     return temp
 
 
-@views.route("/survey_part1/", methods=['GET', 'POST'])
+@views.route("/survey_part1/")
 @login_required
 def survey_part1():
     print("part 1")
@@ -104,7 +104,9 @@ def saveSurveyData(data, directory):
         data = data[5:]
         binary_file.write(data)
 
-    if not path.exists("surveyData/"+directory+current_user.username+".csv"):
+    if path.exists("surveyData/"+directory+current_user.username+".csv"):
+        print("data saved")
+    else:
         print("Error while saving survey data for user "+current_user.username+" in "+directory+".")
 
 
