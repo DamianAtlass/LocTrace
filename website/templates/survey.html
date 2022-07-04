@@ -10,9 +10,9 @@
         <script>
             //this variable needs to be adjusted depending on where the server is hosted
             // example1:
-            //HOST = "http://127.0.0.1:5000"
+            HOST = "http://127.0.0.1:5000"
             // example2:
-            HOST = "https://loctrace.pythonanywhere.com"
+            //HOST = "https://loctrace.pythonanywhere.com"
         </script>
 <style>
     html {
@@ -4521,7 +4521,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //This includes also the changelog of all QuestionnaireItems.
 
         //posts data to server
-        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/survey_part1/"));
+        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part1/"));
         //displays a message and link to the map
         screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
         

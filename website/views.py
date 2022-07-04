@@ -63,11 +63,8 @@ def map1():
 @views.route("/survey_part1/", methods=['GET', 'POST'])
 @login_required
 def survey_part1():
-    if request.method == 'GET':
-        return render_template("survey.html")
-    if request.method == 'POST':
-        print("GOT IT")
-        return ""
+    print("part 1")
+    return render_template("survey.html")
 
 @views.route("/survey_part2/")
 @login_required
