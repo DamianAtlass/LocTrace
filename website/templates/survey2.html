@@ -4594,8 +4594,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         
 
         //posts data to server
-        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2"));
-
+        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2/"));
         //displays a message and link to the map
         screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the second part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
         
