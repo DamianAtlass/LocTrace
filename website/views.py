@@ -78,14 +78,14 @@ def survey_part2():
 def receivedata_part1():
 
     saveSurveyData(request.data, "part1/")
-    return ""
+    return "test"
 
 @views.route("/receivedata_part2/", methods=['POST'])
 @login_required
 def receivedata_part2():
 
     saveSurveyData(request.data, "part2/")
-    return ""
+    return "test2"
 
 def saveSurveyData(data, directory):
     
