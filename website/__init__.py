@@ -16,6 +16,7 @@ DB_NAME = "database.db"
 
 def create_app():
         app = Flask(__name__)
+        CORS(app)
         #important for remembering users
         app.config["SECRET_KEY "] = "asdjfhakljsdgjf"
 
@@ -25,7 +26,7 @@ def create_app():
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         db.init_app(app)
-        CORS(app)
+        
 
         # Set the secret key to some random bytes. Keep this really secret!
         app.secret_key = "sfdjksdafeljkksdf"
