@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, logout_user
+from flask_cors import CORS
 
 
 
@@ -24,6 +25,7 @@ def create_app():
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         db.init_app(app)
+        CORS(app)
 
         # Set the secret key to some random bytes. Keep this really secret!
         app.secret_key = "sfdjksdafeljkksdf"
