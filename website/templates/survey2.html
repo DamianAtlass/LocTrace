@@ -10,7 +10,7 @@
             // example1:
             //let HOST = "http://127.0.0.1:5000"
             // example2:
-            HOST = "https://loctrace.pythonanywhere.com"
+            // HOST = "https://loctrace.pythonanywhere.com"
         </script>
         <!-- complete content of fragebogen.js -->
         <script>
@@ -4593,7 +4593,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         screens.push(new ScreenDataPreview("screenPreview", false));
 
         //posts data to server
-        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2"));
+        screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part2/"));
         //displays a message and link to the map
         screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the second part of our survey!<br>Here you can get to the map:<br><a href='"+HOST+"/map/'>-->"));
         
