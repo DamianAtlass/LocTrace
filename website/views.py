@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 import pandas as pd
 from website.map import buildmap
@@ -47,6 +47,10 @@ def map():
         return temp
 
     if request.method == 'GET':
+
+        if not current_user.survey_part1_answered:
+            return redirect(url_for("views.survey_part1"))
+
         buildmap(current_user)
         # add metadata
         df_metadata = metadata(current_user)
@@ -57,6 +61,9 @@ def map():
 @views.route("/displaymap/")
 @login_required
 def map1():
+    if not current_user.survey_part1_answered:
+            return redirect(url_for("views.survey_part1"))
+            
     temp = render_template("map1.html")
     return temp
 
@@ -73,6 +80,9 @@ def survey_part1():
 @views.route("/survey_part2/")
 @login_required
 def survey_part2():
+    if not current_user.survey_part1_answered:
+            return redirect(url_for("views.survey_part1"))
+
     print("survey part 2: "+str(current_user.survey_part2_answered))
     if current_user.survey_part2_answered:
         return redirect(url_for("views.map"))
