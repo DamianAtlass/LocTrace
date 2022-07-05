@@ -4,13 +4,34 @@
     <head>
         <meta charset="utf-8">
         <title>Survey Part 2</title>
-
+        <meta name="viewport" content="width=device-width" />
         <script>
             //this variable needs to be adjusted depending on where the server is hosted
             // example1:
             let HOST = "http://127.0.0.1:5000"
             // example2:
             //let HOST = "http://loctrace.pythonanywhere.com"
+
+            
+             progress();
+             
+
+            function progress(){
+                setTimeout(function(){
+                let next = document.querySelector('input[type=button]');
+                next.setAttribute('value', "Next " + i + "/7");
+                next.setAttribute('onclick', "increment()");     
+                }, 300);
+                       
+            }
+
+            function increment(){
+                i++;
+                console.log(i);
+                progress();
+            }
+            
+
         </script>
         <!-- complete content of fragebogen.js -->
         <script>
@@ -4231,11 +4252,8 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             }
             
             body {
-                width: 60em;
-                margin: 5em;
+                width: 100%;
                 margin-top: 50px;
-                margin-left: auto;
-                margin-right:auto;
                 text-align: center;
                 font-size: 1.2rem;
                 font-weight: 400;
@@ -4244,6 +4262,12 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
                 background-color: #fff;
                 -webkit-text-size-adjust: 100%;
                 -webkit-tap-highlight-color: #573b8a;
+                position: absolute;
+              }
+
+              body > div{
+                margin: 3em; 
+                position: relative;
               }
             
               tbody{
@@ -4252,14 +4276,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
                 display: inline-table;
                 font-size: 1rem;
               }
-            
-            
-              @media only screen and (max-width: 1152px) {
-                body {
-                margin-top: 50px;
-                  width:100%;
-                }
-              }
+             
             
             hr {
                 border: 0.1px solid rgba(87, 59, 138, 0.2);
@@ -4335,6 +4352,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
                 border-radius: 0.5em;
                 padding: 2em;
               }
+              
             
               
               /*Fragebogenelement ist erforderlich*/
@@ -4346,8 +4364,58 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
               }
             
             
-            
-            
+                   
+        @media only screen and (max-width: 720px) {
+                tr{
+                    display: grid;
+                }
+
+               img{
+                    height: 400px;
+                    width: auto;
+                }
+
+
+                body{
+                    width: 100%
+                }
+               
+                body > div{
+                    margin: 1em;
+                }
+
+                body > div > div.questionnaireItem{
+                    position: relative;
+                    padding: 20px;
+                    width: auto;                    
+                }
+
+                tbody{
+                    margin: 0;
+                    position: relative;
+                }
+
+                body > div > div.questionnaireItem > table > tbody > tr{
+                    position: relative;
+                }
+
+                body > div > div.questionnaireItem > table > tbody > tr:nth-child(1) {
+                    float: left;
+                    
+                }
+                body > div > div.questionnaireItem > table > tbody > tr:nth-child(2) > td{
+                    height: 400px;
+                }
+
+                body > div > div.questionnaireItem > table > tbody > tr:nth-child(2) > td > input{
+                    position: relative;
+                    margin-top: 200px;
+                }
+              } 
+
+
+
+
 
         </style>
 

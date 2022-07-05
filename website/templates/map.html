@@ -24,6 +24,22 @@
             //let HOST = "http://loctrace.pythonanywhere.com"
 </script>
 <style>
+  #myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
   .modal{
     color:#573b8a !important;
   }
@@ -104,7 +120,11 @@
   transform: translate(-50%,-50%);
 }
 
-  @media screen and (max-width: 720px) {
+.myBtn{
+  display: none;
+}
+
+  @media screen and (max-width: 768px) {
     div#map {
       order: 2
     }
@@ -132,6 +152,32 @@
    margin-top: 10px !important;
    padding: 0px !important;
   }
+
+  #myBtn{
+    margin: auto;
+      display: none;
+      position: fixed;
+      bottom: 14px;
+      right: 20%;
+      left: 20%;
+      text-align: center;
+
+
+      width: auto;
+      z-index: 99;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      background-color: rgb(101, 41, 147);
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+  }
+  #myBtn:hover {
+      background-color: #555;
+    }
   }
 </style>
 {% extends "base.html" %}
@@ -243,6 +289,7 @@
     <!--{{map |safe}}-->
     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
   </div>
   <div class="col-md-3 col-12" id="meta">
     <div class="metacard">
@@ -366,6 +413,28 @@ if(is_modal_show == 'already shown'){
 //console.log(is_modal_show);
 }
 </script>
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () { scrollFunction() };
+
+  function scrollFunction() {
+    if (((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) && ($(window).width() < 768)) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
 
 
 
