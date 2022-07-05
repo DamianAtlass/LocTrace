@@ -18,17 +18,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
   //this variable needs to be adjusted depending on where the server is hosted
-            // example1:
-            let HOST = "http://127.0.0.1:5000"
+  // example1:
+  let HOST = "http://127.0.0.1:5000"
             // example2:
             //let HOST = "http://loctrace.pythonanywhere.com"
 </script>
 <style>
-  .modal{
-    color:#573b8a !important;
+  .modal {
+    color: #573b8a !important;
   }
 
-  .row>.col>nav>.collapse>ul{
+  .row>.col>nav>.collapse>ul {
     margin-top: 12px !important;
   }
 
@@ -97,12 +97,16 @@
     font-weight: bold;
   }
 
-  #myModal{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+  #myModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .myBtn {
+    display: none;
+  }
 
   @media screen and (max-width: 720px) {
     div#map {
@@ -117,21 +121,48 @@
       height: 1000px !important;
     }
 
-    #myModal{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+    #myModal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-  .row>.col>nav>.collapse>ul{
-    margin: 0px !important;
-  }
+    .row>.col>nav>.collapse>ul {
+      margin: 0px !important;
+    }
 
-  .row>.col>nav>.collapse>a{
-   margin-top: 10px !important;
-   padding: 0px !important;
-  }
+    .row>.col>nav>.collapse>a {
+      margin-top: 10px !important;
+      padding: 0px !important;
+    }
+
+    #myBtn {
+      margin: auto;
+      display: none;
+      position: fixed;
+      bottom: 14px;
+      right: 20%;
+      left: 20%;
+      text-align: center;
+
+
+      width: auto;
+      z-index: 99;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      background-color: rgb(101, 41, 147);
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    #myBtn:hover {
+      background-color: #555;
+    }
   }
 </style>
 {% extends "base.html" %}
@@ -146,7 +177,7 @@
   <div class="col">
     <nav class="navbar navbar-expand-lg navbar-dark
               justify-content-between text-white" id="main" style="background-color: #573b8a;">
-      
+
       <a class="navbar-brand" href="#">
         Filter
       </a>
@@ -171,10 +202,12 @@
                   <div class="col-4 " style="padding-left: 24px">Ende: </div>
                   <div class="w-100" style="padding: 5px;"></div>
 
-                  <input class="form-control me-2" type="date" href="#" name="start_date" min="{{df_metadata['time'][1]}}" max = "{{df_metadata['time'][(df_metadata|length)-1]}}">
+                  <input class="form-control me-2" type="date" href="#" name="start_date"
+                    min="{{df_metadata['time'][1]}}" max="{{df_metadata['time'][(df_metadata|length)-1]}}">
                   <input class="form-control me-2" type="time" name="start_time">
                   <div class="col-1"></div>
-                  <input class="form-control me-2" type="date" href="#" name="end_date" min="{{df_metadata['time'][1]}}" max = "{{df_metadata['time'][(df_metadata|length)-1]}}">
+                  <input class="form-control me-2" type="date" href="#" name="end_date" min="{{df_metadata['time'][1]}}"
+                    max="{{df_metadata['time'][(df_metadata|length)-1]}}">
                   <input class="form-control me-2" type="time" name="end_time">
                 </div>
                 <div class="dropdown-divider"></div>
@@ -185,10 +218,12 @@
             </form>
           </li>
           <li>
-              <a>
-                <button class=" btn btn-light" onclick="window.location.href=HOST + '/survey_part2/'" name="survey_button" type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="survey_button"
-                  style="background-color: #a079e8; color: #fff; border-color: #a079e8; display:none;">Go to Survey!</button>
-              </a> 
+            <a>
+              <button class=" btn btn-light" onclick="window.location.href=HOST + '/survey_part2/'" name="survey_button"
+                type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="survey_button"
+                style="background-color: #a079e8; color: #fff; border-color: #a079e8; display:none;">Go to
+                Survey!</button>
+            </a>
           </li>
 
         </ul>
@@ -209,29 +244,31 @@
       </div>
 
       <!-- Modal -->
-<div class="modal fade" id="myModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Survey</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Please take part in our Survey now. 
+      <div class="modal fade" id="myModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Survey</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Please take part in our Survey now.
 
-        If you want to continue exploring your location data, you can also paticipate at a later time. 
-        Just click the button above!
+              If you want to continue exploring your location data, you can also paticipate at a later time.
+              Just click the button above!
 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="window.location.href=HOST+'/survey_part2/'"
+                style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Go to Survey now!</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href=HOST+'/survey_part2/'" style="background-color: #a079e8; color: #fff; border-color: #a079e8;">Go to Survey now!</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-    
+
     </nav>
   </div>
 </div>
@@ -244,6 +281,8 @@
     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
   </div>
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Back to Aggregated Information</button>
+
   <div class="col-md-3 col-12" id="meta">
     <div class="metacard">
       <div class="metaheader">
@@ -344,30 +383,50 @@
 
 <script>
 
-var is_modal_show = sessionStorage.getItem('alreadyShow');
+  var is_modal_show = sessionStorage.getItem('alreadyShow');
 
-if(is_modal_show == 'already shown'){  
-  const survey_button = document.getElementById('survey_button');
-  survey_button.style.display = 'block';
-}else{
-  
-  setTimeout(() => {
+  if (is_modal_show == 'already shown') {
+    const survey_button = document.getElementById('survey_button');
+    survey_button.style.display = 'block';
+  } else {
 
-    if(is_modal_show != 'already shown'){
-      $('#myModal').modal('show')
-      sessionStorage.setItem('alreadyShow','already shown');
-      console.log("modal was shown");
-      const survey_button = document.getElementById('survey_button')
-      survey_button.style.display = 'block';
-      console.log("button appears");
-    }
-  //console.log("works");
-  }, 30000);
-//console.log(is_modal_show);
-}
+    setTimeout(() => {
+
+      if (is_modal_show != 'already shown') {
+        $('#myModal').modal('show')
+        sessionStorage.setItem('alreadyShow', 'already shown');
+        console.log("modal was shown");
+        const survey_button = document.getElementById('survey_button')
+        survey_button.style.display = 'block';
+        console.log("button appears");
+      }
+      //console.log("works");
+    }, 30000);
+    //console.log(is_modal_show);
+  }
 </script>
 
+<script>
+  //Get the button
+  var mybutton = document.getElementById("myBtn");
 
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () { scrollFunction() };
+
+  function scrollFunction() {
+    if (((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) && ($(window).width() < 700)) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
 
 <!-- 
 <script>
