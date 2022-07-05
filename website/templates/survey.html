@@ -32,7 +32,7 @@
 
 body {
     width: 60em;
-    margin: 3em;
+    margin-top: 5em !important;
     margin-left: auto;
     margin-right:auto;
     text-align: center;
@@ -43,7 +43,7 @@ body {
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: #573b8a;
-  }
+ }
 
   tbody{
     color: #a079e8;
@@ -55,8 +55,8 @@ body {
 
   @media only screen and (max-width: 1152px) {
     body {
-      width:100%;
-      margin:0;
+        margin: 5em;
+        width:100%;
     }
   }
 
@@ -66,7 +66,7 @@ hr {
 
 
   h1, .h1, h2, .h2, h3, .h3{
-    margin-top: 0;
+    
     margin-bottom:2rem;
     font-weight: 600;
     line-height: 1.2;
@@ -76,6 +76,7 @@ hr {
   h1, .h1 {
     font-size: calc(1.325rem + 0.9vw);
   }
+  
 
   b1{
     color: #573b8a;
@@ -4356,13 +4357,13 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //This screen shows some questions.
         var screen2 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1>Personal Code</h1>"),
-            new UIElementHTML(undefined, "Please follow the instructions below to create your personal code:"),
-            new UIElementHTML(undefined, "(If the information is unknown, please insert an X.)"),
-            new QuestionnaireItemText(undefined, "<br>First letter of your mother's first name:"),
-            new QuestionnaireItemText(undefined, "First letter of your father's first name:"),
-            new QuestionnaireItemText(undefined, "First letter of your place of birth:"),
-            new QuestionnaireItemText(undefined, "Last digit of your year of birth:"),
-            new QuestionnaireItemText(undefined, "Last digit of your birthday:"),
+            new UIElementHTML(undefined, "Please follow the instructions below to create your personal code:", true),
+            new UIElementHTML(undefined, "(If the information is unknown, please insert an X.)", true),
+            new QuestionnaireItemText(undefined, "<br>First letter of your mother's first name:", true),
+            new QuestionnaireItemText(undefined, "First letter of your father's first name:", true),
+            new QuestionnaireItemText(undefined, "First letter of your place of birth:", true),
+            new QuestionnaireItemText(undefined, "Last digit of your year of birth:", true),
+            new QuestionnaireItemText(undefined, "Last digit of your birthday:", true),
             //new UIElementHTML(undefined, "<h1>ScreenUIElements</h1>"),
             //new UIElementHTML(undefined, "<h2>Just some basic questions.</h2>"),
 
@@ -4378,8 +4379,9 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             //new UIElementHTML(undefined, "<h2>Some fancy questions.</h2>"),
 
 
-            new QuestionnaireItemDefinedOne("questionnaireItem", "My hunger feeling is currently strong.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree <br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
-            new QuestionnaireItemDefinedOne("questionnaireItem", "I would like to have a snack right now.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "My hunger feeling is currently strong.<hr>", true, ["Not at all<br> hungry", "Not hungry", "Neither hungry <br> nor full", "Hungry", "Very <br> hungry"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would like to have a snack right now.<hr>", true, ["Strongly<br> disagree", "Disagree",  "Neither<br> agree<br> or<br> disagree", "Agree", "Strongly<br> agree"]),
+            new QuestionnaireItemText(undefined, "<br><br>How long has it been since you ate something (in hours)?", true),
 
             //new QuestionnaireItemSVGVisualAnalogueScale("max-width", "The <a href='https://en.wikipedia.org/wiki/Visual_analogue_scale'>Visual analogue scale</a><br>Labels can be configured.", false, "Label left", "Label right"),
             //new QuestionnaireItemSVGNASATLX("max-width", "The <a href='https://en.wikipedia.org/wiki/NASA-TLX'>NASA-TLX scale</a><br>Labels can be configured.", false, "very low", "very high"),
@@ -4391,7 +4393,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
 
         //screens.push(new ScreenWaitDataDownload(undefined, "Hallihallo", "Basically.csv", true  ))
         var screen4 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Control questions:</h1>"),
+            new UIElementHTML(undefined, "<h1>General Privacy Perception:</h1> In the follwing we will ask you some questons regarding your general privacy perception. "), //changed text
             //new UIElementHTML(undefined, "<h2>Freehand input.</h2>"),
 
 
@@ -4405,7 +4407,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
 
         //This screen "shows" questions that are answered automatically (and are not visible to the user).
         var screen5 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Awareness questions:</h1>"),
+            new UIElementHTML(undefined, "<h1>General Privacy Perception II</h1>"), //changed
             //new UIElementHTML(undefined, "<h2>Measuring stuff and storing data.</h2>"),
             //new UIElementHTML(undefined, "This screen stores data such as the current date of execution, the duration the screen was shown and the URL."),
             //new QuestionnaireItemSystemFocus(),
@@ -4426,7 +4428,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         
 
         var screen6 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Collection question:</h1>"),
+            new UIElementHTML(undefined, "<h1>General Privacy Perception III</h1>"), //changed
             //new UIElementHTML(undefined, "Here, questions need to be answered from top to bottom."),
             //new UIElementHTML(undefined, "Answers cannot be changed afterwards."),
 
@@ -4443,7 +4445,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         screens.push(screen6);
 
         var screen7 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>OPLIS (Privacy Knowledge):</h1>"),
+            new UIElementHTML(undefined, "<h1>Privacy Literacy:</h1> In the folloing we will ask you several questions about your general knowledge about protecting your personal information."), //changed
             new UIElementHTML(undefined, "Knowledge about institutional practices:"),
             //new UIElementHTML(undefined, "NOTE: only questions that are marked as REQUIRED need to be answered."),
             //new QuestionnaireItemDefinedOne("questionnaireItem", "QuestionnaireItemDefinedOne:<br>Question with a defined set of options, where only one option can be selected.", true, ["Option 1", "Option 2", "Option 3"]),
@@ -4457,7 +4459,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         screens.push(screen7);
 
         var screen8 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Knowledge about technical aspects of data protection:</h1>"),
+            new UIElementHTML(undefined, "<h1>Knowledge about technical aspects of data protection I:</h1>"),
             //new UIElementHTML(undefined, "What does the term „browsing history“ stand for?"),
             //new UIElementHTML(undefined, "The web page of TheFragebogen (<i>www.TheFragebogen.de</i>) is presented in full screen."),
             //new UIElementHTML(undefined, "The questionnaire is configured to close when the URL is <i>first</i> changed (i.e., you click on a link)."),
@@ -4476,6 +4478,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //screens.push(new ScreenIFrame("iframe", "http://www.TheFragebogen.de", 1));
 
         var screen9 = new ScreenUIElements(
+            new UIElementHTML(undefined, "<h1>Knowledge about technical aspects of data protection II:</h1>"),
 
             new QuestionnaireItemDefinedOne("questionnaireItem", "Forwarding anonymous user data for the purpose of market research is legal in the European Union.<br>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "The EU-Directive on data protection... <br>", true, ["has to be implemented into national data protection acts by every member state.", "does not exist yet.", "functions as a transnational EU-data protection act.", "solely serves as a non-committal guideline for the data protection acts of the member states."]),    
@@ -4502,9 +4505,10 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
         screens.push(screen10);
         
+        //here comes data preview which is not necessary to display 
 
         var screen11 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Demographics:</h1>"),
+            new UIElementHTML(undefined, "<h1>Demographics:</h1>"), // not displayed
 
             new QuestionnaireItemDefinedOne("questionnaireItem", "What gender do you identify as?<br>", true, ["Male", "Female", "Prefer not to say"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What is your age?<br>", true, ["18 - 25 years old", "26 - 30 years old", "31 - 40 years old", "41 – 50 years old", "51 - 60 years old", "AboveG. Prefer not to answer"]),    

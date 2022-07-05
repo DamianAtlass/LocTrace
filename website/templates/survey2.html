@@ -4233,6 +4233,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             body {
                 width: 60em;
                 margin: 3em;
+                margin-top: 50px;
                 margin-left: auto;
                 margin-right:auto;
                 text-align: center;
@@ -4255,6 +4256,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             
               @media only screen and (max-width: 1152px) {
                 body {
+                margin-top: 50px;
                   width:100%;
                   margin:0;
                 }
@@ -4266,7 +4268,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             
             
               h1, .h1, h2, .h2, h3, .h3{
-                margin-top: 0;
+                
                 margin-bottom:2rem;
                 font-weight: 600;
                 line-height: 1.2;
@@ -4482,29 +4484,30 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             if(a[i]==2){
                 screens.push(screen9)
             }
-        } 
-
-
+        }
+       
+        
         var screen10 = new ScreenUIElements(
             new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
             new UIElementHTML(undefined, "Both companies are requesting your location data on a monthly basis. The following questions will assess for how much money you would sell the respective location types. "),
             new UIElementHTML(undefined, "Google wants to buy your location data on a monthly basis. For how much would you sell the respective location types to Google? "),
             /*new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, HOST+"/get_image?image=sieben.png"),*/
-            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for how much money you are wiling to sell your location types on a monthly basis to Google: <hr>", true, ["<img src='"+HOST+"/get_image?image=sieben-eins.png'>", "<img src='"+HOST+"/get_image?image=sieben-zwei.png'>", "<img src='"+HOST+"/get_image?image=sieben-drei.png'>"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for how much money you are wiling to sell your location types on a monthly basis to Google: <hr>", true, ["<img src='"+HOST+"/get_image?image=sieben-eins.png'", "<img src='"+HOST+"/get_image?image=sieben-zwei.png'>", "<img src='"+HOST+"/get_image?image=sieben-drei.png'>"]),
             );
         //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
         //screens.push(screen10);
-
+        
 
         var screen11 = new ScreenUIElements(
             new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
-            new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money you are wiling to sell your location types on a monthly basis to Google:  ", true, ["<img src='"+HOST+"/get_image?image=acht-eins.png'>", "<img src='"+HOST+"/get_image?image=acht-zwei.png'>", "<img src='"+HOST+"/get_image?image=acht-drei.png'>"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for how much money you are wiling to sell your location types on a monthly basis to Google: <hr>", true, ["<img src='"+HOST+"/get_image?image=acht-eins.png'>", "<img src='"+HOST+"/get_image?image=acht-zwei.png'>", "<img src='"+HOST+"/get_image?image=acht-drei.png'>"]),
             );
         
         var screen12 = new ScreenUIElements(
             new UIElementHTML(undefined, "Many companies track location data mainly to sell it to third parties or improve their services. Google and Apple are examples of companies with different business models. Whereas the business model of Google mainly focuses on reusing the collected information to provide it to third parties for the purpose of targeted advertising, Apple focuses on using collected information to improve their services. "),
             new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money you are wiling to sell your location types on a monthly basis to Google:  ", true, ["<img src='"+HOST+"/get_image?image=neun-eins.png'>", "<img src='"+HOST+"/get_image?image=neun-zwei.png'>", "<img src='"+HOST+"/get_image?image=neun-drei.png'>"]),
             );
+
         for (let i = 0; i < a.length; i++) {
             if(a[i]==0){
                 screens.push(screen10)
