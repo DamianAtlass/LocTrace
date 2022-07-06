@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, logout_user
-
+from flask_cors import CORS
 
 
 
@@ -14,6 +14,7 @@ DB_NAME = "database.db"
 
 def create_app():
         app = Flask(__name__)
+        CORS(app)
         #important for remembering users
         app.config["SECRET_KEY "] = "asdjfhakljsdgjf"
 
