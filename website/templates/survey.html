@@ -31,10 +31,7 @@
 }
 
 body {
-    width: 60em;
-    margin-top: 5em !important;
-    margin-left: auto;
-    margin-right:auto;
+    width: 100%;
     text-align: center;
     font-size: 1.2rem;
     font-weight: 400;
@@ -43,6 +40,13 @@ body {
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: #573b8a;
+    margin: 0px;
+    position: absolute;
+ }
+
+ body > div{
+    position: relative;
+    padding: 3em;
  }
 
   tbody{
@@ -52,12 +56,11 @@ body {
     font-size: 1rem;
   }
 
+ 
+
 
   @media only screen and (max-width: 1152px) {
-    body {
-        margin: 5em;
-        width:100%;
-    }
+   
   }
 
 hr {
@@ -128,7 +131,7 @@ hr {
   
   /*Kästen um die Fragebogenelemente*/
   .questionnaireItem {
-    
+    font-size: large;
     margin-top: 4em;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 0.1rem 1rem #573b8a;
@@ -140,6 +143,7 @@ hr {
   /*Fragebogenelement ist erforderlich*/
   .Required,
   .questionnaireItemRequired {
+    font-size: large;
     outline: none;
     border-color: #cc5858;
     box-shadow: 0 0 0 0.25rem #f3bdbc;
