@@ -25,23 +25,23 @@
 </script>
 <style>
   #myBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-}
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
 
-  .modal{
-    color:#573b8a !important;
+  .modal {
+    color: #573b8a !important;
   }
 
   .row>.col>nav>.collapse>ul {
@@ -124,9 +124,9 @@
     display: none;
   }
 
-.myBtn{
-  display: none;
-}
+  .myBtn {
+    display: none;
+  }
 
   @media screen and (max-width: 768px) {
     div#map {
@@ -152,13 +152,13 @@
       margin: 0px !important;
     }
 
-  .row>.col>nav>.collapse>a{
-   margin-top: 10px !important;
-   padding: 0px !important;
-  }
+    .row>.col>nav>.collapse>a {
+      margin-top: 10px !important;
+      padding: 0px !important;
+    }
 
-  #myBtn{
-    margin: auto;
+    #myBtn {
+      margin: auto;
       display: none;
       position: fixed;
       bottom: 14px;
@@ -300,7 +300,7 @@
     <!--{{map |safe}}-->
     <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
-      <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
   </div>
   <button onclick="topFunction()" id="myBtn" title="Go to top">Back to Aggregated Information</button>
 
@@ -432,7 +432,7 @@
 
   // When the user scrolls down 20px from the top of the document, show the button
   window.onscroll = function () { scrollFunction() };
-
+  mybutton.style.display = "none"
   function scrollFunction() {
     if (((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) && ($(window).width() < 768)) {
       mybutton.style.display = "block";
