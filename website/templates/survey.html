@@ -56,13 +56,6 @@ body {
     font-size: 1rem;
   }
 
- 
-
-
-  @media only screen and (max-width: 1152px) {
-   
-  }
-
 hr {
     border: 0.1px solid rgba(87, 59, 138, 0.2);
   }
@@ -147,6 +140,26 @@ hr {
     outline: none;
     border-color: #cc5858;
     box-shadow: 0 0 0 0.25rem #f3bdbc;
+  }
+
+  @media only screen and (max-width: 720px) {
+    body{
+        width: 100%
+    }
+
+    body > div{
+        margin: 1em;
+    }
+
+    body > div > div.questionnaireItem{
+        position: relative;
+        padding: 20px;
+        width: auto;                    
+    }
+    tbody{
+        margin: 0;
+        position: relative;
+    }
   }
 </style>
 
