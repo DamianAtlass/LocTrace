@@ -33,7 +33,6 @@ def map():
     if request.method == 'POST':
         print("Filter button POST")
         random_number = randint(1, 99999999999)
-        print("random: "+str(random_number))
 
         # getting values from html form
         start_date = request.form.get('start_date')
@@ -58,7 +57,6 @@ def map():
             return redirect(url_for("views.survey_part1"))
 
         random_number = randint(1, 9999)
-        print("random: "+str(random_number))
 
         buildmap(current_user, random_number)
         # add metadata
@@ -71,7 +69,6 @@ def map():
 @login_required
 def map1():
     random_number = img = request.args.get("random_number")
-    print("random_number= "+str(random_number))
 
     if not current_user.survey_part1_answered:
             return redirect(url_for("views.survey_part1"))
