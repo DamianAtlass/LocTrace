@@ -19,9 +19,9 @@
 <script>
   //this variable needs to be adjusted depending on where the server is hosted
   // example1:
-  //let HOST = "http://127.0.0.1:5000"
+  let HOST = "http://127.0.0.1:5000"
   // example2:
-  let HOST = "https://loctrace.pythonanywhere.com"
+  //let HOST = "https://loctrace.pythonanywhere.com"
 </script>
 <style>
   #myBtn {
@@ -298,7 +298,7 @@
 <div class="row" height="1000px">
   <div class="col-md-9 col-12" id="map" padding="0px">
     <!--{{map |safe}}-->
-    <iframe class="displaymap" , src="{{iframe_map_rendered}}" height="100%" width="100%" frameborder="0"
+    <iframe class="displaymap" , src="{{url_for('views.map1', random_number = random_number)}}" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
     <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
   </div>

@@ -11,6 +11,7 @@ import csv
 from os import path, mkdir
 from flask import send_file
 from . import db
+from random import randint
 # create a new blueprint, which defines how the website can be accessed
 views = Blueprint('views', __name__,)
 
@@ -31,22 +32,23 @@ def map():
 
     if request.method == 'POST':
         print("Filter button POST")
+        random_number = randint(1, 9999)
+        print("random: "+str(random_number))
 
         # getting values from html form
         start_date = request.form.get('start_date')
         end_date = request.form.get('end_date')
         start_time = request.form.get('start_time')
         end_time = request.form.get('end_time')
-        iframe_map = build_date_map(current_user, start_date,
-                       end_date, start_time, end_time)
-        if not current_user.survey_part1_answered:
-            return redirect(url_for("views.survey_part1"))
-            
-        iframe_map_rendered = render_template(iframe_map)
+        build_date_map(current_user, start_date,
+                       end_date, start_time, end_time, random_number)
         # add metadata
+
+        
+
         df_metadata = metadata(current_user)
         temp = render_template("map.html", Metadata=zip(
-            df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata, iframe_map_rendered = iframe_map_rendered)
+            df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata, random_number = random_number)
         #print(str(start), file=sys.stdout)
         return temp
 
@@ -55,20 +57,26 @@ def map():
         if not current_user.survey_part1_answered:
             return redirect(url_for("views.survey_part1"))
 
-        buildmap(current_user)
+        random_number = randint(1, 9999)
+        print("random: "+str(random_number))
+
+        buildmap(current_user, random_number)
         # add metadata
         df_metadata = metadata(current_user)
 
-        return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata)
+        return render_template("map.html", Metadata=zip(df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata, random_number = random_number)
 
 
 @views.route("/displaymap/")
 @login_required
 def map1():
+    random_number = img = request.args.get("random_number")
+    print("random_number= "+str(random_number))
+
     if not current_user.survey_part1_answered:
             return redirect(url_for("views.survey_part1"))
             
-    temp = render_template("map1.html")
+    temp = render_template("iframes/map"+random_number+".html")
     return temp
 
 
