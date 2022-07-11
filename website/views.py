@@ -32,7 +32,7 @@ def map():
 
     if request.method == 'POST':
         print("Filter button POST")
-        random_number = randint(1, 9999)
+        random_number = randint(1, 99999999999)
         print("random: "+str(random_number))
 
         # getting values from html form

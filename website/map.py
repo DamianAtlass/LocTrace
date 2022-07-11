@@ -15,7 +15,7 @@ from datetime import timedelta
 import geopy.distance
 import numpy as np
 from geopy.geocoders import Nominatim
-from os import path, mkdir
+from os import path, mkdir, listdir, remove
 
 
 # loading all the loc data
@@ -222,11 +222,16 @@ def addSigificantLocations(user, map):
             icon='wrench', color='red'), popup=popup_w).add_to(map)
 
 def saveMap(map, filenumber):
+    #delete other file(s) to prevent memory overflow
+ 
+    dir = 'website/templates/iframes/'
+    for f in listdir(dir):
+        remove(path.join(dir, f))
+
     #save file
-    path_to_save_file = 'website/templates/iframes/'
-    if not path.exists(path_to_save_file):
-        mkdir(path_to_save_file)
-    map.save(path_to_save_file+"map"+str(filenumber)+'.html')
+    if not path.exists(dir):
+        mkdir(dir)
+    map.save(dir+"map"+str(filenumber)+'.html')
 
 # function for building the map with given data
 def buildmap(user, filenumber):
