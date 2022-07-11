@@ -37,12 +37,16 @@ def map():
         end_date = request.form.get('end_date')
         start_time = request.form.get('start_time')
         end_time = request.form.get('end_time')
-        build_date_map(current_user, start_date,
+        iframe_map = build_date_map(current_user, start_date,
                        end_date, start_time, end_time)
+        if not current_user.survey_part1_answered:
+            return redirect(url_for("views.survey_part1"))
+            
+        iframe_map_rendered = render_template(iframe_map)
         # add metadata
         df_metadata = metadata(current_user)
         temp = render_template("map.html", Metadata=zip(
-            df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata)
+            df_metadata.columns, df_metadata.loc[0]), df_metadata=df_metadata, iframe_map_rendered = iframe_map_rendered)
         #print(str(start), file=sys.stdout)
         return temp
 

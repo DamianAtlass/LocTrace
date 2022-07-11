@@ -258,7 +258,7 @@ def buildmap(user):
 
     # add sigificant locations (home and work)
     addSigificantLocations(user, m3)
-
+    return m3
     m3.save('website/templates/map1.html')
 
     return m3
@@ -344,6 +344,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
                                      caption='motion score')
         m4.add_child(colormap)
+        return m4
         m4.save("website/templates/map1.html")
 
     else:
@@ -374,6 +375,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     # add sigificant locations (home and work)
     addSigificantLocations(user, m4)
 
+    return m4
     m4.save("website/templates/map1.html")
 
 
