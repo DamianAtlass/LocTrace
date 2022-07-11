@@ -222,15 +222,17 @@ def addSigificantLocations(user, map):
             icon='wrench', color='red'), popup=popup_w).add_to(map)
 
 def saveMap(map, filenumber):
-    #delete other file(s) to prevent memory overflow
- 
     dir = 'website/templates/iframes/'
+
+    #check if directory exists and create one, if it doesn't
+    if not path.exists(dir):
+        mkdir(dir)
+    
+    #delete other file(s) to prevent memory overflow
     for f in listdir(dir):
         remove(path.join(dir, f))
 
     #save file
-    if not path.exists(dir):
-        mkdir(dir)
     map.save(dir+"map"+str(filenumber)+'.html')
 
 # function for building the map with given data
