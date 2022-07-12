@@ -15,6 +15,7 @@ from datetime import timedelta
 import geopy.distance
 import numpy as np
 from geopy.geocoders import Nominatim
+from os import path, mkdir, listdir, remove
 
 
 # loading all the loc data
@@ -220,9 +221,22 @@ def addSigificantLocations(user, map):
         folium.Marker((entry.latitude, entry.longitude), icon=folium.Icon(
             icon='wrench', color='red'), popup=popup_w).add_to(map)
 
+def saveMap(map, filenumber):
+    dir = 'website/templates/iframes/'
+
+    #check if directory exists and create one, if it doesn't
+    if not path.exists(dir):
+        mkdir(dir)
+    
+    #delete other file(s) to prevent memory overflow
+    for f in listdir(dir):
+        remove(path.join(dir, f))
+
+    #save file
+    map.save(dir+"map"+str(filenumber)+'.html')
 
 # function for building the map with given data
-def buildmap(user):
+def buildmap(user, filenumber):
     '''
     userStr = str(user)[1:-1].replace(" ","")
     #print(str(user))
@@ -259,13 +273,12 @@ def buildmap(user):
     # add sigificant locations (home and work)
     addSigificantLocations(user, m3)
 
-    m3.save('website/templates/map1.html')
-
-    return m3
+    #save file
+    saveMap(m3,filenumber)
 
 
 # builds new map with filtered data range
-def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time):
+def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_time, filenumber):
 
     # get Data for user
 
@@ -344,7 +357,9 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
                                      caption='motion score')
         m4.add_child(colormap)
-        m4.save("website/templates/map1.html")
+
+        #save file
+        saveMap(m4,filenumber)
 
     else:
 
@@ -374,7 +389,8 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     # add sigificant locations (home and work)
     addSigificantLocations(user, m4)
 
-    m4.save("website/templates/map1.html")
+    #save file
+    saveMap(m4,filenumber)
 
 
 def metadata(current_user):

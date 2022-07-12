@@ -301,7 +301,7 @@
 <div class="row" height="1000px">
   <div class="col-md-9 col-12" id="map" padding="0px">
     <!--{{map |safe}}-->
-    <iframe class="displaymap" , src="/displaymap" height="100%" width="100%" frameborder="0"
+    <iframe class="displaymap" , src="{{url_for('views.map1', random_number = random_number)}}" height="100%" width="100%" frameborder="0"
       seamless="seamless"></iframe>
     <button onclick="topFunction()" id="myBtn" title="Go to top">Scroll Back up</button>
   </div>
