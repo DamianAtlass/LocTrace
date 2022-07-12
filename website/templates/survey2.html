@@ -13,13 +13,16 @@
             //let HOST = "http://loctrace.pythonanywhere.com"
 
             
-             progress();
+            progress();
              
 
             function progress(){
                 setTimeout(function(){
                 let next = document.querySelector('input[type=button]');
-                next.setAttribute('value', "Next " + i + "/7");
+                if(i<=2){
+                    next.style = "pointer-events: visible";
+                }
+                next.setAttribute('value', "Next " + i + "/18");
                 next.setAttribute('onclick', "increment()");     
                 }, 300);
                        
@@ -29,6 +32,21 @@
                 i++;
                 console.log(i);
                 progress();
+                if(i>2){
+                    setTimeout(function(){
+                        const radioButtons = document.querySelectorAll('input[type="radio"]');
+                        let next = document.querySelector('input[type=button]'); 
+                        console.log(radioButtons)
+                        for (const radioButton of radioButtons) {
+                            radioButton.addEventListener("click", () => {
+                            if (radioButton.checked) {
+                                next.style = "pointer-events: visible"
+                            }
+                            });
+                        }
+                    }, 300);
+                
+                }
             }
             
 
@@ -4503,13 +4521,13 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
     }
     for (let i = 0; i < a.length; i++) {
             if(a[i]==0){
-                screens.push(screen6)
-            }
-            if(a[i]==1){
                 screens.push(screen4)
             }
-            if(a[i]==2){
+            if(a[i]==1){
                 screens.push(screen5)
+            }
+            if(a[i]==2){
+                screens.push(screen6)
             }
         } 
       
