@@ -15,7 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth',__name__)
 
-REQUIRE_PW_TO_LOAD_DB = False
+REQUIRE_PW_TO_LOAD_DB = True
 #second parameter is the password for loading the database
 PW_DB = generate_password_hash("apfelkuchen", method="sha256")
 
