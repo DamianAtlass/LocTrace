@@ -41,7 +41,7 @@ def login():
                 print("User "+user.username+" logged in.")
                 return redirect(url_for("views.survey_part1"))
             else:
-                flash("Password incorrect.", category="error")
+                flash("Password for user '"+ username_login +"' incorrect.", category="error")
                 print("Unsuccessful login attempt by user "+user.username+".")
 
         else:
