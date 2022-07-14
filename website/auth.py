@@ -10,12 +10,14 @@ from .map import getHomeLoc, getWorkLoc
 import time
 from geopy.geocoders import Nominatim
 import numpy as np
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 auth = Blueprint('auth',__name__)
 
-REQUIRE_PW_TO_LOAD_DB = True
-PW_DB = "apfelkuchen"
+REQUIRE_PW_TO_LOAD_DB = False
+#second parameter is the password for loading the database
+PW_DB = generate_password_hash("apfelkuchen", method="sha256")
 
 
 #file from which the users' usernames will be added to the local sqlalchemy database
@@ -28,13 +30,20 @@ def login():
     #manages login, redirectes and informs user if log-in failed
     if request.method =="POST":
         username_login = request.form.get("username")
+        password_login = request.form.get("password")
+
+
         user = User.query.filter_by(username=username_login).first()
 
-
         if user:
-            login_user(user, remember=True)
-            print("User "+user.username+" logged in.")
-            return redirect(url_for("views.survey_part1"))
+            if check_password_hash(user.password, password_login):
+                login_user(user, remember=True)
+                print("User "+user.username+" logged in.")
+                return redirect(url_for("views.survey_part1"))
+            else:
+                flash("Password incorrect.", category="error")
+                print("Unsuccessful login attempt by user "+user.username+".")
+
         else:
             flash("No user named '"+username_login+"' has been found.", category="error")
             if not User.query.first():
@@ -86,14 +95,13 @@ def loaddb():
     if request.method =="POST":
 
         pw_db_form = request.form.get("load_db_password")
-        print("pw_db: "+pw_db_form)
-        if pw_db_form != PW_DB:
+        if not check_password_hash(PW_DB, pw_db_form):
             return "wrong pw, pw can be found in auth.py"
-
-        print("Force reload of database...")
-        load_users()
-        calculateSigLocs()
-        return redirect(url_for("auth.login"))
+        else:
+            print("Force reload of database...")
+            load_users()
+            calculateSigLocs()
+            return redirect(url_for("auth.login"))
 
     
 def load_database():
@@ -126,31 +134,46 @@ def load_users():
         df = pd.read_csv(LOG_IN_DATA_FILE)
 
         print("Add users to database...", end="")
-        # add users from datafram in db
+        
+        #some variables to provide interesting information
         new = 0
         old = 0
+        p = 0
 
         for index, row in df.iterrows():
             username_df = row['username']
 
+            #if user with same username is already in database, don't add them again
             if User.query.filter_by(username=username_df).first():
                 old=old+1
+
+                #however, check if they have a new password and set it, if so
+                existing_user = User.query.filter_by(username=username_df).first()
+                
+                if not check_password_hash(existing_user.password, row['password']):
+                    existing_user.password = generate_password_hash(row['password'], method="sha256")
+                    db.session.commit()
+                    p=p+1
                     
             else:
+                #build new user
                 new_user = User()
                 new_user.username = username_df
+                new_user.password = generate_password_hash(row['password'], method="sha256")
                 new_user.sigLoc_loaded = False
                 new_user.survey_part1_answered = False
                 new_user.survey_part2_answered = False
-                                
+                
+                #add new user
                 db.session.add(new_user)
                 db.session.commit()
                 new = new+1
                 
 
 
-        print("done.\n"+str(old)+" user(s) already in database. "+str(new)+" new user(s) added. ", end="")
-        
+        print("done.\n"+str(old)+" user(s) already in database. "+str(new)+" new user(s) added. ")
+        print(str(p) +" password(s) have been updated.", end=" ")
+
         number_of_users = User.query.count()
         print(str(number_of_users)+" users in database.")
 
@@ -198,8 +221,6 @@ def calculateSigLocs():
         db.session.add(home)
         db.session.commit()
 
-        
-
         #calculate work location
         w_list = getWorkLoc(stops, h_dic)
         
@@ -212,8 +233,6 @@ def calculateSigLocs():
             db.session.add(work)
             db.session.commit()
         
-        
-
         if len(user.home) == 0 and len(user.home) == 0:
             print("Problem while calculating sigLocs of user "+ user.username)
         else:

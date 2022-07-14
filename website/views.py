@@ -80,7 +80,6 @@ def map1():
 @views.route("/survey_part1/")
 @login_required
 def survey_part1():
-    print("survey part 1: "+str(current_user.survey_part1_answered))
     if  current_user.survey_part1_answered:
         return redirect(url_for("views.map"))
 
@@ -92,7 +91,6 @@ def survey_part2():
     if not current_user.survey_part1_answered:
             return redirect(url_for("views.survey_part1"))
 
-    print("survey part 2: "+str(current_user.survey_part2_answered))
     if current_user.survey_part2_answered:
         return redirect(url_for("views.map"))
 
