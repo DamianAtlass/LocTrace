@@ -11,45 +11,6 @@
         let HOST = "http://127.0.0.1:5000"
         // example2:
         //let HOST = "https://loctrace.pythonanywhere.com"
-
-
-        progress();
-
-
-        function progress() {
-            setTimeout(function () {
-                let next = document.querySelector('input[type=button]');
-                if (i <= 2) {
-                    next.style = "pointer-events: visible";
-                }
-                next.setAttribute('value', "Next " + i + "/18");
-                next.setAttribute('onclick', "increment()");
-            }, 300);
-
-        }
-
-        function increment() {
-            i++;
-            console.log(i);
-            progress();
-            if (i > 2) {
-                setTimeout(function () {
-                    const radioButtons = document.querySelectorAll('input[type="radio"]');
-                    let next = document.querySelector('input[type=button]');
-                    console.log(radioButtons)
-                    for (const radioButton of radioButtons) {
-                        radioButton.addEventListener("click", () => {
-                            if (radioButton.checked) {
-                                next.style = "pointer-events: visible"
-                            }
-                        });
-                    }
-                }, 300);
-
-            }
-        }
-
-
     </script>
     <!-- complete content of fragebogen.js -->
     <script>
@@ -4350,11 +4311,6 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
                 position: relative;
                 margin-top: 200px;
             }
-        }
-
-
-        input[type="button"] {
-            pointer-events: none;
         }
 
         hr {
