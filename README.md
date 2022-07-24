@@ -7,7 +7,7 @@ Before the app can be started, there are a couple of things that need to be done
 
 1) The file "LocTrace/logindata.csv", which should be found in the main directory, needs to contain all users and passwords, that are supposed to access the page. If no such file can be found or if it is empty, a warning should be displayed on the console. For more information read "Loading users" below.
 
-2) The folder "LocTrace/data" in the main directory needs to provide the location data for all users. If data is not provided, the map can't be build correctly and an error message will probably be shown. "LocTrace/data" contains folders, which are named after the users (example: "EXAMPLE_USER_1"). In "LocTrace/data/EXAMPLE_USER_1/" are multiple files, which are named all the same for each user:
+2) The folder "LocTrace/data" in the main directory needs to provide the location data for all users. If data is not provided, the map can't be build correctly and an error message will probably be shown. "LocTrace/data" contains folders, which are named after the users (example: "EXAMPLE_USER_1"). In "LocTrace/data/EXAMPLE_USER_1/" would be multiple files, which need to be named all the same for each user:
 - "LocTrace/data/EXAMPLE_USER_1/gps_samples_and_motion_score.csv"
 - "LocTrace/data/EXAMPLE_USER_1/mobility_report.csv"
 - "LocTrace/data/EXAMPLE_USER_1/stops.csv"
