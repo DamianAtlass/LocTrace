@@ -4410,7 +4410,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
 
         //screens.push(new ScreenWaitDataDownload(undefined, "Hallihallo", "Basically.csv", true  ))
         var screen4 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>General Privacy Perception:</h1> In the follwing we will ask you some questons regarding your general privacy perception. "), //changed text
+            new UIElementHTML(undefined, "<h1>General Privacy Perception:</h1> In the follwing we will ask you some questions regarding your general privacy perception. "), //changed text
             //new UIElementHTML(undefined, "<h2>Freehand input.</h2>"),
 
 
@@ -4453,7 +4453,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new QuestionnaireItemDefinedOne("questionnaireItem", "It usually bothers me when online companies ask me for personal information.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
             new QuestionnaireItemDefinedOne("questionnaireItem", "When online companies ask me for personal information, I sometimes think twice before providing it.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
             new QuestionnaireItemDefinedOne("questionnaireItem", "It bothers me to give personal information to so many online companies.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
-            new QuestionnaireItemDefinedOne("questionnaireItem", "MI’m concerned that online companies are collecting too much personal information about me.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I’m concerned that online companies are collecting too much personal information about me.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
             new QuestionnaireItemDefinedOne("questionnaireItem", "When you’re responding to the questions in the questionnaire it is important that you’re paying attention. Please agree by selecting the second option from the left on the scale.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
 
             //new QuestionnaireItemDate("questionnaireItem", "QuestionnaireItemDate: Question asking for a date.", false),
@@ -4462,7 +4462,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         screens.push(screen6);
 
         var screen7 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Privacy Literacy:</h1> In the folloing we will ask you several questions about your general knowledge about protecting your personal information."), //changed
+            new UIElementHTML(undefined, "<h1>Privacy Literacy:</h1> In the following we will ask you several questions about your general knowledge about protecting your personal information."), //changed
             new UIElementHTML(undefined, "Knowledge about institutional practices:"),
             //new UIElementHTML(undefined, "NOTE: only questions that are marked as REQUIRED need to be answered."),
             //new QuestionnaireItemDefinedOne("questionnaireItem", "QuestionnaireItemDefinedOne:<br>Question with a defined set of options, where only one option can be selected.", true, ["Option 1", "Option 2", "Option 3"]),
@@ -4486,7 +4486,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new QuestionnaireItemDefinedOne("questionnaireItem", "In the browsing history…<br>", true, ["the URLs of visited websites are stored.", "cookies from visited websites are stored.", "potentially infected websites are stored separately.", "different information about the user are stored, depending on the browser type."]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What is a „cookie“?<br>", true, ["A text file that enables websites to recognize a user when revisiting.", "A program to disable data collection from online operators.", "A computer virus that can be transferred after connecting to a website.", "A browser plugin that ensures safe online surfing."]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What does the term „cache“ mean?<br>", true, ["A buffer memory that accelerates surfing on the Internet.", "A program that specifically collects information about an Internet user and passes them on to third parties.", "A program, that copies data on an external hard drive to protect against data theft.", "A browser plugin that encrypts data transfer when surfing online."]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "What is a „trojan“? A trojan is a computer program, that…<br>", true, ["is disguised as a useful application, but fulfills another function in the background", "protects a computer from viruses and other malware", "was developed for fun an d has no specific function.", "caused damage as computer virus in the 90ies but doesn’t exist anymore."]),    
+            new QuestionnaireItemDefinedOne("questionnaireItem", "What is a „trojan“? A trojan is a computer program, that…<br>", true, ["is disguised as a useful application, but fulfills another function in the background", "protects a computer from viruses and other malware", "was developed for fun and has no specific function.", "caused damage as computer virus in the 90ies but doesn’t exist anymore."]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What is a „firewall“?<br>", true, ["A fallback system that will protect the computer from unwanted web attacks.", "An outdated protection program against computer viruses", "A browser plugin that ensures safe online surfing.", "A new technical development that prevents data loss in case of a short circuit"]),    
         );
         screens.push(screen8);
@@ -4514,9 +4514,9 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new QuestionnaireItemDefinedOne("questionnaireItem", "Tracking of one’s own internet is made more difficult if one deletes browser information (e.g. cookies, cache, browser history) regularly.<br>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "Surfing in the private browsing mode can prevent the reconstruction of your surfing behavior, because no browser information is stored.<br>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "Using false names or pseudonyms can make it difficult to identify someone on the Internet.<br>", true, ["True", "False", "Dont know"]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "Even though It-experts can crack difficult passwords, it is more sensible to use a combination of letters, numbers and signs as passwords than words, names or simple combinations of numbers.<br>", true, ["True", "False", "Dont know"]),    
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Even though IT-experts can crack difficult passwords, it is more sensible to use a combination of letters, numbers and signs as passwords than words, names or simple combinations of numbers.<br>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "In order to prevent the access to personal data, one should use various passwords and user names for different online applications and change them frequently.<br>", true, ["True", "False", "Dont know"]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important you pay attention to the statements. Please agree by choosing ‘strongly agree’.<br>", true, ["Strongly Disagree", "Disagree", "Neither Agree or Disagree"]),    
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important you pay attention to the statements. Please agree by choosing ‘strongly Disagree’.<br>", true, ["Strongly Disagree", "Disagree", "Neither Agree or Disagree"]),    
 
         );
         //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
@@ -4544,7 +4544,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
         //posts data to server
         screens.push(new ScreenWaitDataUpload(undefined, HOST+"/receivedata_part1/"));
         //displays a message and link to the map
-        screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Click on the arrow button below to get to the map and the second part of the survey <br>Please take part in the second survey, in oder to thoroughly participate in our survey.<br><a href='"+HOST+"/map/'>-->"));
+        screens.push(new ScreenWait(undefined, undefined, "Thank you for taking part in the first part of our survey!<br>Click on the arrow button below to get to the map and the second part of the survey <br>Please take part in the second survey, in order to throughly participate in our survey.<br><a href='"+HOST+"/map/'>-->"));
         
         
 
