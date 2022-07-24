@@ -14,9 +14,13 @@ Before the app can be started, there are a couple of things that need to be done
 
 3) The variable "HOST", which can be found in "LocTrace/website/templatessurvey.html", "LocTrace/website/survey2.html" and "LocTrace/website/map.html" needs to be adjusted in each file, depending on where the app is hosted (localhost, https://LocTrace.pythonanywhere.com/,...). The most common hosts, which were just stated, are already listed in the files and simply need to be commented in/out. When hosted locally, the app runs on port 5000 by default.
 
-4) Python 3.9 is required to run the app, in pythonanywhere this can be configured under "Web"->"Code".
+4) For altering the questions in the questionnaire, it is recommended to be familiar with TheFragebogen (https://thefragebogen.de/) first. Then, the files "LocTrace/website/templates/survey.html" (the first part of the survey) and "LocTrace/website/templates/survey2.html" (the second part of the survey) can be edited as desired. 
 
-5) When starting the app, as explained below, there will probably be a few packages, which need to be installed. Usually, your python interpreter / error log will tell you, which packages are needed.
+5) When new data is about to be collected and the website is about to be hosted for the first time, the file "LocTrace/website/database.db" should not exist / must be deleted if it does (implicating, that it belongs to an old survey). "LocTrace/website/database.db" is created automatically when the website is hosted and even though it doesn't carry the survey data, it does contain information allowing/forbidding participants to answer the survey. If the server is just reloaded (because, for example, insignificant changes to the website have been made) it should be fine to keep the file, it is however strongly recommended against deploying changes, when an active survey is running. Therefore, this should be kept in mind for development only. If "LocTrace/surveyData" contains answers of an old survey, it must be deleted as well.
+
+6) Python 3.9 is required to run the app, in pythonanywhere this can be configured under "Web"->"Code".
+
+7) When starting the app, as explained below, there will probably be a few packages, which need to be installed. Usually, your python interpreter / error log will tell you, which packages are needed.
 
 
 ### Starting the app
