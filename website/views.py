@@ -26,7 +26,6 @@ variable = "variables can be passed this way"
 def map():
 
     if request.method == 'POST':
-        print("Filter button POST")
         random_number = randint(1, 9999999999)
 
         # getting values from html form
@@ -100,7 +99,7 @@ def receivedata_part1():
 
     current_user.survey_part1_answered = True
     db.session.commit()
-    print("survey part 2: "+str(current_user.survey_part2_answered))
+    print(current_user.username + " answered survey part 1: "+str(current_user.survey_part1_answered))
     return ""
 
 @views.route("/receivedata_part2/", methods=['POST'])
@@ -110,7 +109,7 @@ def receivedata_part2():
     saveSurveyData(request.data, "part2/")
     current_user.survey_part2_answered = True
     db.session.commit()
-    print("survey part 2: "+str(current_user.survey_part2_answered))
+    print(current_user.username + " answered survey part 2: "+str(current_user.survey_part2_answered))
     
     return ""
 

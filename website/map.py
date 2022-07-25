@@ -279,10 +279,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
     csv_path = "data/" + user.username + "/gps_samples_and_motion_score.csv"
 
     data = pd.read_csv(csv_path)
-    print(req_start_date)
-    print(req_end_date)
-    print(req_start_time)
-    print(req_end_time)
+    print("Filter for: "+str(req_start_date)+" "+str(req_start_time)+" to "+str(req_end_date)+" "+str(req_end_time))
 
     # if no date is given, set to first and/or last possible day
     if req_start_date == "" and req_end_date == "":
@@ -328,8 +325,8 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
     newData = pd.DataFrame()
 
-    print(data['ts'].iloc[0])
-    print(data['ts'].iloc[len(data)-1])
+    #print(data['ts'].iloc[0])
+    #print(data['ts'].iloc[len(data)-1])
 
     for i in range(0, len(data)-1):
         dataDate = data['ts'].iloc[i]
