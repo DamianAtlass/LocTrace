@@ -1,20 +1,14 @@
-#import cgi;
-from email.policy import default
 import folium
 import pandas as pd
-import branca
 import branca.colormap as cm
 from datetime import datetime
 # import for home loc
 import folium
 import pandas as pd
-import branca
 import branca.colormap as cm
 from datetime import datetime
 from datetime import timedelta
-import geopy.distance
 import numpy as np
-from geopy.geocoders import Nominatim
 from os import path, mkdir, listdir, remove
 
 

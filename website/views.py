@@ -1,13 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required, current_user
-import pandas as pd
 from website.map import buildmap
 from website.map import metadata
 from website.map import build_date_map
-from datetime import datetime
-import folium
-import sys
-import csv
 from os import path, mkdir
 from flask import send_file
 from . import db

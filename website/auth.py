@@ -1,11 +1,9 @@
-from re import L
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 import pandas as pd
 from .models import User, Stop_h, Stop_w, State
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 from os import path
-from sqlalchemy import func
 from .map import getHomeLoc, getWorkLoc
 import time
 from geopy.geocoders import Nominatim
