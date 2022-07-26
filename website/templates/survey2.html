@@ -4424,7 +4424,7 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
             new UIElementHTML(undefined, "<h2>Location data in general is one of the most tracked data types, which is collected by most smartphone applications, even though the intended use does not require it. </h2>"),
             new UIElementHTML(undefined, "Location data is sensitive for three reasons: "),
             new UIElementHTML(undefined, "<br><b1>Location can be a personal identifier:</b1> through your shared locations it is very easy to identify you as a person. "),
-            new UIElementHTML(undefined, "<br><b1>Location carries very sensitive information:</b1> sensitive personal data is shared when locations are tracked. Location information can reveille a person’s ethnicity, political or philosphical beliefs, and also health and sexual orientation. This can be detected by frequent visits to a church or a specific doctor. This information can be highly important for future career opportunities when your health status can be predicted from sport activities and movement patterns. "),
+            new UIElementHTML(undefined, "<br><b1>Location carries very sensitive information:</b1> sensitive personal data is shared when locations are tracked. Location information can reveal a person’s ethnicity, political or philosphical beliefs, and also health and sexual orientation. This can be detected by frequent visits to a church or a specific doctor. This information can be highly important for future career opportunities when your health status can be predicted from sport activities and movement patterns. "),
             new UIElementHTML(undefined, "<br><b1>Location creates patterns:</b1> when location data is aggregated over many users various patterns can be extracted. For example a fitness tracker could reveal the location of military bases on remote locations, as some of their users turned out to be soldiers. "),
 
         );
@@ -4437,6 +4437,7 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
             new UIElementHTML(undefined, "<b1>Workplace:</b1> your predicted work location, based on your location traces"),
             new UIElementHTML(undefined, "<b1>All location data:</b1> all your location traces tracked cintinously"),
             new UIElementHTML(undefined, "<b1>Aggregated information:</b1> all the information which can be inferred from your movement patterns (some examples have been displayed next to the map such as unique places, time you spent at certain places, how many hours a day you are moving, which days you are active and so on)"),
+            new UIElementHTML(undefined, "These location types have been tracked with your phone through the µlogger app over the last week.")
         );
         screens.push(screen2);
 
@@ -4643,11 +4644,15 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
         screens.push(screen19)
 
         var screen20 = new ScreenUIElements(
-            new UIElementHTML(undefined, "<h1>Demographics:</h1>"), // not displayed
+            new UIElementHTML(undefined, "<h1>Demographics:</h1> <br><br> This is the final part of the questionnaire! In the following we will ask you demographic questions, which will be only collected anonymized! Please answer as truthfully as you can."), // not displayed
 
-            new QuestionnaireItemDefinedOne("questionnaireItem", "What gender do you identify as?<br>", true, ["Male", "Female", "Prefer not to say"]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "What is your age?<br>", true, ["18 - 25 years old", "26 - 30 years old", "31 - 40 years old", "41 – 50 years old", "51 - 60 years old", "Above", "Prefer not to answer"]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "Where is your home located?<br>", true, ["True", "False", "Dont know"]),    
+            new QuestionnaireItemDefinedOne("questionnaireItem", "What is your age?<br>", true, ["18 - 25 years old", "26 - 30 years old", "31 - 40 years old", "41 – 50 years old", "51 - 60 years old", "Above", "Prefer not to answer"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "What gender do you identify as?", true, ["Male", "Female", "Other"]),
+            new QuestionnaireItemText(undefined, "<br>In which country do you currently live?<br>", true),
+            new QuestionnaireItemText(undefined, "What is your nationality?<br>", true),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Which of the following categories describes your employment status best?<br>", true, ["Apprenticeship / professional training", "Student", "Employee", "Civil Servant", "Pensioners", "Unemployed", "Other"]),      
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Do you practice or have you ever practiced a profession in one of the following fields: IT/ Information technology, Computer Science, Electrical engineering, Communication technology, Other? <br>", true, ["Yes", "No"]),   
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Was your home correctly displayed on the map?<br>", true, ["Yes", "No", "I Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What is the highest degree or level of education you have completed?<br>", true, ["No degree", "Secondary School Diploma  ", "High School Diploma", "Bachelor's Degree", "Master's Degree", "Ph.D. or higher", "Apprenticeship / professional training",  "Prefer not to say"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "What is your annual household income?<br>", true, ["Less than 20,000€", "20.000-34.999€", " 35.000-49.999€", "50.000-74.999€", "75.000-99.999€", "Over 100.000€", "Prefer not to say"]),    
         )
