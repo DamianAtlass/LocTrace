@@ -34,7 +34,7 @@ When starting the app for the first time, depending on how many users / how many
 For insights in loading users from "LocTrace/logindata.csv" into the sql-database correctly, take a look at "LocTrace/website/auth.py" (specifically the variables "LOG_IN_DATA_FILE", "REQUIRE_PW_TO_LOAD_DB", "PW_DB" and the function "load_users()". After loading users, significant locations(sigLocs), which will be seen on the map, will be calculated and saved in the database as well.
 
 If there ever should be a need for changing passwords for existing users or adding users in general, the following steps need to be taken:
-- New users and passwords should be added to "LocTrace/logindata.csv" in the same pattern, as the existing ones ([username],[password]\n).
+- New users and passwords should be added to "LocTrace/logindata.csv" in the same pattern, as the existing ones ([username],[password]).
 - For changing the password of an existing user, simply replace the old password with the new one in "LocTrace/logindata.csv".
 - None of the changes have actually been updated yet. To do so, access the route HOST/loaddb/ (example: LocTrace.pythonanywhere.com/loaddb/) and enter the password, which can be found (and set) in "LocTrace/website/auth.py".
 - Deleting users from the database is not possible. It is advised to add new users after the new data has been added to "LocTrace/data/", as adding it afterwards can lead to unexpected behaviour.
