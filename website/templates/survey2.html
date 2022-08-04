@@ -4531,12 +4531,15 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
 
         for (let i = 0; i < a.length; i++) {
             if (a[i] == 0) {
+                //console.log("push 7")
                 screens.push(screen7)
             }
             if (a[i] == 1) {
+                //console.log("push 8")
                 screens.push(screen8)
             }
             if (a[i] == 2) {
+                //console.log("push 9")
                 screens.push(screen9)
             }
         }
@@ -4546,18 +4549,18 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
         var screen10 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1> Willingness to Sell Your Data</h1> Many companies track location data mainly to sell it to <b1>third parties</b1> or improve their services. <b1>Google</b1> and <b1>Apple</b1> are examples of companies with different <b1>business models</b1>. Whereas the business model of Google mainly focuses on <b1>reusing the collected information to provide it to third parties for the purpose of targeted advertising</b1>, Apple focuses on using collected information to <b1>improve their services</b1>. "),
             new UIElementHTML(undefined, "Both companies are requesting your location data on a monthly basis. The following questions will assess for how much money you would sell the respective location types. "), //change should be on a separate page!
-
         );
-        var screen11 = new ScreenUIElements(
+        //console.log("push 10")
+        screens.push(screen10)
+
+        var screen11_1 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1> Google:</h1> Google wants to <b1>buy your location data </b1> on a monthly basis. <b1>For how much would you sell the respective location types</b1> to <b1>Google</b1>? "),
-            /*new QuestionnaireItemMediaImage(undefined, "Please select the option which most closely reflects for how much money your are wiling to sell your location types on a monthly basis to Google:  ", false, HOST+"/get_image?image=sieben.png"),*/
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for <b1>how much money you are wiling to sell your location</b1> types on a monthly basis to <b1>Google</b1>: <hr>", true, ["<img src='" + HOST + "/get_image?image=sieben-eins.png'>", "<img src='" + HOST + "/get_image?image=sieben-zwei.png'>", "<img src='" + HOST + "/get_image?image=sieben-drei.png'>"]),
         );
-        //screen10.setPaginateUI(new PaginateUIButton(undefined, -2, 1, "Back to iFrame", "Next"));
-        //screens.push(screen10);
+   
 
 
-        var screen11 = new ScreenUIElements(
+        var screen11_2 = new ScreenUIElements(
             new UIElementHTML(undefined, "<h1> Google:</h1> Google wants to  <b1>buy your location data on a monthly basis</b1>. For  <b1>how much would you sell the respective location types</b1> to <b1>Google</b1>?"),
             new QuestionnaireItemDefinedOne("questionnaireItem", "Please select the option which most closely reflects for <b1>how much money you are wiling to sell your location types on a monthly basis</b1> to <b1>Google</b1>: <hr>", true, ["<img src='" + HOST + "/get_image?image=acht-eins.png'>", "<img src='" + HOST + "/get_image?image=acht-zwei.png'>", "<img src='" + HOST + "/get_image?image=acht-drei.png'>"]),
         );
@@ -4569,10 +4572,10 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
 
         for (let i = 0; i < a.length; i++) {
             if (a[i] == 0) {
-                screens.push(screen10)
+                screens.push(screen11_1)
             }
             if (a[i] == 1) {
-                screens.push(screen11)
+                screens.push(screen11_2)
             }
             if (a[i] == 2) {
                 screens.push(screen12)
@@ -4683,7 +4686,6 @@ Monday, June 13th, 2022, 10:50:30 PM UTC
                 return;
             }
             screenController.init(document.body);
-            console.log("hey")
             screenController.start();
         }
 
