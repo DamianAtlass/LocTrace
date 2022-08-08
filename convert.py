@@ -2,26 +2,30 @@ import os
 import pandas as pd
 import utm
 
+#runs fine on python 3.8.10. Not supposed to be running on the server 
 
-main_folder = "data\\"
+main_folder = os.path.join(os.getcwd(), "user_data")
 for user_folder in os.listdir(main_folder):
     print(user_folder+":")
 
-    ###rename file - needed files
-    old_file_gps = main_folder + user_folder+"\\source.csv"
-    new_file_gps = main_folder + user_folder+"\\gps_samples_and_motion_score.csv"
+    ###rename gps file(s) - define needed files
+    old_file_gps = os.path.join(main_folder, user_folder, "source.csv")
+    new_file_gps = os.path.join(main_folder, user_folder, "gps_samples_and_motion_score.csv")
 
     #rename file
     if os.path.exists(old_file_gps):
         os.rename(old_file_gps, new_file_gps)
     else:
-        print("\tNo file '"+ old_file_gps + "'found, can't rename.")
+        if os.path.exists(new_file_gps):
+            print("\tFile already exists")
+        else:
+            print("\tNo file '"+ old_file_gps + "' found, can't rename.")
 
 
 
-    ###convert & delete file afterwards - needed files
-    old_file_mr = main_folder + user_folder + "\\analysis.xlsx"
-    new_file_mr = main_folder + user_folder + "\\mobility_report.csv"
+    ###convert mobility_report file(s) - define needed files
+    old_file_mr = os.path.join(main_folder, user_folder, "analysis.xlsx")
+    new_file_mr = os.path.join(main_folder, user_folder, "mobility_report.csv")
    
     # convert & delete file afterwards
     if os.path.exists(old_file_mr):
@@ -29,7 +33,10 @@ for user_folder in os.listdir(main_folder):
         read_file.to_csv (new_file_mr, index = None, header=True)
         os.remove(old_file_mr)
     else:
-        print("\tNo file '"+ old_file_mr + "'found, can't convert.")
+        if os.path.exists(new_file_mr):
+            print("\tFile already exists")
+        else:
+            print("\tNo file '"+ new_file_mr + "' found, can't convert.")
 
 
 
@@ -39,7 +46,7 @@ for user_folder in os.listdir(main_folder):
     samples_df = pd.read_csv(new_file_gps)
 
     # read stops
-    stops_df = pd.read_csv(main_folder + user_folder+"\\stops.csv")
+    stops_df = pd.read_csv(os.path.join(main_folder, user_folder, "stops.csv"))
 
     ##convert timestamps to timezone aware format (important)
     samples_df.ts = pd.to_datetime(samples_df.ts)
@@ -62,7 +69,7 @@ for user_folder in os.listdir(main_folder):
 
 
     # add long and lat to stops:
-    stops_file = old_file_gps = main_folder + user_folder+"\\stops.csv"
+    stops_file = os.path.join(os.path.join(main_folder, user_folder, "stops.csv"))
     stops = pd.read_csv(stops_file)
     tracks = pd.read_csv(new_file_gps)
 

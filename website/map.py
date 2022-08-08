@@ -260,7 +260,7 @@ def buildmap(user, filenumber):
         alt = data['altitude'].iloc[i] #originally "motion_score"
 
         if not isNaN(alt):
-            color_ = colormap(alt*8)
+            color_ = colormap(alt)
             folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
     # add sigificant locations (home and work)
@@ -380,7 +380,7 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
             alt = newData['altitude'].iloc[i] #originally "motion_score"
 
             if not isNaN(alt):
-                color_ = colormap(alt*8)
+                color_ = colormap(alt)
                 folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
     # add sigificant locations (home and work)
