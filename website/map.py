@@ -25,8 +25,7 @@ def filter_by_date_range(start_date, start_time, end_date, end_time):
     end_datetime = datetime.datetime.combine(end_date, end_time.time())
 
     data = pd.read_csv("website/data/example_gps.csv")
-    df_filtered = pd.DataFrame(columns=[
-                               'Unnamed: 0', 'ts', 'longitude', 'latitude', 'altitude', 'accuracy', 'motion_score', 'y', 'x'])
+    #df_filtered = pd.DataFrame(columns=['Unnamed: 0', 'ts', 'longitude', 'latitude', 'altitude', 'accuracy', 'motion_score', 'y', 'x'])
 
     data['ts'] = data['ts'].apply(
         lambda x: datetime.datetime.strptime(x, "%Y-%m-%d %H:%M:%S+02:00"))
@@ -257,16 +256,23 @@ def buildmap(user, filenumber):
         loc2 = data['latitude'].iloc[i+1], data['longitude'].iloc[i+1]
 
         loc = [loc1, loc2]
+        
+        alt = data['altitude'].iloc[i] #originally "motion_score"
 
-        color_ = colormap(data['motion_score'][i])
-
-        folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
+        if not isNaN(alt):
+            color_ = colormap(alt*8)
+            folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
 
     # add sigificant locations (home and work)
     addSigificantLocations(user, m3)
 
     #save file
     saveMap(m3,filenumber)
+
+#checks if a number is NaN by comparing it to itself
+#https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
+def isNaN(num):
+    return num != num
 
 
 # builds new map with filtered data range
@@ -370,10 +376,12 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
                                             1], newData['longitude'].iloc[i+1]
 
             loc = [loc1, loc2]
+            
+            alt = newData['altitude'].iloc[i] #originally "motion_score"
 
-            color_ = colormap(newData['motion_score'].iloc[i])
-
-            folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
+            if not isNaN(alt):
+                color_ = colormap(alt*8)
+                folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
 
     # add sigificant locations (home and work)
     addSigificantLocations(user, m4)
