@@ -4,7 +4,7 @@ import utm
 
 #runs fine on python 3.8.10. Not supposed to be running on the server 
 
-main_folder = os.path.join(os.getcwd(), "user_data")
+main_folder = os.path.join(os.getcwd(), "data")
 for user_folder in os.listdir(main_folder):
     print(user_folder+":")
 
