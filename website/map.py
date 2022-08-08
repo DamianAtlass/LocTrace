@@ -47,11 +47,10 @@ def toDate(str):
 # returns location of home
 def getHomeLoc(stops):
 
-    durationPerUniqueId = np.zeros(len(stops)-1, dtype=np.int64)
+    durationPerUniqueId = np.zeros(len(stops), dtype=np.int64)
 
     for i in range(0, len(stops)):
-        durationPerUniqueId[stops.iloc[i]["unique_id"]
-                            ] += stops.iloc[i]["duration"]
+        durationPerUniqueId[stops.iloc[i]["unique_id"]] += stops.iloc[i]["duration"]
 
     max_index = np.argmax(durationPerUniqueId)
     #print("max: "+str(max_index))
@@ -82,15 +81,14 @@ def getDate(data):
 # returns an array of possible work locations
 def getWorkLoc(stops, home):
 
-    durationPerUniqueId = np.zeros(len(stops)-1, dtype=np.int64)
+    durationPerUniqueId = np.zeros(len(stops), dtype=np.int64)
 
     # add all durations sorted after unique_id (if it is not home's id)
     for i in range(0, len(stops)):
 
         if diff_id(stops.iloc[i], home) and toDate(stops["start"].iloc[i]).weekday() < 5:
             #print("weekday: "+str(toDate(stops.iloc[i]["start"]).weekday()))
-            durationPerUniqueId[stops.iloc[i]["unique_id"]
-                                ] += stops.iloc[i]["duration"]
+            durationPerUniqueId[stops.iloc[i]["unique_id"]] += stops.iloc[i]["duration"]
     # get index (= unique_id) of biggest entry
     max_index = np.argmax(durationPerUniqueId)
 
