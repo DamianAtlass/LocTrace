@@ -247,8 +247,8 @@ def buildmap(user, filenumber):
         zoom_start=10)
 
     colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
-                                 index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
-                                 caption='motion score')
+                                     index=[0, 50, 100, 200, 600, 1000], vmin=0, vmax=1000,
+                                     caption='altitude')
     m3.add_child(colormap)
 
     for i in range(0, len(data)-1):
