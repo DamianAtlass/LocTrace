@@ -4364,6 +4364,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new UIElementHTML(undefined, "<h2>Welcome to our “LocTrace” experiment. We are from the Quality and Usability Lab department in the Technical University of Berlin. The aim of the study is to gain knowledge about the monetary value of personal data.</h2><br>"),
             new UIElementHTML(undefined, "The study consists of your location data collected from the app and answering a questionnaire, which takes about 20 minutes to complete."),
             new UIElementHTML(undefined, "<br>Thanks for participating in our survey!"),
+            new UIElementHTML(undefined, "<br>If you are using a cellphone, please turn your screen horizontally to have a better view of the questionnaire."),
             new UIElementHTML(undefined, "<br>Data protection information:"),
             new UIElementHTML(undefined, "In this study, personal data is collected, such as location data and the answers to the questionnaires. Your data will only be used for scientific purposes and will only be stored anonymously. You can always request the deletion of your data using the personal code you created at the beginning of the study. If you don't remember the code, we'll send you the questions to answer so we can regenerate your code. This option is available for at least 30 days after your completion and ends with the submission of the data as part of a scientific publication. If you have any further questions, please contact vera.schmitt@tu-berlin.de."),
             new QuestionnaireItemDefinedOne("questionnaireItem", "I have read the information on the Value of Personal Data study and I am willing to participate in the study. <hr> ", true, ["Yes"])
@@ -4435,7 +4436,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             //new QuestionnaireItemSystemConst("Default text", "Some stuff"),
 
 
-            new QuestionnaireItemDefinedOne("questionnaireItem", "Companies seeking information online should disclose the way the data are collected, processed, and used.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Companies seeking information online should disclose the way the data is collected, processed, and used.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
             new QuestionnaireItemDefinedOne("questionnaireItem", "A good consumer online privacy policy should have a clear and conspicuous disclosure.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
             new QuestionnaireItemDefinedOne("questionnaireItem", "It is very important to me that I am aware and knowledgeable about how my personal information will be used.<hr>", true, ["Strongly<br> Disagree", "Disagree", "Somewhat<br> Disagree", "Neither<br> Agree<br> or<br> Disagree", "Somewhat<br> Agree", "Agree", "Strongly<br> Agree"]),
         );
@@ -4471,7 +4472,7 @@ class QuestionnaireItemMediaVideoRepeatable extends QuestionnaireItemMediaVideo 
             new QuestionnaireItemDefinedOne("questionnaireItem", "Social network site operators (e.g. Facebook) also collect and process information about non-users of the social network site.<hr>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "User data that are collected by social network site operators (e.g. Facebook) are deleted after five years.<hr>", true, ["True", "False", "Dont know"]),    
             new QuestionnaireItemDefinedOne("questionnaireItem", "Companies combine users’ data traces collected from different websites to create user profiles<hr>", true, ["True", "False", "Dont know"]),    
-            new QuestionnaireItemDefinedOne("questionnaireItem", "E-mails are commonly passed over several computers before they reach the actual receiver.<hr>", true, ["True", "False", "Dont know"]),        
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Emails are commonly passed over several computers before they reach the actual receiver.<hr>", true, ["True", "False", "Dont know"]),        
             );
         screens.push(screen7);
 
