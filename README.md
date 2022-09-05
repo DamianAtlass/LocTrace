@@ -48,25 +48,122 @@ Immediately after creation, users and significant locations are saved into the d
 
 ### The survey data:
 
-As of now, the survey is designed to be split up into 2 parts: part 1 and part 2. When the user's questionnaire is sent to the server, a folder "LocTrace/surveyData" will be created, which contains 2 subfolders called "LocTrace/surveyData/part1" and "LocTrace/surveyData/part2" (these folders not existing implicates that no data has arrived yet). Each of them will hold the participant's answers as .csv files, which are named after their username (example: "LocTrace/surveyData/part1/EXAMPLE_USER_1.csv" and "LocTrace/surveyData/part2/EXAMPLE_USER_1.csv"). None of the actual survey data is saved in the database, however it is remembered if a participant already awnsered a part of a survey. The participant will be redirected to the map, if this is the case.
+As of now, the survey is designed to be split up into 2 parts: part 1 and part 2. When the user's questionnaire is sent to the server, a folder "LocTrace/surveyData" will be created, which contains 2 subfolders called "LocTrace/surveyData/part1" and "LocTrace/surveyData/part2" (these folders not existing implicates that no data has arrived yet). Each of them will hold the participant's answers as .csv files, which are named after their username (example: "LocTrace/surveyData/part1/EXAMPLE_USER_1.csv" and "LocTrace/surveyData/part2/EXAMPLE_USER_1.csv"). None of the actual survey data is saved in the database, however it is remembered if a participant already answered a part of a survey. The participant will be redirected to the map, if this is the case.
 The easiest way to export the survey data from the pythonanywhere server is probably using the console to zip it (command: "zip -r myzipfile my_folder_name", example: "zip -r surveyData surveyData") and simply download the .zip file afterwards (here: "LocTrace/surveyData.zip").
 
 
 
+### Overview on file structure
 
 
+LocTrace/   <--Root
+|   app.py
+|   convert.py
+|   logindata.csv
+|   main.py
+|   README.md
+|   
++---data
+|   +---EXAMPLE_USER1
+|   |       gps_samples_and_motion_score.csv
+|   |       mobility_report.csv
+|   |       stops.csv
+|   |       
+|   +---...
+|   |
+|   :
+|        
++---surveyData*
+|   +---part1
+|   |       EXAMPLE_USER_1.csv
+|   |       ...
+|   |       
+|   \---part2
+|           EXAMPLE_USER_1.csv
+|	    ...
+|           
++---website
+|   |   auth.py
+|   |   database.db*
+|   |   map.py
+|   |   models.py
+|   |   views.py
+|   |   __init__.py
+|   |   
+|   +---templates
+|   |   |   base.html
+|   |   |   login.html
+|   |   |   map.html
+|   |   |   survey.html
+|   |   |   survey2.html
+|   |   |   
+|   |   +---css
+|   |   |       bootstrap.min.css
+|   |   |       style.css
+|   |   |       
+|   |   +---iframes*
+|   |   |       ...
+|   |   |       
+|   |   +---img
+|   |   |       ...
+|   |   |       
+|   |   \---js
+|   |           thefragebogen.js
+|   |           
+|   \---__pycache__*
+|           ...
+|           
+\---__pycache__*
+        ...
+        
+
+### Short description on relevant files
+Some files/folders are given a short summary here. Files/folders marked with * might/should not exist when first launching the app (obviously including all subfolders and files within).
+
+# LocTrace/app.py
+Defines the application.
 
 
+# LocTrace/convert.py
+...
 
 
+# LocTrace/logindata.csv
+Carries password and usernames of accounts, that are supposed to access the website.
 
 
+# LocTrace/main.py
+Defines the application as well, but hosts it on a specific port and in debug mode.
+
+# Loctrace/data/
+Folder which holds the participants tracked data. For more information, see 'Setting up the app' above.
 
 
+# Loctrace/surveyData/
+Folder which holds the survey's answers separated into part 1 and part 2.
 
 
+# Loctrace/website/auth.py
+Contains routes which deal with logging in/out and reading data from "Loctrace/data/" into the database.
 
 
+# Loctrace/website/map.py
+Is responsible for the creating the map (showing the user's tracked locations), which is later embedded as i-frame into "LocTrace/website/templates/map.html". Also holds the filter function and calculation of significant locations.
+
+
+# Loctrace/website/models.py
+Defines the structure of the database. If on wants to understand the database, this is the first place to go.
+
+
+# Loctrace/website/views.py
+Contains all other routes, passes filter-values to "Loctrace/website/map.py", embeddens map i-frame into "LocTrace/website/templates/map.html".
+
+
+# Loctrace/website/__init__.py
+Sets up the app and creates a database.
+
+# Loctrace/website/templates/iframes
+Should contain a single file called "mapX.html", where "X" is replaced by a random positive number. This file is embedded into "LocTrace/website/templates/map.html" and represents the map with the user's tracks and significant locations. It is created and replaced each time a user requests the map page or uses the filter function. It's unorthodox naming allows it to bypass browser's caching, which would result in the same map being loaded again and again and again. When we encountered this problem, a quick solution was needed more than an elegant one. More info in map() in "Loctrace/website/views.py".
 
 
 
