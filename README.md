@@ -56,64 +56,64 @@ The easiest way to export the survey data from the pythonanywhere server is prob
 ### Overview on file structure
 
 
-LocTrace/   <--Root \n
-\|   app.py
-|   convert.py
-|   logindata.csv
-|   main.py
-|   README.md
-|   
-+---data
-|   +---EXAMPLE_USER1
-|   |       gps_samples_and_motion_score.csv
-|   |       mobility_report.csv
-|   |       stops.csv
-|   |       
-|   +---...
-|   |
-|   :
-|        
-+---surveyData*
-|   +---part1
-|   |       EXAMPLE_USER_1.csv
-|   |       ...
-|   |       
-|   \---part2
-|           EXAMPLE_USER_1.csv
-|	    ...
-|           
-+---website
-|   |   auth.py
-|   |   database.db*
-|   |   map.py
-|   |   models.py
-|   |   views.py
-|   |   __init__.py
-|   |   
-|   +---templates
-|   |   |   base.html
-|   |   |   login.html
-|   |   |   map.html
-|   |   |   survey.html
-|   |   |   survey2.html
-|   |   |   
-|   |   +---css
-|   |   |       bootstrap.min.css
-|   |   |       style.css
-|   |   |       
-|   |   +---iframes*
-|   |   |       ...
-|   |   |       
-|   |   +---img
-|   |   |       ...
-|   |   |       
-|   |   \---js
-|   |           thefragebogen.js
-|   |           
-|   \---__pycache__*
-|           ...
-|           
-\---__pycache__*
+LocTrace/   <--Root
+│   app.py
+│   convert.py
+│   logindata.csv
+│   main.py
+│   README.md
+│   
+├──data
+│   ├──EXAMPLE_USER1
+│   │       gps_samples_and_motion_score.csv
+│   │       mobility_report.csv
+│   │       stops.csv
+│   │       
+│   ├──...
+│   │
+│   :
+│        
+├──surveyData*
+│   ├──part1
+│   │       EXAMPLE_USER_1.csv
+│   │       ...
+│   │       
+│   └─part2
+│           EXAMPLE_USER_1.csv
+│	    ...
+│           
+├──website
+│   │   auth.py
+│   │   database.db*
+│   │   map.py
+│   │   models.py
+│   │   views.py
+│   │   __init__.py
+│   │   
+│   ├──templates
+│   │   │   base.html
+│   │   │   login.html
+│   │   │   map.html
+│   │   │   survey.html
+│   │   │   survey2.html
+│   │   │   
+│   │   ├──css
+│   │   │       bootstrap.min.css
+│   │   │       style.css
+│   │   │       
+│   │   ├──iframes*
+│   │   │       ...
+│   │   │       
+│   │   ├──img
+│   │   │       ...
+│   │   │       
+│   │   └─js
+│   │           thefragebogen.js
+│   │           
+│   └─__pycache__*
+│           ...
+│           
+└─__pycache__*
         ...
         
 
