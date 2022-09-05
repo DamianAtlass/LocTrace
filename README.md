@@ -57,7 +57,7 @@ The easiest way to export the survey data from the pythonanywhere server is prob
 
 
 LocTrace/   <--Root \n
-|   app.py
+\|   app.py
 |   convert.py
 |   logindata.csv
 |   main.py
