@@ -56,7 +56,7 @@ The easiest way to export the survey data from the pythonanywhere server is prob
 ### Overview on file structure
 
 
-LocTrace/   <--Root
+LocTrace/   <--Root \n
 |   app.py
 |   convert.py
 |   logindata.csv
@@ -120,49 +120,49 @@ LocTrace/   <--Root
 ### Short description on relevant files
 Some files/folders are given a short summary here. Files/folders marked with * might/should not exist when first launching the app (obviously including all subfolders and files within).
 
-# LocTrace/app.py
+#### LocTrace/app.py
 Defines the application.
 
 
-# LocTrace/convert.py
+#### LocTrace/convert.py
 ...
 
 
-# LocTrace/logindata.csv
+#### LocTrace/logindata.csv
 Carries password and usernames of accounts, that are supposed to access the website.
 
 
-# LocTrace/main.py
+#### LocTrace/main.py
 Defines the application as well, but hosts it on a specific port and in debug mode.
 
-# Loctrace/data/
+#### Loctrace/data/
 Folder which holds the participants tracked data. For more information, see 'Setting up the app' above.
 
 
-# Loctrace/surveyData/
+#### Loctrace/surveyData/
 Folder which holds the survey's answers separated into part 1 and part 2.
 
 
-# Loctrace/website/auth.py
+#### Loctrace/website/auth.py
 Contains routes which deal with logging in/out and reading data from "Loctrace/data/" into the database.
 
 
-# Loctrace/website/map.py
+#### Loctrace/website/map.py
 Is responsible for the creating the map (showing the user's tracked locations), which is later embedded as i-frame into "LocTrace/website/templates/map.html". Also holds the filter function and calculation of significant locations.
 
 
-# Loctrace/website/models.py
+#### Loctrace/website/models.py
 Defines the structure of the database. If on wants to understand the database, this is the first place to go.
 
 
-# Loctrace/website/views.py
+#### Loctrace/website/views.py
 Contains all other routes, passes filter-values to "Loctrace/website/map.py", embeddens map i-frame into "LocTrace/website/templates/map.html".
 
 
-# Loctrace/website/__init__.py
+#### Loctrace/website/__init__.py
 Sets up the app and creates a database.
 
-# Loctrace/website/templates/iframes
+#### Loctrace/website/templates/iframes
 Should contain a single file called "mapX.html", where "X" is replaced by a random positive number. This file is embedded into "LocTrace/website/templates/map.html" and represents the map with the user's tracks and significant locations. It is created and replaced each time a user requests the map page or uses the filter function. It's unorthodox naming allows it to bypass browser's caching, which would result in the same map being loaded again and again and again. When we encountered this problem, a quick solution was needed more than an elegant one. More info in map() in "Loctrace/website/views.py".
 
 
