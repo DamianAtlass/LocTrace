@@ -57,63 +57,63 @@ The easiest way to export the survey data from the pythonanywhere server is prob
 
 
 LocTrace/   <--Root <br/>
-│   app.py <br/>
-│   convert.py <br/>
-│   logindata.csv <br/>
-│   main.py <br/>
-│   README.md <br/>
-│    <br/>
-├──data <br/>
-│   ├──EXAMPLE_USER1 <br/>
-│   │       gps_samples_and_motion_score.csv <br/>
-│   │       mobility_report.csv <br/>
-│   │       stops.csv <br/>
-│   │        <br/>
-│   ├──... <br/>
-│   │ <br/>
-│   : <br/>
-│         <br/>
-├──surveyData* <br/>
-│   ├──part1 <br/>
-│   │       EXAMPLE_USER_1.csv <br/>
-│   │       ... <br/>
-│   │        <br/>
-│   └─part2 <br/>
-│           EXAMPLE_USER_1.csv <br/>
-│	    ... <br/>
-│            <br/>
-├──website <br/>
-│   │   auth.py <br/>
-│   │   database.db* <br/>
-│   │   map.py <br/>
-│   │   models.py <br/>
-│   │   views.py <br/>
-│   │   __init__.py <br/>
-│   │    <br/>
-│   ├──templates <br/>
-│   │   │   base.html <br/>
-│   │   │   login.html <br/>
-│   │   │   map.html <br/>
-│   │   │   survey.html <br/>
-│   │   │   survey2.html <br/>
-│   │   │    <br/>
-│   │   ├──css <br/>
-│   │   │       bootstrap.min.css <br/>
-│   │   │       style.css <br/>
-│   │   │        <br/>
-│   │   ├──iframes* <br/>
-│   │   │       ... <br/>
-│   │   │        <br/>
-│   │   ├──img <br/>
-│   │   │       ... <br/>
-│   │   │        <br/>
-│   │   └─js <br/>
-│   │           thefragebogen.js <br/>
-│   │            <br/>
-│   └─__pycache__* <br/>
-│           ... <br/>
-│            <br/>
-└─__pycache__* <br/>
+|   app.py <br/>
+|   convert.py <br/>
+|   logindata.csv <br/>
+|   main.py <br/>
+|   README.md <br/>
+|    <br/>
++---data <br/>
+|   +---EXAMPLE_USER1 <br/>
+|   |       gps_samples_and_motion_score.csv <br/>
+|   |       mobility_report.csv <br/>
+|   |       stops.csv <br/>
+|   |        <br/>
+|   +---... <br/>
+|   | <br/>
+|   : <br/>
+|         <br/>
++---surveyData* <br/>
+|   +---part1 <br/>
+|   |       EXAMPLE_USER_1.csv <br/>
+|   |       ... <br/>
+|   |        <br/>
+|   \part2 <br/>
+|           EXAMPLE_USER_1.csv <br/>
+|	    ... <br/>
+|            <br/>
++---website <br/>
+|   |   auth.py <br/>
+|   |   database.db* <br/>
+|   |   map.py <br/>
+|   |   models.py <br/>
+|   |   views.py <br/>
+|   |   __init__.py <br/>
+|   |    <br/>
+|   +---templates <br/>
+|   |   |   base.html <br/>
+|   |   |   login.html <br/>
+|   |   |   map.html <br/>
+|   |   |   survey.html <br/>
+|   |   |   survey2.html <br/>
+|   |   |    <br/>
+|   |   +---css <br/>
+|   |   |       bootstrap.min.css <br/>
+|   |   |       style.css <br/>
+|   |   |        <br/>
+|   |   +---iframes* <br/>
+|   |   |       ... <br/>
+|   |   |        <br/>
+|   |   +---img <br/>
+|   |   |       ... <br/>
+|   |   |        <br/>
+|   |   \js <br/>
+|   |           thefragebogen.js <br/>
+|   |            <br/>
+|   \__pycache__* <br/>
+|           ... <br/>
+|            <br/>
+\__pycache__* <br/>
         ... <br/>
 <br/>
 
