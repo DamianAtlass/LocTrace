@@ -118,7 +118,7 @@ LocTrace/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<--Root <br
 <br/>
 
 ### Short description on relevant files
-Some files/folders are given a short summary here. Files/folders marked with * might not exist when first launching the app (obviously including all subfolders and files within). Files/folders marked with ** should not exist when first launching the app, as their existence manipulates the behaviour of the website or is a result of input.
+Some files/folders are given a short summary here. Files/folders marked with * might not exist / don't need to exist when first launching the app (obviously including all subfolders and files within). Files/folders marked with ** should not exist when first launching the app, as their existence manipulates the behaviour of the website or is a result of input.
 #### LocTrace/app.py
 Defines the application.
 
