@@ -50,6 +50,7 @@ def map():
         if not current_user.survey_part1_answered:
             return redirect(url_for("views.survey_part1"))
 
+        #check discreption of folder 'iframes' in the readme.md to understand why the following is necessary
         random_number = randint(1, 9999999999)
 
         buildmap(current_user, random_number)

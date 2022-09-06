@@ -165,7 +165,7 @@ Sets up the app and creates a database.
 Here, the actual survey is coded, including the upload to the server. Admittedly an overwhelming file, as well it's second part. If one if interested in how the survey was coded, searching for "HERE is where the actual survey is written" can certainly save some time.
 
 #### Loctrace/website/templates/iframes
-Should contain a single file called "mapX.html", where "X" is replaced by a random positive number. This file is embedded into "LocTrace/website/templates/map.html" and represents the map with the user's tracks and significant locations. It is created and replaced each time a user requests the map page or uses the filter function. It's unorthodox naming allows it to bypass browser's caching, which would result in the same map being loaded again and again and again. When we encountered this problem, a quick solution was needed more than an elegant one. More info in map() in "Loctrace/website/views.py".
+Should contain a single file called "mapX.html", where "X" is replaced by a random positive number. This file is embedded into "LocTrace/website/templates/map.html" and represents the map with the user's tracks and significant locations. It is created and replaced each time a user requests the map page or uses the filter function. It's unorthodox naming allows it to bypass browser's caching, which would result in the same map being loaded again and again and again. When we encountered this problem, a quick solution was needed more than an elegant one. Occurs in map() in "Loctrace/website/views.py".
 
 
 
