@@ -2,9 +2,12 @@ import os
 import pandas as pd
 import utm
 
-#runs fine on python 3.8.10. Not supposed to be running on the server 
+# This file transforms the data we received (each user-folder holding: analysis.xlsx, souce.csv, stops.csv)
+# into a structure compatible with the webapp (each user-folder holding: gps_samples_and_motion_score.csv, mobility_report.csv, stops.csv) 
 
-main_folder = os.path.join(os.getcwd(), "data")
+#runs fine on python 3.8.10. Not supposed to be running on the server. 
+
+main_folder = os.path.join(os.getcwd(), "user_data")
 for user_folder in os.listdir(main_folder):
     print(user_folder+":")
 
