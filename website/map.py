@@ -242,14 +242,14 @@ def buildmap(user, filenumber):
 
     location = data['latitude'].mean(), data['longitude'].mean()
 
-    m3 = folium.Map(
+    map = folium.Map(
         location,
         zoom_start=10)
 
     colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                                      index=[0, 50, 100, 200, 600, 1000], vmin=0, vmax=1000,
-                                     caption='altitude')
-    m3.add_child(colormap)
+                                     caption='motion score') #originally "motion_score"
+    map.add_child(colormap)
 
     for i in range(0, len(data)-1):
         loc1 = data['latitude'].iloc[i], data['longitude'].iloc[i]
@@ -257,17 +257,17 @@ def buildmap(user, filenumber):
 
         loc = [loc1, loc2]
         
-        alt = data['altitude'].iloc[i] #originally "motion_score"
+        alt = data['motion_score'].iloc[i] #originally "motion_score"
 
         if not isNaN(alt):
             color_ = colormap(alt)
-            folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m3)
+            folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(map)
 
     # add sigificant locations (home and work)
-    addSigificantLocations(user, m3)
+    addSigificantLocations(user, map)
 
     #save file
-    saveMap(m3,filenumber)
+    saveMap(map,filenumber)
 
 #checks if a number is NaN by comparing it to itself
 #https://stackoverflow.com/questions/944700/how-can-i-check-for-nan-values
@@ -344,31 +344,31 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
     if (newData.empty):
         location = data['latitude'].mean(), data['longitude'].mean()
-        m4 = folium.Map(
+        map = folium.Map(
             location,
             zoom_start=10)
 
         colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
                                      caption='motion score')
-        m4.add_child(colormap)
+        map.add_child(colormap)
 
         #save file
-        saveMap(m4,filenumber)
+        saveMap(map,filenumber)
 
     else:
 
         # create new folium map with filterd Data
         location = newData['latitude'].mean(), newData['longitude'].mean()
 
-        m4 = folium.Map(
+        map = folium.Map(
             location,
             zoom_start=10)
 
         colormap = cm.LinearColormap(colors=['darkblue', 'blue', 'green', 'yellow', 'orange', 'red'],
                                      index=[0, 100, 250, 500, 700, 1000], vmin=0, vmax=1000,
-                                     caption='motion score')
-        m4.add_child(colormap)
+                                     caption='motion score') #originally "motion_score"
+        map.add_child(colormap)
 
         for i in range(0, len(newData)-1):
             loc1 = newData['latitude'].iloc[i], newData['longitude'].iloc[i]
@@ -377,17 +377,17 @@ def build_date_map(user, req_start_date, req_end_date, req_start_time, req_end_t
 
             loc = [loc1, loc2]
             
-            alt = newData['altitude'].iloc[i] #originally "motion_score"
+            alt = newData['motion_score'].iloc[i] #originally "motion_score"
 
             if not isNaN(alt):
                 color_ = colormap(alt)
-                folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(m4)
+                folium.PolyLine(loc, weight=5, opacity=1, color=color_).add_to(map)
 
     # add sigificant locations (home and work)
-    addSigificantLocations(user, m4)
+    addSigificantLocations(user, map)
 
     #save file
-    saveMap(m4,filenumber)
+    saveMap(map,filenumber)
 
 
 def metadata(current_user):
