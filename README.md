@@ -12,7 +12,7 @@ Before the app can be started, there are a couple of things that need to be done
 - "LocTrace/data/EXAMPLE_USER_1/mobility_report.csv"
 - "LocTrace/data/EXAMPLE_USER_1/stops.csv"
 
-3) The variable "HOST", which can be found in "LocTrace/website/templatessurvey.html", "LocTrace/website/survey2.html" and "LocTrace/website/map.html" needs to be adjusted in each file, depending on where the app is hosted (localhost, https://LocTrace.pythonanywhere.com/,...). The most common hosts, which were just stated, are already listed in the files and simply need to be commented in/out. When hosted locally, the app runs on port 5000 by default.
+3) The variable "HOST", which can be found in "LocTrace/website/templates/survey.html", "LocTrace/website/templates/survey2.html" and "LocTrace/website/templates/map.html" needs to be adjusted in each file, depending on where the app is hosted (localhost, https://LocTrace.pythonanywhere.com/,...). The most common hosts, which were just stated, are already listed in the files and simply need to be commented in/out. When hosted locally, the app runs on port 5000 by default.
 
 4) For altering the questions in the questionnaire, it is recommended to be familiar with TheFragebogen (https://thefragebogen.de/) first. Then, the files "LocTrace/website/templates/survey.html" (the first part of the survey) and "LocTrace/website/templates/survey2.html" (the second part of the survey) can be edited as desired. 
 
